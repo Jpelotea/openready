@@ -74,7 +74,7 @@ The `netlify.toml` file already sets the publish directory.
 Make sure the project has:
 
 - public repository
-- software code in `public/app.js`
+- software code in `app.js`
 - `LICENSE`
 - `CODE_OF_CONDUCT.md`
 - `CONTRIBUTING.md`
