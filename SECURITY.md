@@ -11,7 +11,7 @@ If you find a security issue, please do not create a public issue with exploit d
 Instead, contact the maintainer privately:
 
 ```text
-Add your preferred contact email here before publishing.
+peloteajoshuacarl0@gmail.com
 ```
 
 Please include:
