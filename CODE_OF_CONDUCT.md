@@ -31,7 +31,7 @@ If you experience or witness unacceptable behavior, please report it by opening 
 Maintainer contact:
 
 ```text
-Add your preferred contact email here before publishing.
+peloteajoshuacarl0@gmail.com
 ```
 
 Reports will be reviewed respectfully and confidentially where possible.
