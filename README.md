@@ -24,7 +24,7 @@ Early public version. Contributions, suggestions, and beginner-friendly document
 Add your Netlify site URL here after deployment:
 
 ```text
-https://your-site-name.netlify.app
+https://capable-chaja-458cb0.netlify.app/
 ```
 
 ## Repository structure
