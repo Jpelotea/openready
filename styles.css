@@ -1,0 +1,288 @@
+:root {
+  --bg: #f7f7f2;
+  --surface: #ffffff;
+  --text: #17211f;
+  --muted: #5e6c68;
+  --border: #dbe3df;
+  --accent: #244d44;
+  --accent-soft: #e5f1ed;
+  --shadow: 0 20px 45px rgba(23, 33, 31, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(247, 247, 242, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: -0.03em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+.hero {
+  padding-top: 6rem;
+  padding-bottom: 5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+h1 {
+  max-width: 780px;
+  margin: 0;
+  font-size: clamp(2.6rem, 8vw, 5.8rem);
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.hero-text {
+  max-width: 700px;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.hero-actions,
+.tool-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.button,
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.85rem 1.2rem;
+  font-weight: 800;
+  text-decoration: none;
+  background: var(--accent);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.button.secondary,
+.secondary-button {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.grid-two,
+.grid-three {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.card,
+.progress-card,
+.check-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  box-shadow: var(--shadow);
+}
+
+.card {
+  padding: 1.4rem;
+}
+
+.section-heading {
+  max-width: 740px;
+  margin-bottom: 1.5rem;
+}
+
+.progress-card {
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.progress-card p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.progress-ring {
+  min-width: 74px;
+  min-height: 74px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.checklist {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.check-item {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: start;
+}
+
+.check-item input {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.2rem;
+  accent-color: var(--accent);
+}
+
+.check-item strong {
+  display: block;
+}
+
+.check-item span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.notes-label {
+  display: block;
+  margin: 1.2rem 0 0.4rem;
+  font-weight: 800;
+}
+
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1rem;
+  font: inherit;
+  resize: vertical;
+}
+
+.timeline {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  padding: 1.4rem 1.4rem 1.4rem 2.6rem;
+  box-shadow: var(--shadow);
+}
+
+.site-footer {
+  padding: 2rem 1rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.site-footer p {
+  margin: 0.25rem 0;
+}
+
+@media (max-width: 760px) {
+  .nav {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .grid-two,
+  .grid-three {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OpenReady is a non-commercial open-source readiness checklist for public software projects.">
+  <title>OpenReady | Open-source readiness checklist</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="OpenReady home">OpenReady</a>
+      <div class="nav-links">
+        <a href="#checklist">Checklist</a>
+        <a href="#docs">Docs</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#community">Community</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section">
+      <p class="eyebrow">Non-commercial open-source software</p>
+      <h1>Prepare a healthier public software project.</h1>
+      <p class="hero-text">OpenReady is a simple browser-based checklist for maintainers who want clear licensing, community docs, contributor guidance, and a project site that supports open collaboration.</p>
+      <div class="hero-actions">
+        <a class="button" href="#checklist">Start checklist</a>
+        <a class="button secondary" href="#docs">Read docs</a>
+      </div>
+    </section>
+
+    <section class="section grid-two" aria-labelledby="purpose-title">
+      <div>
+        <h2 id="purpose-title">What this project does</h2>
+        <p>OpenReady helps project creators review the basic public materials that make an open-source software project easier to understand, reuse, and contribute to.</p>
+      </div>
+      <div class="card">
+        <h3>Project promise</h3>
+        <p>This project does not sell hosting, support, consulting, or premium features. It exists as a free, open-source community tool.</p>
+      </div>
+    </section>
+
+    <section id="checklist" class="section" aria-labelledby="checklist-title">
+      <div class="section-heading">
+        <p class="eyebrow">Interactive tool</p>
+        <h2 id="checklist-title">Open-source readiness checklist</h2>
+        <p>Check the items your project already has. Your progress saves in this browser only.</p>
+      </div>
+
+      <div class="progress-card" aria-live="polite">
+        <div>
+          <strong id="progressText">0 of 0 complete</strong>
+          <p id="progressMessage">Start checking items to see your readiness score.</p>
+        </div>
+        <div class="progress-ring" id="progressPercent">0%</div>
+      </div>
+
+      <form id="checklistForm" class="checklist" aria-label="Open-source readiness checklist"></form>
+
+      <label class="notes-label" for="projectNotes">Project notes</label>
+      <textarea id="projectNotes" rows="5" placeholder="Write what still needs to be added before publishing or applying..."></textarea>
+
+      <div class="tool-actions">
+        <button type="button" id="exportButton">Export checklist JSON</button>
+        <button type="button" class="secondary-button" id="resetButton">Reset</button>
+      </div>
+    </section>
+
+    <section id="docs" class="section grid-three" aria-labelledby="docs-title">
+      <div class="section-heading full">
+        <p class="eyebrow">Documentation</p>
+        <h2 id="docs-title">Community-facing docs</h2>
+        <p>These are the recommended pages for a healthy open-source software project.</p>
+      </div>
+      <article class="card">
+        <h3>Getting Started</h3>
+        <p>Explain what the software is, who it is for, and how to use it without assuming expert knowledge.</p>
+      </article>
+      <article class="card">
+        <h3>Contributing</h3>
+        <p>Show beginners how to report bugs, suggest improvements, and submit changes respectfully.</p>
+      </article>
+      <article class="card">
+        <h3>Changelog</h3>
+        <p>Document meaningful changes so users and contributors can follow project progress.</p>
+      </article>
+    </section>
+
+    <section id="roadmap" class="section" aria-labelledby="roadmap-title">
+      <div class="section-heading">
+        <p class="eyebrow">Roadmap</p>
+        <h2 id="roadmap-title">Planned improvements</h2>
+      </div>
+      <ol class="timeline">
+        <li><strong>Version 0.1:</strong> Checklist, local save, JSON export, and community docs.</li>
+        <li><strong>Version 0.2:</strong> Import checklist files, print summary, and beginner explanations.</li>
+        <li><strong>Version 0.3:</strong> README helper, accessibility checklist, and more templates.</li>
+      </ol>
+    </section>
+
+    <section id="community" class="section grid-two" aria-labelledby="community-title">
+      <div>
+        <p class="eyebrow">Community</p>
+        <h2 id="community-title">Open collaboration is welcome</h2>
+        <p>OpenReady welcomes documentation improvements, accessibility fixes, checklist suggestions, and beginner-friendly examples.</p>
+      </div>
+      <div class="card">
+        <h3>Repository links</h3>
+        <p>After creating your GitHub repository, replace these placeholders:</p>
+        <ul>
+          <li><a href="https://github.com/your-username/openready">Source repository</a></li>
+          <li><a href="https://github.com/your-username/openready/issues">Issue tracker</a></li>
+          <li><a href="https://github.com/your-username/openready/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>OpenReady is a non-commercial open-source project.</p>
+    <p><a href="https://www.netlify.com/">This site is powered by Netlify</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
