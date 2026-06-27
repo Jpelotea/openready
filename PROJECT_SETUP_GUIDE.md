@@ -43,7 +43,7 @@ git init
 git add .
 git commit -m "Initial open-source project setup"
 git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/openready.git
+git remote add origin https://github.com/Jpelotea/openready.git
 git push -u origin main
 ```
 
