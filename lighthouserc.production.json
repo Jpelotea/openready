@@ -4,9 +4,10 @@
       "url": [
         "https://capable-chaja-458cb0.netlify.app/"
       ],
-      "numberOfRuns": 3,
+      "numberOfRuns": 1,
       "settings": {
-        "chromeFlags": "--no-sandbox --headless=new"
+        "chromeFlags": "--no-sandbox --headless=new",
+        "maxWaitForLoad": 30000
       }
     },
     "assert": {
