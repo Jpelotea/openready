@@ -12,12 +12,29 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - A reusable local validator at `scripts/validate_data.py`.
 - Validation for required fields, duplicate checklist IDs, project links, documentation cards, theme tokens, and roadmap entries.
 - A prominently configured Governance documentation card and governance project link.
+- Lighthouse CI configuration in `lighthouserc.json`.
+- A GitHub Actions Lighthouse workflow with downloadable HTML and JSON reports.
+- Measured performance and accessibility guidance in `docs/performance.md`.
+- An SVG favicon for the application.
 
 ### Changed
 
 - Expanded README community-health documentation and repository structure.
 - Added governance and automated validation guidance to the contribution process.
-- Separated the remaining Lighthouse performance audit into a focused tracked task.
+- Replaced unverified performance claims with documented targets and measured results.
+- Updated the roadmap after establishing the first Lighthouse baseline.
+
+### Accessibility
+
+- Added an accessible name to the hidden checklist-import file input.
+- Updated compact brand-link accessible names so they include the visible `OR` text.
+- Fixed the accessibility findings identified by the first Lighthouse audit.
+
+### Quality baseline
+
+- The first representative audit measured 100 Performance, 91 Accessibility, 96 Best Practices, and 100 SEO.
+- After correcting the identified accessibility labels and missing favicon, all three final local-static-build runs measured 100 in Performance, Accessibility, Best Practices, and SEO.
+- The documented scores apply to the GitHub Actions static-server environment, not the currently deployed Netlify site.
 
 ## [0.2.1] - 2026-07-25
 
