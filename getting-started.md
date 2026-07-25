@@ -1,6 +1,6 @@
 # Getting Started
 
-OpenReady helps maintainers prepare a public open-source project before inviting contributors or applying to open-source hosting programs.
+OpenReady helps maintainers assess and improve the public health of an open-source software repository.
 
 ## Who this is for
 
@@ -10,19 +10,84 @@ This project is useful for:
 - beginner developers
 - documentation contributors
 - small open-source communities
+- educators teaching open-source practices
 - project owners preparing public repositories
 
-## How to use the app
+## Use the hosted app
 
-1. Open the OpenReady website.
+1. Open the [OpenReady website](https://capable-chaja-458cb0.netlify.app/).
 2. Review each checklist item.
-3. Mark items that your project already satisfies.
-4. Use the notes field to record missing work.
-5. Export your checklist as JSON when you want a saved copy.
+3. Mark items that the project already satisfies.
+4. Use the notes field to record missing work or next actions.
+5. Export the checklist as JSON when a backup is needed.
+6. Import a previous JSON export to restore progress.
+7. Use **Print report** to print the summary or save it as a PDF.
+
+Checklist progress and notes remain in the current browser unless they are intentionally exported.
+
+## Light and dark themes
+
+OpenReady follows the browser or operating system theme when there is no saved preference.
+
+Use the theme button in the navigation to switch manually. The chosen theme is saved in local browser storage.
+
+## Run OpenReady locally
+
+OpenReady has no package installation or build step. It loads content from JSON files, so it should be run through a local static server rather than opened directly with a `file://` URL.
+
+From the repository directory, run:
+
+```bash
+python -m http.server 8080
+```
+
+Then open:
+
+```text
+http://localhost:8080
+```
+
+## Update checklist content
+
+Edit:
+
+```text
+data/checklist.json
+```
+
+Each checklist item may contain:
+
+- a stable `id`
+- a category
+- a title
+- a plain-language description
+- an optional resource label
+- an optional resource URL
+
+Keep existing IDs stable when possible so saved and exported checklist progress remains compatible.
+
+## Update site content and colors
+
+Edit:
+
+```text
+data/site.json
+```
+
+This file contains:
+
+- application version and project links
+- product principles
+- feature cards
+- documentation cards
+- roadmap entries
+- light and dark theme tokens
+
+When customizing theme colors, verify readable contrast for body text, buttons, links, cards, focus states, success messages, and error messages.
 
 ## What the checklist covers
 
-The checklist focuses on community health basics:
+The current checklist focuses on:
 
 - license
 - Code of Conduct
@@ -30,11 +95,11 @@ The checklist focuses on community health basics:
 - contributing guide
 - changelog
 - roadmap
-- issue links
-- non-commercial statement
-- hosting attribution
-- clear project purpose
+- issue tracker
+- security policy
+- project governance
+- community-facing project documentation
 
 ## Important note
 
-OpenReady is not legal advice. It is a practical checklist to help maintainers organize their public project materials.
+OpenReady is not legal advice, security certification, or a guarantee that a repository will qualify for any hosting or sponsorship program. It is a practical organizational tool for maintainers.
