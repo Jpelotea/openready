@@ -4,9 +4,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="OpenReady is a private, browser-based checklist that helps maintainers improve the health of public open-source repositories.">
-  <meta name="theme-color" content="#0b1220">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="OpenReady | Build a healthier open-source project">
+  <meta property="og:description" content="Assess repository health, save progress locally, and create a clear readiness report.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://capable-chaja-458cb0.netlify.app/">
+  <link rel="canonical" href="https://capable-chaja-458cb0.netlify.app/">
   <title>OpenReady | Build a healthier open-source project</title>
+
+  <script>
+    (() => {
+      document.documentElement.classList.add("js");
+      try {
+        const savedTheme = localStorage.getItem("openready-theme");
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : systemTheme;
+      } catch (error) {
+        document.documentElement.dataset.theme = "light";
+      }
+    })();
+  </script>
+
   <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "OpenReady",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any modern web browser",
+    "softwareVersion": "0.2.1",
+    "description": "A private browser-based checklist for improving the health of public open-source repositories.",
+    "url": "https://capable-chaja-458cb0.netlify.app/",
+    "codeRepository": "https://github.com/Jpelotea/openready",
+    "license": "https://github.com/Jpelotea/openready/blob/main/LICENSE",
+    "isAccessibleForFree": true
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -25,17 +61,23 @@
         <a href="#roadmap">Roadmap</a>
       </div>
 
-      <a class="nav-cta" href="https://github.com/Jpelotea/openready">View on GitHub</a>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch color theme" aria-pressed="false">
+          <span id="themeIcon" aria-hidden="true">◐</span>
+          <span id="themeLabel">Theme</span>
+        </button>
+        <a class="nav-cta" data-link="repository" href="https://github.com/Jpelotea/openready">View on GitHub</a>
+      </div>
     </nav>
   </header>
 
   <main id="main-content">
     <section id="top" class="hero">
       <div class="shell hero-grid">
-        <div class="hero-copy">
+        <div class="hero-copy" data-reveal>
           <div class="status-pill">
             <span class="status-dot" aria-hidden="true"></span>
-            Open source · MIT licensed · v0.2.0
+            <span id="projectStatus">Open source · MIT licensed · v0.2.1</span>
           </div>
 
           <p class="eyebrow">Repository health, made practical</p>
@@ -48,7 +90,7 @@
 
           <div class="hero-actions">
             <a class="button primary" href="#checklist">Start the checklist</a>
-            <a class="button ghost" href="https://github.com/Jpelotea/openready">Explore the source</a>
+            <a class="button ghost" data-link="repository" href="https://github.com/Jpelotea/openready">Explore the source</a>
           </div>
 
           <ul class="hero-points" aria-label="OpenReady highlights">
@@ -58,7 +100,7 @@
           </ul>
         </div>
 
-        <aside class="hero-panel" aria-label="OpenReady project health preview">
+        <aside class="hero-panel" aria-label="OpenReady project health preview" data-reveal data-reveal-delay="1">
           <div class="panel-topline">
             <span>Project health preview</span>
             <span class="panel-score">70%</span>
@@ -95,7 +137,7 @@
     </section>
 
     <section class="trust-strip" aria-label="Product principles">
-      <div class="shell trust-grid">
+      <div class="shell trust-grid" id="principlesGrid">
         <div><strong>Private by default</strong><span>No data leaves your device.</span></div>
         <div><strong>Built for beginners</strong><span>Plain-language guidance throughout.</span></div>
         <div><strong>Community-first</strong><span>Designed for open collaboration.</span></div>
@@ -104,13 +146,13 @@
 
     <section id="features" class="section">
       <div class="shell">
-        <div class="section-heading centered">
+        <div class="section-heading centered" data-reveal>
           <p class="eyebrow">Why OpenReady</p>
           <h2>A lightweight toolkit for stronger public projects.</h2>
           <p>Use one focused workflow to assess what exists, identify gaps, and share a clear readiness report.</p>
         </div>
 
-        <div class="feature-grid">
+        <div class="feature-grid" id="featureGrid">
           <article class="feature-card">
             <span class="feature-number">01</span>
             <h3>Assess project health</h3>
@@ -133,32 +175,36 @@
     <section id="checklist" class="section section-alt" aria-labelledby="checklist-title">
       <div class="shell">
         <div class="checklist-header">
-          <div class="section-heading">
+          <div class="section-heading" data-reveal>
             <p class="eyebrow">Interactive workspace</p>
             <h2 id="checklist-title">Open-source readiness checklist</h2>
             <p>Check what your project already has. OpenReady saves progress only in this browser.</p>
           </div>
 
-          <div class="progress-card" aria-live="polite">
+          <div class="progress-card" aria-live="polite" data-reveal data-reveal-delay="1">
             <div class="progress-copy">
               <span class="progress-label">Current readiness</span>
-              <strong id="progressText">0 of 0 complete</strong>
-              <p id="progressMessage">Start checking items to see your readiness score.</p>
+              <strong id="progressText">Loading checklist…</strong>
+              <p id="progressMessage">Preparing your project health workspace.</p>
             </div>
-            <div class="progress-ring" id="progressPercent" aria-label="Readiness score">0%</div>
+            <div class="progress-ring" id="progressPercent" aria-label="Readiness score" style="--progress: 0">0%</div>
           </div>
         </div>
+
+        <noscript>
+          <p class="noscript-message">OpenReady needs JavaScript to load its interactive JSON checklist.</p>
+        </noscript>
 
         <form id="checklistForm" class="checklist" aria-label="Open-source readiness checklist"></form>
 
         <div class="workspace-footer">
-          <div>
+          <div data-reveal>
             <label class="notes-label" for="projectNotes">Project notes</label>
             <p class="field-help">Record missing files, owners, decisions, or next actions.</p>
             <textarea id="projectNotes" rows="6" placeholder="Example: Add a SECURITY.md file and link it from the README..."></textarea>
           </div>
 
-          <div class="tool-panel">
+          <div class="tool-panel" data-reveal data-reveal-delay="1">
             <h3>Checklist tools</h3>
             <p>Save a backup, restore past work, or produce a shareable report.</p>
             <div class="tool-actions">
@@ -176,16 +222,16 @@
 
     <section id="docs" class="section" aria-labelledby="docs-title">
       <div class="shell">
-        <div class="section-heading">
+        <div class="section-heading" data-reveal>
           <p class="eyebrow">Project documentation</p>
           <h2 id="docs-title">Everything needed to understand and support the software.</h2>
         </div>
 
-        <div class="docs-grid">
+        <div class="docs-grid" id="docsGrid">
           <a class="doc-card" href="https://github.com/Jpelotea/openready/blob/main/getting-started.md">
             <span>Start here</span>
             <h3>Getting started</h3>
-            <p>Learn what OpenReady does and how to use it in a browser.</p>
+            <p>Learn what OpenReady does and how to run it locally.</p>
           </a>
           <a class="doc-card" href="https://github.com/Jpelotea/openready/blob/main/CONTRIBUTING.md">
             <span>Participate</span>
@@ -208,21 +254,25 @@
 
     <section id="roadmap" class="section section-dark" aria-labelledby="roadmap-title">
       <div class="shell roadmap-grid">
-        <div class="section-heading">
+        <div class="section-heading" data-reveal>
           <p class="eyebrow light">Public roadmap</p>
           <h2 id="roadmap-title">Built in small, useful releases.</h2>
           <p>OpenReady grows through transparent issues, community feedback, and practical improvements.</p>
-          <a class="button light-button" href="https://github.com/Jpelotea/openready/issues/7">View the v0.1.0 tracker</a>
+          <a class="button light-button" href="https://github.com/Jpelotea/openready/issues/8">View the current tracker</a>
         </div>
 
-        <ol class="timeline">
+        <ol class="timeline" id="roadmapTimeline" data-reveal data-reveal-delay="1">
           <li class="done">
             <span>Released</span>
             <div><strong>v0.1.0</strong><p>Core checklist, local saving, JSON export, and community documentation.</p></div>
           </li>
+          <li class="done">
+            <span>Released</span>
+            <div><strong>v0.2.0</strong><p>Improved interface, JSON import, print-ready reporting, and stronger mobile usability.</p></div>
+          </li>
           <li class="current">
             <span>Current</span>
-            <div><strong>v0.2.0</strong><p>Improved interface, JSON import, print-ready reporting, and stronger mobile usability.</p></div>
+            <div><strong>v0.2.1</strong><p>JSON-first content, adaptive themes, configurable colors, and native browser animations.</p></div>
           </li>
           <li>
             <span>Planned</span>
@@ -233,16 +283,16 @@
     </section>
 
     <section id="community" class="section">
-      <div class="shell community-card">
+      <div class="shell community-card" data-reveal>
         <div>
           <p class="eyebrow">Open collaboration</p>
           <h2>Help make repository health easier for everyone.</h2>
           <p>OpenReady welcomes beginner-friendly documentation, accessibility fixes, design feedback, bug reports, and feature ideas.</p>
         </div>
         <div class="community-actions">
-          <a class="button primary" href="https://github.com/Jpelotea/openready/issues">Browse issues</a>
-          <a class="button ghost" href="https://github.com/Jpelotea/openready/discussions">Join discussions</a>
-          <a class="community-link" href="https://github.com/Jpelotea/openready/blob/main/CODE_OF_CONDUCT.md">Read the Code of Conduct →</a>
+          <a class="button primary" data-link="issues" href="https://github.com/Jpelotea/openready/issues">Browse issues</a>
+          <a class="button ghost" data-link="discussions" href="https://github.com/Jpelotea/openready/discussions">Join discussions</a>
+          <a class="community-link" data-link="codeOfConduct" href="https://github.com/Jpelotea/openready/blob/main/CODE_OF_CONDUCT.md">Read the Code of Conduct →</a>
         </div>
       </div>
     </section>
@@ -258,14 +308,14 @@
         <p>A non-commercial, MIT-licensed open-source software project.</p>
       </div>
       <div class="footer-links">
-        <a href="https://github.com/Jpelotea/openready">Source</a>
-        <a href="https://github.com/Jpelotea/openready/blob/main/LICENSE">License</a>
-        <a href="https://github.com/Jpelotea/openready/blob/main/SECURITY.md">Security</a>
-        <a href="https://www.netlify.com/">This site is powered by Netlify</a>
+        <a data-link="repository" href="https://github.com/Jpelotea/openready">Source</a>
+        <a data-link="license" href="https://github.com/Jpelotea/openready/blob/main/LICENSE">License</a>
+        <a data-link="security" href="https://github.com/Jpelotea/openready/blob/main/SECURITY.md">Security</a>
+        <a data-link="poweredByNetlify" href="https://www.netlify.com/">This site is powered by Netlify</a>
       </div>
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="app.js" defer></script>
 </body>
 </html>
