@@ -41,6 +41,8 @@ Data, theming, and maintenance foundation:
 - responsive support through ultra-wide displays
 - visible governance and maintainer documentation
 - automated JSON validation for pushes and pull requests
+- repeatable Lighthouse CI audits with downloadable reports
+- documented local-static-build performance and accessibility baseline
 
 ## Planned — v0.3.0
 
@@ -57,13 +59,21 @@ Track this release in [issue #8](https://github.com/Jpelotea/openready/issues/8)
 
 ## Performance and quality work
 
-Planned maintenance improvements include:
+Completed foundation:
 
-- a repeatable Lighthouse audit process
-- documented performance, accessibility, best-practices, and SEO baselines
-- review of layout stability and asset loading
-- link checks for community and documentation resources
-- expanded automated validation as the data schema grows
+- repeatable Lighthouse audit process
+- documented Performance, Accessibility, Best Practices, and SEO baseline
+- automatic HTML and JSON report artifacts
+- accessibility fixes informed by the first audit
+
+Next quality improvements:
+
+- measure the deployed production site when a current deployment is available
+- perform manual keyboard and screen-reader reviews
+- test responsive behavior on real phones and tablets
+- review layout stability and asset loading under slower network conditions
+- add automated link checks for community and documentation resources
+- expand validation as the data schema grows
 
 ## Future exploration
 
