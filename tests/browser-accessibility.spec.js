@@ -86,24 +86,21 @@ test('the keyboard-accessible import action restores checklist data and notes', 
   await expect(page.locator('#toolStatus')).toHaveText('Checklist imported successfully.');
 });
 
-test.describe('reduced motion', () => {
-  test.use({ reducedMotion: 'reduce' });
+test('reveal content is rendered without motion when reduced motion is requested', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await openCleanPage(page);
 
-  test('reveal content is rendered without motion when reduced motion is requested', async ({ page }) => {
-    await openCleanPage(page);
+  const result = await page.evaluate(() => ({
+    preferenceMatches: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    revealStyles: Array.from(document.querySelectorAll('[data-reveal]')).map((element) => {
+      const styles = getComputedStyle(element);
+      return { opacity: styles.opacity, transform: styles.transform };
+    }),
+  }));
 
-    const result = await page.evaluate(() => ({
-      preferenceMatches: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-      revealStyles: Array.from(document.querySelectorAll('[data-reveal]')).map((element) => {
-        const styles = getComputedStyle(element);
-        return { opacity: styles.opacity, transform: styles.transform };
-      }),
-    }));
-
-    expect(result.preferenceMatches).toBeTruthy();
-    expect(result.revealStyles.length).toBeGreaterThan(0);
-    expect(result.revealStyles.every((styles) => styles.opacity === '1' && styles.transform === 'none')).toBeTruthy();
-  });
+  expect(result.preferenceMatches).toBeTruthy();
+  expect(result.revealStyles.length).toBeGreaterThan(0);
+  expect(result.revealStyles.every((styles) => styles.opacity === '1' && styles.transform === 'none')).toBeTruthy();
 });
 
 const viewports = [
