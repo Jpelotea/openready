@@ -1,28 +1,59 @@
-# Roadmap
+# OpenReady Roadmap
 
-## Version 0.1
+OpenReady is developed through small, public releases focused on practical value for maintainers.
 
-- Browser-based checklist
-- Local progress save
-- Export checklist as JSON
-- Basic project documentation
+## Released — v0.1.0
 
-## Version 0.2
+Foundation release:
 
-- Import checklist JSON
-- Add beginner explanations for each checklist item
-- Improve mobile layout
-- Add print-friendly summary
+- browser-based repository-health checklist
+- local progress saving
+- project notes
+- JSON export
+- core project documentation
+- MIT License
+- Code of Conduct
+- contributing and security guidance
 
-## Version 0.3
+## Current — v0.2.0
 
-- Add project profile fields
-- Add template generator for README sections
-- Add accessibility review checklist
+Interface and reporting release:
 
-## Future ideas
+- redesigned responsive interface
+- clearer software and community positioning
+- JSON checklist import
+- print-friendly readiness report
+- improved focus states and mobile controls
+- updated repository documentation
 
-- Optional GitHub repository URL checker
-- Multi-language documentation
-- Community examples gallery
-- Maintainer handbook section
+## Planned — v0.3.0
+
+Guided project setup:
+
+- optional project profile fields
+- expanded explanations and examples for every checklist item
+- README section helper
+- accessibility review checklist
+- optional readiness categories and scoring details
+
+## Future exploration
+
+Ideas that require further design and community feedback:
+
+- optional GitHub repository URL assessment
+- reusable community-document templates
+- multilingual documentation
+- project examples gallery
+- maintainer learning pathway
+- offline installable web app support
+
+## How priorities are selected
+
+Priorities are shaped by:
+
+1. usability problems reported through GitHub Issues
+2. accessibility and security needs
+3. beginner-maintainer feedback
+4. community contributions that fit the non-commercial project mission
+
+See the [issue tracker](https://github.com/Jpelotea/openready/issues) for current work.
