@@ -5,10 +5,11 @@ Automated Lighthouse checks are useful, but they do not prove that every person 
 ## Testing status
 
 - Automated local Lighthouse baseline: completed
-- Production Lighthouse audit: pending or recorded through the `Production deployment audit` workflow
+- Production Lighthouse audit: completed; see [production-audit.md](production-audit.md)
 - Keyboard-only review: requires a human tester
 - Screen-reader review: requires a human tester using assistive technology
 - Real-device review: requires testing on representative phones, tablets, and desktop browsers
+- Manual testing tracker: [issue #14](https://github.com/Jpelotea/openready/issues/14)
 
 A test should only be marked complete after a person has performed it and recorded the date, browser, operating system, and result.
 
