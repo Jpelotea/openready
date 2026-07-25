@@ -22,7 +22,7 @@ https://capable-chaja-458cb0.netlify.app/
 
 ## Current version
 
-**v0.2.1 — Data and theming foundation**
+**v0.2.1 — Data, theming, and maintenance foundation**
 
 Current capabilities:
 
@@ -38,6 +38,8 @@ Current capabilities:
 - responsive mobile, tablet, desktop, and ultra-wide layouts
 - accessibility-minded controls, focus states, and reduced-motion support
 - native browser reveal animations
+- automated JSON validation
+- repeatable Lighthouse CI audits and downloadable reports
 
 ## Who it is for
 
@@ -61,6 +63,7 @@ OpenReady provides public links and documentation directly related to the softwa
 - [Security policy](SECURITY.md)
 - [Release history](CHANGELOG.md)
 - [Project roadmap](roadmap.md)
+- [Performance and accessibility audits](docs/performance.md)
 
 Beginner-friendly bug reports, documentation improvements, accessibility feedback, design suggestions, and focused code contributions are welcome.
 
@@ -75,16 +78,21 @@ openready/
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
 │   ├── workflows/
+│   │   ├── lighthouse.yml
 │   │   └── validate-data.yml
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── data/
 │   ├── checklist.json
 │   └── site.json
+├── docs/
+│   └── performance.md
 ├── scripts/
 │   └── validate_data.py
 ├── index.html
 ├── styles.css
 ├── app.js
+├── favicon.svg
+├── lighthouserc.json
 ├── getting-started.md
 ├── maintainer-guide.md
 ├── roadmap.md
@@ -113,7 +121,7 @@ Then open:
 http://localhost:8080
 ```
 
-No package installation or build process is required.
+No package installation or build process is required for normal use.
 
 ## Editing content and themes
 
@@ -144,6 +152,20 @@ The validator checks:
 
 The workflow is defined in `.github/workflows/validate-data.yml`.
 
+## Lighthouse quality audits
+
+OpenReady uses Lighthouse CI to measure Performance, Accessibility, Best Practices, and SEO in a repeatable GitHub Actions environment.
+
+Run the audit locally from the repository root:
+
+```bash
+npx --yes @lhci/cli@0.15.x autorun
+```
+
+The first recorded post-fix baseline used three local-static-build runs in GitHub Actions. All three runs scored 100 in all four categories. These results apply to that controlled environment and are not presented as measurements of the currently deployed Netlify site.
+
+See [docs/performance.md](docs/performance.md) for the measured baseline, limitations, report workflow, and future audit guidance.
+
 ## Deploying
 
 OpenReady is a static site. Netlify can publish it directly from the repository root.
@@ -163,9 +185,9 @@ See [roadmap.md](roadmap.md) and the public [v0.3.0 roadmap tracker](https://git
 
 Current open work includes:
 
-- adding a repeatable Lighthouse performance baseline
 - adding README screenshots
-- expanding accessibility checks
+- expanding manual and automated accessibility checks
+- measuring the deployed site when production deployment is available
 - exploring optional project profiles and scoring
 - developing beginner-friendly project-material helpers
 
