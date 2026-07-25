@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "application": {
+    "name": "OpenReady",
+    "version": "0.2.1",
+    "status": "Active open-source project",
+    "repository": "https://github.com/Jpelotea/openready",
+    "liveSite": "https://capable-chaja-458cb0.netlify.app/"
+  },
+  "links": {
+    "repository": "https://github.com/Jpelotea/openready",
+    "issues": "https://github.com/Jpelotea/openready/issues",
+    "discussions": "https://github.com/Jpelotea/openready/discussions",
+    "codeOfConduct": "https://github.com/Jpelotea/openready/blob/main/CODE_OF_CONDUCT.md",
+    "license": "https://github.com/Jpelotea/openready/blob/main/LICENSE",
+    "security": "https://github.com/Jpelotea/openready/blob/main/SECURITY.md",
+    "changelog": "https://github.com/Jpelotea/openready/blob/main/CHANGELOG.md",
+    "roadmap": "https://github.com/Jpelotea/openready/blob/main/roadmap.md",
+    "poweredByNetlify": "https://www.netlify.com/"
+  },
+  "principles": [
+    {
+      "title": "Private by default",
+      "description": "Checklist progress and notes stay in the browser unless the user exports them."
+    },
+    {
+      "title": "Built for beginners",
+      "description": "Plain-language guidance makes repository health easier to understand."
+    },
+    {
+      "title": "Community-first",
+      "description": "The project is designed for open collaboration, reuse, and improvement."
+    }
+  ],
+  "features": [
+    {
+      "number": "01",
+      "title": "Assess project health",
+      "description": "Review licensing, governance, security, documentation, and community readiness in one place."
+    },
+    {
+      "number": "02",
+      "title": "Keep progress locally",
+      "description": "Checklist progress and notes are stored locally. No account, analytics service, or backend is required."
+    },
+    {
+      "number": "03",
+      "title": "Share useful reports",
+      "description": "Export progress as JSON, restore saved work later, or print a clean readiness summary."
+    }
+  ],
+  "documents": [
+    {
+      "label": "Start here",
+      "title": "Getting started",
+      "description": "Learn what OpenReady does and how to run it locally.",
+      "url": "https://github.com/Jpelotea/openready/blob/main/getting-started.md"
+    },
+    {
+      "label": "Participate",
+      "title": "Contributing",
+      "description": "Report an issue, improve documentation, or propose a software change.",
+      "url": "https://github.com/Jpelotea/openready/blob/main/CONTRIBUTING.md"
+    },
+    {
+      "label": "Stay safe",
+      "title": "Security policy",
+      "description": "Review the responsible process for reporting security concerns.",
+      "url": "https://github.com/Jpelotea/openready/blob/main/SECURITY.md"
+    },
+    {
+      "label": "Follow progress",
+      "title": "Changelog",
+      "description": "See notable improvements and software release history.",
+      "url": "https://github.com/Jpelotea/openready/blob/main/CHANGELOG.md"
+    }
+  ],
+  "roadmap": [
+    {
+      "state": "done",
+      "label": "Released",
+      "version": "v0.1.0",
+      "description": "Core checklist, local saving, JSON export, and community documentation."
+    },
+    {
+      "state": "done",
+      "label": "Released",
+      "version": "v0.2.0",
+      "description": "Improved interface, JSON import, print-ready reporting, and stronger mobile usability."
+    },
+    {
+      "state": "current",
+      "label": "Current",
+      "version": "v0.2.1",
+      "description": "JSON-first content, adaptive themes, configurable colors, and native browser animations."
+    },
+    {
+      "state": "planned",
+      "label": "Planned",
+      "version": "v0.3.0",
+      "description": "Project profiles, template helpers, deeper accessibility guidance, and optional scoring."
+    }
+  ],
+  "themes": {
+    "light": {
+      "themeColor": "#f5f7fb",
+      "background": "#f5f7fb",
+      "surface": "#ffffff",
+      "surfaceSoft": "#eef3fb",
+      "surfaceElevated": "#fbfcff",
+      "surfaceDark": "#0b1220",
+      "text": "#152238",
+      "muted": "#617089",
+      "border": "#dce4f0",
+      "primary": "#2857d6",
+      "primaryHover": "#1f46ad",
+      "primarySoft": "#e8efff",
+      "success": "#1b8a62",
+      "successSoft": "#dcf6ea",
+      "danger": "#b33a3a"
+    },
+    "dark": {
+      "themeColor": "#07111f",
+      "background": "#07111f",
+      "surface": "#0d1a2b",
+      "surfaceSoft": "#101f33",
+      "surfaceElevated": "#122238",
+      "surfaceDark": "#040a13",
+      "text": "#eaf2ff",
+      "muted": "#9aa9bf",
+      "border": "#26374e",
+      "primary": "#82a8ff",
+      "primaryHover": "#a5c0ff",
+      "primarySoft": "#182b4e",
+      "success": "#5fd6a7",
+      "successSoft": "#143d32",
+      "danger": "#ff9292"
+    }
+  }
+}
