@@ -28,7 +28,7 @@ Interface and reporting release:
 
 ## Current — v0.2.1
 
-Data and theming foundation:
+Data, theming, and maintenance foundation:
 
 - JSON-driven checklist and site content
 - centralized project links and release information
@@ -39,6 +39,8 @@ Data and theming foundation:
 - reduced-motion safeguards
 - improved SEO metadata and structured data
 - responsive support through ultra-wide displays
+- visible governance and maintainer documentation
+- automated JSON validation for pushes and pull requests
 
 ## Planned — v0.3.0
 
@@ -53,6 +55,16 @@ Guided project setup:
 
 Track this release in [issue #8](https://github.com/Jpelotea/openready/issues/8).
 
+## Performance and quality work
+
+Planned maintenance improvements include:
+
+- a repeatable Lighthouse audit process
+- documented performance, accessibility, best-practices, and SEO baselines
+- review of layout stability and asset loading
+- link checks for community and documentation resources
+- expanded automated validation as the data schema grows
+
 ## Future exploration
 
 Ideas that require further design and community feedback:
@@ -63,8 +75,7 @@ Ideas that require further design and community feedback:
 - project examples gallery
 - maintainer learning pathway
 - offline installable web app support
-- automated JSON schema checks
-- automated Lighthouse and accessibility checks
+- JSON Schema files for editor integration
 
 ## How priorities are selected
 
