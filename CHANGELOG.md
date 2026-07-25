@@ -4,6 +4,35 @@ All notable changes to OpenReady are documented in this file.
 
 The format follows a simple release-based structure inspired by Keep a Changelog.
 
+## [0.2.1] - 2026-07-25
+
+### Added
+
+- JSON-driven checklist content in `data/checklist.json`.
+- Central site configuration in `data/site.json`.
+- Configurable light and dark theme color tokens.
+- System-aware theme selection with a saved manual preference.
+- Flicker-resistant theme initialization before the stylesheet loads.
+- Native Intersection Observer reveal animations.
+- Subtle native progress and project-status animations.
+- Search metadata, canonical URL, Open Graph metadata, and SoftwareApplication structured data.
+- Checklist categories and direct resource links.
+- Responsive support for ultra-wide displays.
+
+### Changed
+
+- Separated frequently updated content from core application logic.
+- Reworked checklist rendering to use safe DOM APIs and JSON data.
+- Improved the readiness progress ring with a dynamic visual indicator.
+- Updated README, roadmap, and local-development instructions.
+- Local development now requires a static web server because JSON content is loaded with `fetch`.
+
+### Accessibility
+
+- Theme controls include accessible labels and state information.
+- Animations continue to respect `prefers-reduced-motion`.
+- Both light and dark themes use centralized semantic color tokens.
+
 ## [0.2.0] - 2026-07-25
 
 ### Added
