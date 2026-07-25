@@ -39,7 +39,7 @@ Current capabilities:
 - accessibility-minded controls, focus states, and reduced-motion support
 - native browser reveal animations
 - automated JSON validation
-- repeatable Lighthouse CI audits and downloadable reports
+- repeatable local and production Lighthouse audits with downloadable reports
 
 ## Who it is for
 
@@ -64,6 +64,8 @@ OpenReady provides public links and documentation directly related to the softwa
 - [Release history](CHANGELOG.md)
 - [Project roadmap](roadmap.md)
 - [Performance and accessibility audits](docs/performance.md)
+- [Production deployment audit](docs/production-audit.md)
+- [Manual accessibility and device testing](docs/manual-accessibility-testing.md)
 
 Beginner-friendly bug reports, documentation improvements, accessibility feedback, design suggestions, and focused code contributions are welcome.
 
@@ -78,6 +80,7 @@ openready/
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
 │   ├── workflows/
+│   │   ├── lighthouse-production.yml
 │   │   ├── lighthouse.yml
 │   │   └── validate-data.yml
 │   └── PULL_REQUEST_TEMPLATE.md
@@ -85,7 +88,9 @@ openready/
 │   ├── checklist.json
 │   └── site.json
 ├── docs/
-│   └── performance.md
+│   ├── manual-accessibility-testing.md
+│   ├── performance.md
+│   └── production-audit.md
 ├── scripts/
 │   └── validate_data.py
 ├── index.html
@@ -93,6 +98,7 @@ openready/
 ├── app.js
 ├── favicon.svg
 ├── lighthouserc.json
+├── lighthouserc.production.json
 ├── getting-started.md
 ├── maintainer-guide.md
 ├── roadmap.md
@@ -154,17 +160,26 @@ The workflow is defined in `.github/workflows/validate-data.yml`.
 
 ## Lighthouse quality audits
 
-OpenReady uses Lighthouse CI to measure Performance, Accessibility, Best Practices, and SEO in a repeatable GitHub Actions environment.
+OpenReady uses Lighthouse CI to measure Performance, Accessibility, Best Practices, and SEO in repeatable GitHub Actions environments.
 
-Run the audit locally from the repository root:
+Run the local-static-build audit from the repository root:
 
 ```bash
 npx --yes @lhci/cli@0.15.x autorun
 ```
 
-The first recorded post-fix baseline used three local-static-build runs in GitHub Actions. All three runs scored 100 in all four categories. These results apply to that controlled environment and are not presented as measurements of the currently deployed Netlify site.
+The first recorded post-fix local baseline used three runs in GitHub Actions. All three runs scored 100 in all four categories. These scores apply only to that controlled local-static-build environment.
 
-See [docs/performance.md](docs/performance.md) for the measured baseline, limitations, report workflow, and future audit guidance.
+The initial production audit measured the public Netlify deployment at:
+
+- Performance: 91
+- Accessibility: 91
+- Best Practices: 96
+- SEO: 100
+
+The production report showed that the public site had not yet received accessibility and favicon fixes already present on `main`. Redeployment is tracked in [issue #13](https://github.com/Jpelotea/openready/issues/13).
+
+See [docs/performance.md](docs/performance.md) for the local baseline, [docs/production-audit.md](docs/production-audit.md) for the deployed-site evidence, and [docs/manual-accessibility-testing.md](docs/manual-accessibility-testing.md) for testing that Lighthouse cannot complete.
 
 ## Deploying
 
@@ -185,9 +200,9 @@ See [roadmap.md](roadmap.md) and the public [v0.3.0 roadmap tracker](https://git
 
 Current open work includes:
 
+- deploying the latest `main` branch to the public Netlify site
+- completing keyboard, screen-reader, zoom, reflow, and real-device testing
 - adding README screenshots
-- expanding manual and automated accessibility checks
-- measuring the deployed site when production deployment is available
 - exploring optional project profiles and scoring
 - developing beginner-friendly project-material helpers
 

@@ -16,6 +16,9 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - A GitHub Actions Lighthouse workflow with downloadable HTML and JSON reports.
 - Measured performance and accessibility guidance in `docs/performance.md`.
 - An SVG favicon for the application.
+- A separate Lighthouse configuration and workflow for auditing the public Netlify deployment.
+- Production audit evidence and measured results in `docs/production-audit.md`.
+- A human keyboard, screen-reader, zoom, reflow, theme, reduced-motion, and real-device test plan in `docs/manual-accessibility-testing.md`.
 
 ### Changed
 
@@ -23,18 +26,22 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Added governance and automated validation guidance to the contribution process.
 - Replaced unverified performance claims with documented targets and measured results.
 - Updated the roadmap after establishing the first Lighthouse baseline.
+- Distinguished local-static-build scores from public production-deployment scores.
+- Limited production auditing to a bounded representative run so unreachable or stale deployments still produce useful evidence.
 
 ### Accessibility
 
 - Added an accessible name to the hidden checklist-import file input.
 - Updated compact brand-link accessible names so they include the visible `OR` text.
 - Fixed the accessibility findings identified by the first Lighthouse audit.
+- Added a manual testing process for checks that automated tools cannot verify.
 
 ### Quality baseline
 
-- The first representative audit measured 100 Performance, 91 Accessibility, 96 Best Practices, and 100 SEO.
+- The first representative local audit measured 100 Performance, 91 Accessibility, 96 Best Practices, and 100 SEO.
 - After correcting the identified accessibility labels and missing favicon, all three final local-static-build runs measured 100 in Performance, Accessibility, Best Practices, and SEO.
-- The documented scores apply to the GitHub Actions static-server environment, not the currently deployed Netlify site.
+- The initial public Netlify audit measured 91 Performance, 91 Accessibility, 96 Best Practices, and 100 SEO.
+- The production report showed accessibility and favicon findings already fixed on `main`, confirming that the public deployment needs to be updated before a fair current-code comparison.
 
 ## [0.2.1] - 2026-07-25
 
