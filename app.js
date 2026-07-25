@@ -1,58 +1,29 @@
-const checklistItems = [
-  {
-    id: "license",
-    title: "Repository includes a clear open-source license",
-    description: "Add a LICENSE file in the repository root, such as MIT, Apache-2.0, GPL-3.0, or another OSI-approved license."
-  },
-  {
-    id: "code-of-conduct",
-    title: "Repository includes a Code of Conduct",
-    description: "Add CODE_OF_CONDUCT.md at the top level and link it from the site or documentation."
-  },
-  {
-    id: "readme",
-    title: "README explains the project clearly",
-    description: "Explain what the software does, who it helps, how to use it, and how to contribute."
-  },
-  {
-    id: "contributing",
-    title: "Contributing guide is available",
-    description: "Add CONTRIBUTING.md with beginner-friendly steps for issues, pull requests, and documentation fixes."
-  },
-  {
-    id: "changelog",
-    title: "Changelog tracks important updates",
-    description: "Add CHANGELOG.md so users and contributors can follow project progress."
-  },
-  {
-    id: "roadmap",
-    title: "Roadmap shows planned improvements",
-    description: "Publish a short roadmap so contributors know what kind of help is useful."
-  },
-  {
-    id: "issues",
-    title: "Issue tracker is linked",
-    description: "Make it easy for users to report bugs, suggest features, or ask documentation questions."
-  },
-  {
-    id: "security",
-    title: "Security policy explains responsible reporting",
-    description: "Add SECURITY.md with supported versions and a private way to report sensitive security concerns."
-  },
-  {
-    id: "governance",
-    title: "Decision-making and maintainer roles are documented",
-    description: "Explain how project decisions are made, who maintains the software, and how responsibilities may grow."
-  },
-  {
-    id: "community-docs",
-    title: "Website supports the software community",
-    description: "Include docs, changelog, roadmap, contributing links, or other information directly related to the software."
-  }
-];
+const STORAGE_KEYS = {
+  checklist: "openready-checklist-v1",
+  notes: "openready-notes-v1",
+  theme: "openready-theme"
+};
 
-const storageKey = "openready-checklist-v1";
-const notesKey = "openready-notes-v1";
+const TOKEN_MAP = {
+  background: "--bg",
+  surface: "--surface",
+  surfaceSoft: "--surface-soft",
+  surfaceElevated: "--surface-elevated",
+  surfaceDark: "--surface-dark",
+  text: "--text",
+  muted: "--muted",
+  border: "--border",
+  primary: "--primary",
+  primaryHover: "--primary-dark",
+  primarySoft: "--primary-soft",
+  success: "--success",
+  successSoft: "--success-soft",
+  danger: "--danger"
+};
+
+let checklistItems = [];
+let siteConfig = null;
+
 const form = document.querySelector("#checklistForm");
 const progressText = document.querySelector("#progressText");
 const progressMessage = document.querySelector("#progressMessage");
@@ -64,10 +35,23 @@ const importInput = document.querySelector("#importInput");
 const printButton = document.querySelector("#printButton");
 const resetButton = document.querySelector("#resetButton");
 const toolStatus = document.querySelector("#toolStatus");
+const themeToggle = document.querySelector("#themeToggle");
+const themeIcon = document.querySelector("#themeIcon");
+const themeLabel = document.querySelector("#themeLabel");
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+async function loadJson(path) {
+  const response = await fetch(path, { cache: "no-cache" });
+  if (!response.ok) {
+    throw new Error(`Could not load ${path} (${response.status}).`);
+  }
+  return response.json();
+}
 
 function getSavedState() {
   try {
-    return JSON.parse(localStorage.getItem(storageKey)) || {};
+    return JSON.parse(localStorage.getItem(STORAGE_KEYS.checklist)) || {};
   } catch (error) {
     return {};
   }
@@ -78,45 +62,253 @@ function setStatus(message, isError = false) {
   toolStatus.dataset.status = isError ? "error" : "success";
 }
 
+function createTextElement(tagName, text, className = "") {
+  const element = document.createElement(tagName);
+  element.textContent = text;
+  if (className) element.className = className;
+  return element;
+}
+
+function renderPrinciples(principles) {
+  const container = document.querySelector("#principlesGrid");
+  if (!container || !Array.isArray(principles)) return;
+
+  container.replaceChildren(
+    ...principles.map((principle) => {
+      const item = document.createElement("div");
+      item.append(
+        createTextElement("strong", principle.title || "Project principle"),
+        createTextElement("span", principle.description || "")
+      );
+      return item;
+    })
+  );
+}
+
+function renderFeatures(features) {
+  const container = document.querySelector("#featureGrid");
+  if (!container || !Array.isArray(features)) return;
+
+  container.replaceChildren(
+    ...features.map((feature, index) => {
+      const card = document.createElement("article");
+      card.className = "feature-card";
+      card.dataset.reveal = "";
+      card.dataset.revealDelay = String(index % 3);
+      card.append(
+        createTextElement("span", feature.number || String(index + 1).padStart(2, "0"), "feature-number"),
+        createTextElement("h3", feature.title || "Feature"),
+        createTextElement("p", feature.description || "")
+      );
+      return card;
+    })
+  );
+}
+
+function renderDocuments(documents) {
+  const container = document.querySelector("#docsGrid");
+  if (!container || !Array.isArray(documents)) return;
+
+  container.replaceChildren(
+    ...documents.map((documentItem, index) => {
+      const card = document.createElement("a");
+      card.className = "doc-card";
+      card.href = documentItem.url || "#";
+      card.dataset.reveal = "";
+      card.dataset.revealDelay = String(index % 4);
+      card.append(
+        createTextElement("span", documentItem.label || "Documentation"),
+        createTextElement("h3", documentItem.title || "Project document"),
+        createTextElement("p", documentItem.description || "")
+      );
+      return card;
+    })
+  );
+}
+
+function renderRoadmap(roadmap) {
+  const container = document.querySelector("#roadmapTimeline");
+  if (!container || !Array.isArray(roadmap)) return;
+
+  container.replaceChildren(
+    ...roadmap.map((release) => {
+      const item = document.createElement("li");
+      if (["done", "current", "planned"].includes(release.state)) {
+        item.className = release.state;
+      }
+      const copy = document.createElement("div");
+      copy.append(
+        createTextElement("strong", release.version || "Upcoming"),
+        createTextElement("p", release.description || "")
+      );
+      item.append(createTextElement("span", release.label || "Planned"), copy);
+      return item;
+    })
+  );
+}
+
+function applyConfiguredLinks(links) {
+  if (!links || typeof links !== "object") return;
+  document.querySelectorAll("[data-link]").forEach((element) => {
+    const key = element.dataset.link;
+    if (typeof links[key] === "string" && links[key]) {
+      element.href = links[key];
+    }
+  });
+}
+
+function applyThemeTokens(themeName) {
+  const tokens = siteConfig?.themes?.[themeName];
+  if (!tokens || typeof tokens !== "object") return;
+
+  Object.entries(TOKEN_MAP).forEach(([configKey, cssVariable]) => {
+    const value = tokens[configKey];
+    if (typeof value === "string" && value) {
+      document.documentElement.style.setProperty(cssVariable, value);
+    }
+  });
+
+  if (themeColorMeta && typeof tokens.themeColor === "string") {
+    themeColorMeta.content = tokens.themeColor;
+  }
+}
+
+function getCurrentTheme() {
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+}
+
+function updateThemeControl(themeName) {
+  const isDark = themeName === "dark";
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+  themeIcon.textContent = isDark ? "☀" : "☾";
+  themeLabel.textContent = isDark ? "Light" : "Dark";
+}
+
+function applyTheme(themeName, persist = false) {
+  const normalizedTheme = themeName === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = normalizedTheme;
+  applyThemeTokens(normalizedTheme);
+  updateThemeControl(normalizedTheme);
+
+  if (persist) {
+    try {
+      localStorage.setItem(STORAGE_KEYS.theme, normalizedTheme);
+    } catch (error) {
+      // The selected theme still works for the current page session.
+    }
+  }
+}
+
+function setupTheme() {
+  applyTheme(getCurrentTheme());
+
+  themeToggle.addEventListener("click", () => {
+    applyTheme(getCurrentTheme() === "dark" ? "light" : "dark", true);
+  });
+
+  systemThemeQuery.addEventListener("change", (event) => {
+    try {
+      if (localStorage.getItem(STORAGE_KEYS.theme)) return;
+    } catch (error) {
+      // Follow the system theme when storage is unavailable.
+    }
+    applyTheme(event.matches ? "dark" : "light");
+  });
+}
+
+function applySiteConfig(config) {
+  siteConfig = config;
+  const version = config?.application?.version;
+  const projectStatus = document.querySelector("#projectStatus");
+  if (projectStatus && version) {
+    projectStatus.textContent = `Open source · MIT licensed · v${version}`;
+  }
+
+  applyConfiguredLinks(config.links);
+  renderPrinciples(config.principles);
+  renderFeatures(config.features);
+  renderDocuments(config.documents);
+  renderRoadmap(config.roadmap);
+  applyTheme(getCurrentTheme());
+}
+
 function saveState() {
   const state = {};
-  document.querySelectorAll("input[type='checkbox'][data-check]").forEach((input) => {
-    state[input.id] = input.checked;
+  document.querySelectorAll("input[data-check]").forEach((input) => {
+    state[input.dataset.itemId] = input.checked;
   });
-  localStorage.setItem(storageKey, JSON.stringify(state));
-  localStorage.setItem(notesKey, notes.value);
+
+  try {
+    localStorage.setItem(STORAGE_KEYS.checklist, JSON.stringify(state));
+    localStorage.setItem(STORAGE_KEYS.notes, notes.value);
+  } catch (error) {
+    setStatus("Progress could not be saved in this browser.", true);
+  }
+
   updateProgress();
 }
 
-function renderChecklist() {
-  const saved = getSavedState();
+function renderChecklist(items) {
+  if (!Array.isArray(items) || items.length === 0) {
+    throw new Error("The checklist data does not contain any items.");
+  }
 
-  checklistItems.forEach((item) => {
-    const label = document.createElement("label");
-    label.className = "check-item";
-    label.setAttribute("for", item.id);
+  checklistItems = items;
+  const saved = getSavedState();
+  form.replaceChildren();
+
+  items.forEach((item, index) => {
+    if (!item.id || !item.title) return;
+
+    const card = document.createElement("article");
+    card.className = "check-item";
+    card.dataset.reveal = "";
+    card.dataset.revealDelay = String(index % 2);
 
     const input = document.createElement("input");
     input.type = "checkbox";
-    input.id = item.id;
+    input.id = `check-${item.id}`;
     input.dataset.check = "true";
+    input.dataset.itemId = item.id;
     input.checked = Boolean(saved[item.id]);
     input.addEventListener("change", saveState);
 
-    const text = document.createElement("span");
-    text.innerHTML = `<strong>${item.title}</strong><span>${item.description}</span>`;
+    const content = document.createElement("div");
+    content.className = "check-content";
 
-    label.append(input, text);
-    form.appendChild(label);
+    const category = createTextElement("span", item.category || "Project health", "check-category");
+    const title = document.createElement("label");
+    title.className = "check-title";
+    title.htmlFor = input.id;
+    title.textContent = item.title;
+    const description = createTextElement("p", item.description || "", "check-description");
+
+    content.append(category, title, description);
+
+    if (item.resourceUrl && item.resourceLabel) {
+      const resource = document.createElement("a");
+      resource.className = "check-resource";
+      resource.href = item.resourceUrl;
+      resource.textContent = `${item.resourceLabel} →`;
+      content.append(resource);
+    }
+
+    card.append(input, content);
+    form.append(card);
   });
 
-  notes.value = localStorage.getItem(notesKey) || "";
+  try {
+    notes.value = localStorage.getItem(STORAGE_KEYS.notes) || "";
+  } catch (error) {
+    notes.value = "";
+  }
   notes.addEventListener("input", saveState);
   updateProgress();
 }
 
 function getProgress() {
-  const inputs = Array.from(document.querySelectorAll("input[type='checkbox'][data-check]"));
+  const inputs = Array.from(document.querySelectorAll("input[data-check]"));
   const completed = inputs.filter((input) => input.checked).length;
   const total = inputs.length;
   const percent = total ? Math.round((completed / total) * 100) : 0;
@@ -125,9 +317,9 @@ function getProgress() {
 
 function updateProgress() {
   const { completed, total, percent } = getProgress();
-
   progressText.textContent = `${completed} of ${total} complete`;
   progressPercent.textContent = `${percent}%`;
+  progressPercent.style.setProperty("--progress", percent);
   progressPercent.setAttribute("aria-label", `Readiness score: ${percent}%`);
 
   if (percent === 100) {
@@ -148,7 +340,7 @@ function createExportPayload() {
   return {
     format: "openready-checklist",
     formatVersion: 1,
-    applicationVersion: "0.2.0",
+    applicationVersion: siteConfig?.application?.version || "0.2.1",
     exportedAt: new Date().toISOString(),
     summary: { completed, total, percent },
     completedItems: checklistItems.map((item) => ({
@@ -161,6 +353,11 @@ function createExportPayload() {
 }
 
 function exportChecklist() {
+  if (checklistItems.length === 0) {
+    setStatus("The checklist is still loading.", true);
+    return;
+  }
+
   const payload = createExportPayload();
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
@@ -198,13 +395,13 @@ async function importChecklist(file) {
     const payload = JSON.parse(text);
     const state = normalizeImportedState(payload);
 
-    localStorage.setItem(storageKey, JSON.stringify(state));
-    localStorage.setItem(notesKey, typeof payload.notes === "string" ? payload.notes : "");
+    localStorage.setItem(STORAGE_KEYS.checklist, JSON.stringify(state));
+    localStorage.setItem(STORAGE_KEYS.notes, typeof payload.notes === "string" ? payload.notes : "");
 
-    document.querySelectorAll("input[type='checkbox'][data-check]").forEach((input) => {
-      input.checked = Boolean(state[input.id]);
+    document.querySelectorAll("input[data-check]").forEach((input) => {
+      input.checked = Boolean(state[input.dataset.itemId]);
     });
-    notes.value = localStorage.getItem(notesKey) || "";
+    notes.value = localStorage.getItem(STORAGE_KEYS.notes) || "";
     updateProgress();
     setStatus("Checklist imported successfully.");
   } catch (error) {
@@ -224,9 +421,14 @@ function resetChecklist() {
   const confirmed = window.confirm("Reset your checklist progress and notes?");
   if (!confirmed) return;
 
-  localStorage.removeItem(storageKey);
-  localStorage.removeItem(notesKey);
-  document.querySelectorAll("input[type='checkbox'][data-check]").forEach((input) => {
+  try {
+    localStorage.removeItem(STORAGE_KEYS.checklist);
+    localStorage.removeItem(STORAGE_KEYS.notes);
+  } catch (error) {
+    // Continue resetting the visible interface.
+  }
+
+  document.querySelectorAll("input[data-check]").forEach((input) => {
     input.checked = false;
   });
   notes.value = "";
@@ -234,13 +436,77 @@ function resetChecklist() {
   setStatus("Checklist progress was reset.");
 }
 
-exportButton.addEventListener("click", exportChecklist);
-importButton.addEventListener("click", () => importInput.click());
-importInput.addEventListener("change", () => {
-  const [file] = importInput.files;
-  if (file) importChecklist(file);
-});
-printButton.addEventListener("click", printChecklist);
-resetButton.addEventListener("click", resetChecklist);
+function setupToolActions() {
+  exportButton.addEventListener("click", exportChecklist);
+  importButton.addEventListener("click", () => importInput.click());
+  importInput.addEventListener("change", () => {
+    const [file] = importInput.files;
+    if (file) importChecklist(file);
+  });
+  printButton.addEventListener("click", printChecklist);
+  resetButton.addEventListener("click", resetChecklist);
+}
 
-renderChecklist();
+function setupRevealAnimations() {
+  const elements = document.querySelectorAll("[data-reveal]:not([data-reveal-ready])");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  elements.forEach((element) => {
+    element.dataset.revealReady = "true";
+    const delay = Number(element.dataset.revealDelay || 0);
+    element.style.setProperty("--reveal-delay", `${Math.max(0, delay) * 90}ms`);
+  });
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    elements.forEach((element) => element.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "0px 0px -8%", threshold: 0.12 }
+  );
+
+  elements.forEach((element) => observer.observe(element));
+}
+
+async function initialize() {
+  setupTheme();
+  setupToolActions();
+
+  const [siteResult, checklistResult] = await Promise.allSettled([
+    loadJson("data/site.json"),
+    loadJson("data/checklist.json")
+  ]);
+
+  if (siteResult.status === "fulfilled") {
+    applySiteConfig(siteResult.value);
+  } else {
+    console.warn(siteResult.reason);
+  }
+
+  if (checklistResult.status === "fulfilled") {
+    try {
+      renderChecklist(checklistResult.value.items);
+    } catch (error) {
+      form.innerHTML = `<p class="load-error">${error.message}</p>`;
+      progressText.textContent = "Checklist unavailable";
+      progressMessage.textContent = "Review data/checklist.json and reload the page.";
+    }
+  } else {
+    console.error(checklistResult.reason);
+    form.innerHTML = '<p class="load-error">The checklist could not be loaded. Run OpenReady through a local web server or use the hosted site.</p>';
+    progressText.textContent = "Checklist unavailable";
+    progressMessage.textContent = "The JSON content file could not be reached.";
+  }
+
+  setupRevealAnimations();
+}
+
+initialize();
