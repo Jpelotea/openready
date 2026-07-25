@@ -1,0 +1,27 @@
+name: Export deploy source
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/export-source.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Remove Git metadata
+        run: rm -rf .git
+
+      - name: Upload deploy source
+        uses: actions/upload-artifact@v4
+        with:
+          name: openready-deploy-source
+          path: .
+          include-hidden-files: true
+          retention-days: 1
