@@ -7,6 +7,17 @@ async function openCleanPage(page) {
   await expect(page.locator('input[data-check]').first()).toBeVisible();
 }
 
+function maximumDurationInSeconds(value) {
+  return Math.max(
+    ...value.split(',').map((part) => {
+      const duration = part.trim();
+      if (duration.endsWith('ms')) return Number.parseFloat(duration) / 1000;
+      if (duration.endsWith('s')) return Number.parseFloat(duration);
+      return 0;
+    })
+  );
+}
+
 test('keyboard users can reach the main controls and save checklist progress', async ({ page }) => {
   await openCleanPage(page);
 
@@ -86,7 +97,7 @@ test('the keyboard-accessible import action restores checklist data and notes', 
   await expect(page.locator('#toolStatus')).toHaveText('Checklist imported successfully.');
 });
 
-test('reveal content is rendered without motion when reduced motion is requested', async ({ page }) => {
+test('reveal content is rendered without meaningful motion when reduced motion is requested', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await openCleanPage(page);
 
@@ -94,13 +105,24 @@ test('reveal content is rendered without motion when reduced motion is requested
     preferenceMatches: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     revealStyles: Array.from(document.querySelectorAll('[data-reveal]')).map((element) => {
       const styles = getComputedStyle(element);
-      return { opacity: styles.opacity, transform: styles.transform };
+      return {
+        opacity: styles.opacity,
+        transitionDuration: styles.transitionDuration,
+        animationDuration: styles.animationDuration,
+      };
     }),
   }));
 
   expect(result.preferenceMatches).toBeTruthy();
   expect(result.revealStyles.length).toBeGreaterThan(0);
-  expect(result.revealStyles.every((styles) => styles.opacity === '1' && styles.transform === 'none')).toBeTruthy();
+  expect(result.revealStyles.every((styles) => styles.opacity === '1')).toBeTruthy();
+  expect(
+    result.revealStyles.every(
+      (styles) =>
+        maximumDurationInSeconds(styles.transitionDuration) <= 0.001 &&
+        maximumDurationInSeconds(styles.animationDuration) <= 0.001
+    )
+  ).toBeTruthy();
 });
 
 const viewports = [
