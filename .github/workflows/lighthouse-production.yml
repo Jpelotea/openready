@@ -1,0 +1,58 @@
+name: Production deployment audit
+
+on:
+  pull_request:
+    paths:
+      - "lighthouserc.production.json"
+      - ".github/workflows/lighthouse-production.yml"
+      - "docs/manual-accessibility-testing.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-production:
+    name: Audit public Netlify deployment
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Record production reachability and headers
+        continue-on-error: true
+        run: |
+          mkdir -p lhci-production-results
+          {
+            echo "Audit time (UTC): $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            echo "URL: https://capable-chaja-458cb0.netlify.app/"
+            echo
+            curl --location --silent --show-error --fail-with-body \
+              --connect-timeout 20 --max-time 60 \
+              --dump-header - --output /tmp/openready-production.html \
+              https://capable-chaja-458cb0.netlify.app/
+            echo
+            echo "Downloaded bytes: $(wc -c < /tmp/openready-production.html)"
+            grep -oE '<title>[^<]+' /tmp/openready-production.html | head -1 || true
+            grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' /tmp/openready-production.html | sort -u || true
+          } > lhci-production-results/reachability.txt 2>&1
+
+      - name: Run Lighthouse CI against production
+        continue-on-error: true
+        run: npx --yes @lhci/cli@0.15.x autorun --config=lighthouserc.production.json
+
+      - name: Upload production audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-audit-reports
+          path: lhci-production-results
+          if-no-files-found: warn
+          retention-days: 30
