@@ -1,17 +1,31 @@
 # Manual Accessibility and Device Testing
 
-Automated Lighthouse checks are useful, but they do not prove that every person can use OpenReady successfully. This checklist covers the manual testing that should accompany automated results.
+Automated Lighthouse and Playwright checks are useful, but they do not prove that every person can use OpenReady successfully. This checklist covers the human testing that must accompany automated results.
 
 ## Testing status
 
 - Automated local Lighthouse baseline: completed
 - Production Lighthouse audit: completed; see [production-audit.md](production-audit.md)
-- Keyboard-only review: requires a human tester
-- Screen-reader review: requires a human tester using assistive technology
-- Real-device review: requires testing on representative phones, tablets, and desktop browsers
-- Manual testing tracker: [issue #14](https://github.com/Jpelotea/openready/issues/14)
+- Automated keyboard, theme, import, reduced-motion, and responsive checks: completed; see [automated-browser-testing.md](automated-browser-testing.md)
+- Human keyboard-only review: pending
+- Desktop screen-reader review: pending
+- Mobile screen-reader review: pending
+- Browser zoom, reflow, and high-contrast review: pending
+- Representative real-device review: pending
+- Parent manual testing tracker: [issue #14](https://github.com/Jpelotea/openready/issues/14)
 
-A test should only be marked complete after a person has performed it and recorded the date, browser, operating system, and result.
+A test should only be marked complete after a person has performed it and recorded the date, browser, operating system, environment, and result.
+
+## Human testing work queue
+
+The remaining work is separated so contributors can complete one focused test without needing every device or assistive technology.
+
+- [Desktop screen reader and keyboard review — issue #17](https://github.com/Jpelotea/openready/issues/17)
+- [Mobile screen reader review — issue #18](https://github.com/Jpelotea/openready/issues/18)
+- [Browser zoom, reflow, and high contrast — issue #19](https://github.com/Jpelotea/openready/issues/19)
+- [Representative real-device usability matrix — issue #20](https://github.com/Jpelotea/openready/issues/20)
+
+Use the repository's **Accessibility test session** issue template to record a session. Create a separate, focused bug issue for every defect found rather than hiding several unrelated problems inside one test report.
 
 ## Keyboard-only test
 
@@ -76,15 +90,15 @@ Review the following:
 
 ## Real-device matrix
 
-Record at least one result in each category:
+Record at least one human result in each category:
 
-| Category | Suggested environment | Result | Notes |
+| Category | Suggested environment | Result | Evidence |
 |---|---|---|---|
-| Small phone | iPhone SE-size viewport or compact Android phone | Pending | |
-| Modern phone | Current iPhone or Android device | Pending | |
-| Tablet | iPad or Android tablet in portrait and landscape | Pending | |
-| Desktop | Windows, macOS, or Linux at 100% and 200% zoom | Pending | |
-| Ultra-wide | Desktop viewport wider than 1600 pixels | Pending | |
+| Small phone | iPhone SE-size device or compact Android phone | Pending | Issue #20 |
+| Modern phone | Current iPhone or Android device | Pending | Issue #20 |
+| Tablet | iPad or Android tablet in portrait and landscape | Pending | Issue #20 |
+| Desktop | Windows, macOS, or Linux at 100% and 200% zoom | Pending | Issues #17 and #19 |
+| Ultra-wide | Desktop viewport wider than 1600 pixels | Pending | Issue #20 |
 
 ## Functional checks during accessibility testing
 
@@ -107,8 +121,9 @@ For each testing session, record:
 - device and operating system
 - browser and version
 - assistive technology and version, when applicable
+- OpenReady URL or commit tested
 - test sections completed
 - problems found and their related GitHub issue numbers
 - overall result: pass, pass with observations, or needs work
 
-Automated scores must not be used as a substitute for these manual results.
+Automated scores must not be used as a substitute for these human results.
