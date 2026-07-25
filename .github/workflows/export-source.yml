@@ -1,9 +1,12 @@
 name: Export deploy source
 
 on:
-  pull_request:
+  push:
+    branches: [main]
     paths:
       - ".github/workflows/export-source.yml"
+      - ".github/workflows/export-source-trigger.txt"
+  workflow_dispatch:
 
 permissions:
   contents: read
