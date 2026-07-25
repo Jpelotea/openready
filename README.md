@@ -9,11 +9,12 @@ It turns repository best practices into a practical browser-based checklist cove
 - contributor guidance
 - Code of Conduct
 - security policy
-- governance
-- changelog and roadmap
+- governance and maintainer roles
+- changelog and release history
+- roadmap and planned improvements
 - community participation
 
-OpenReady runs entirely in the browser. It has no backend, account system, analytics, advertising, or paid services.
+OpenReady runs entirely in the browser. It has no backend, account system, analytics, or paid services.
 
 ## Live application
 
@@ -31,13 +32,12 @@ Current capabilities:
 - project notes
 - JSON export and import
 - print-friendly readiness report
-- responsive layouts for mobile, tablet, desktop, and wide displays
-- system-aware light and dark modes
-- saved manual theme preference
-- configuration-driven color tokens
-- lightweight native browser animations
-- reduced-motion support
 - JSON-driven checklist and site content
+- adaptive light and dark themes
+- configurable semantic color tokens
+- responsive mobile, tablet, desktop, and ultra-wide layouts
+- accessibility-minded controls, focus states, and reduced-motion support
+- native browser reveal animations
 
 ## Who it is for
 
@@ -49,57 +49,46 @@ OpenReady is designed for:
 - educators introducing healthy open-source practices
 - project owners preparing a public release
 
+## Community and project health
+
+OpenReady provides public links and documentation directly related to the software:
+
+- [Issue tracker](https://github.com/Jpelotea/openready/issues)
+- [GitHub Discussions](https://github.com/Jpelotea/openready/discussions)
+- [Contributing guide](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Governance and maintainer roles](GOVERNANCE.md)
+- [Security policy](SECURITY.md)
+- [Release history](CHANGELOG.md)
+- [Project roadmap](roadmap.md)
+
+Beginner-friendly bug reports, documentation improvements, accessibility feedback, design suggestions, and focused code contributions are welcome.
+
 ## Privacy
 
 OpenReady does not send checklist information to a server. Progress and notes remain in the current browser unless the user intentionally exports a JSON backup.
-
-## Data-driven architecture
-
-Frequently updated content is separated from the core application code:
-
-- `data/checklist.json` contains checklist categories, titles, descriptions, and resource links.
-- `data/site.json` contains the version, project links, feature cards, documentation cards, roadmap entries, and theme tokens.
-
-This allows maintainers to update most visible content without editing `app.js` or the main HTML structure.
-
-Important headings and project descriptions remain in semantic HTML as a search-friendly fallback.
-
-## Customizing colors
-
-Open `data/site.json`, then edit the values inside:
-
-```json
-"themes": {
-  "light": {
-    "primary": "#2857d6",
-    "background": "#f5f7fb"
-  },
-  "dark": {
-    "primary": "#82a8ff",
-    "background": "#07111f"
-  }
-}
-```
-
-The application maps these values to centralized CSS custom properties. When changing colors, review text contrast and interactive states in both themes.
 
 ## Repository structure
 
 ```text
 openready/
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   ├── workflows/
+│   │   └── validate-data.yml
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── data/
-│   ├── checklist.json        # Checklist content and resource links
-│   └── site.json             # Site content, links, version, and themes
-├── index.html                # Semantic page structure and SEO fallback content
-├── styles.css                # Responsive design system and theme styles
-├── app.js                    # Rendering, storage, import/export, theme, and animation logic
+│   ├── checklist.json
+│   └── site.json
+├── scripts/
+│   └── validate_data.py
+├── index.html
+├── styles.css
+├── app.js
 ├── getting-started.md
 ├── maintainer-guide.md
 ├── roadmap.md
 ├── netlify-open-source-readiness.md
-├── .github/
-│   ├── ISSUE_TEMPLATE/
-│   └── PULL_REQUEST_TEMPLATE.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── GOVERNANCE.md
@@ -112,23 +101,48 @@ openready/
 
 ## Run locally
 
-No package installation or build process is required. Because the application loads JSON files with `fetch`, use a local web server rather than opening `index.html` directly as a `file://` page.
-
-1. Download or clone the repository.
-2. Open a terminal in the repository directory.
-3. Start a local server:
+OpenReady loads JSON content with `fetch`, so it must be served through a local web server.
 
 ```bash
 python -m http.server 8080
 ```
 
-4. Open:
+Then open:
 
 ```text
 http://localhost:8080
 ```
 
-Other static servers may also be used.
+No package installation or build process is required.
+
+## Editing content and themes
+
+Frequently updated content is separated from the core application logic:
+
+- edit `data/checklist.json` to change checklist items, categories, explanations, and resource links
+- edit `data/site.json` to change project links, documentation cards, roadmap entries, and theme colors
+
+Keep checklist IDs stable so existing browser progress and imported files remain compatible.
+
+## Automated data validation
+
+Every push or pull request that changes the JSON data, validation script, or workflow runs:
+
+```bash
+python scripts/validate_data.py
+```
+
+The validator checks:
+
+- valid JSON syntax
+- required checklist fields
+- unique, stable checklist IDs
+- complete documentation and community links
+- valid HTTP or HTTPS URLs
+- required light and dark theme tokens
+- roadmap entry structure
+
+The workflow is defined in `.github/workflows/validate-data.yml`.
 
 ## Deploying
 
@@ -141,35 +155,23 @@ Build command: leave blank
 Publish directory: .
 ```
 
-The included `netlify.toml` contains the publish configuration.
-
-## Performance and accessibility goals
-
-OpenReady aims to maintain:
-
-- Lighthouse Performance score of 90 or higher
-- Lighthouse Accessibility score of 95 or higher
-- Lighthouse Best Practices score of 95 or higher
-- Lighthouse SEO score of 95 or higher
-- minimal layout shifting
-- no required third-party JavaScript
-- keyboard-accessible controls
-- visible focus indicators
-- support for `prefers-reduced-motion`
-
-These are project targets rather than guarantees because results vary by browser, device, network, and hosting conditions.
+The included `netlify.toml` contains the publish configuration and static-site headers.
 
 ## Project roadmap
 
-See [roadmap.md](roadmap.md) and the current [v0.3.0 roadmap tracker](https://github.com/Jpelotea/openready/issues/8).
+See [roadmap.md](roadmap.md) and the public [v0.3.0 roadmap tracker](https://github.com/Jpelotea/openready/issues/8).
 
 Current open work includes:
 
-- expanding checklist guidance and examples
+- adding a repeatable Lighthouse performance baseline
 - adding README screenshots
-- refining mobile usability
-- creating a dedicated accessibility review checklist
+- expanding accessibility checks
 - exploring optional project profiles and scoring
+- developing beginner-friendly project-material helpers
+
+## Decision-making
+
+Current decision-making, review criteria, maintainer responsibilities, and future governance plans are documented in [GOVERNANCE.md](GOVERNANCE.md).
 
 ## Contributing
 
