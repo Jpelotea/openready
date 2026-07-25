@@ -1,0 +1,72 @@
+name: Browser accessibility checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "styles.css"
+      - "app.js"
+      - "data/**"
+      - "tests/**"
+      - "playwright.config.js"
+      - ".github/workflows/browser-accessibility.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "styles.css"
+      - "app.js"
+      - "data/**"
+      - "tests/**"
+      - "playwright.config.js"
+      - ".github/workflows/browser-accessibility.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-accessibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Playwright test runner
+        run: npm install --no-save @playwright/test@1.52.0
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Start local static server
+        run: |
+          python3 -m http.server 8080 > /tmp/openready-server.log 2>&1 &
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8080/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/openready-server.log
+          exit 1
+
+      - name: Run browser accessibility checks
+        run: npx playwright test
+
+      - name: Upload browser test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-accessibility-results
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 30
