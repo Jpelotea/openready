@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "license",
+      "category": "Foundation",
+      "title": "Repository includes a clear open-source license",
+      "description": "Add a LICENSE file in the repository root, such as MIT, Apache-2.0, GPL-3.0, or another OSI-approved license.",
+      "resourceLabel": "Review the license",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/LICENSE"
+    },
+    {
+      "id": "code-of-conduct",
+      "category": "Community",
+      "title": "Repository includes a Code of Conduct",
+      "description": "Add CODE_OF_CONDUCT.md at the top level and make it easy for contributors to find.",
+      "resourceLabel": "Read the Code of Conduct",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/CODE_OF_CONDUCT.md"
+    },
+    {
+      "id": "readme",
+      "category": "Foundation",
+      "title": "README explains the project clearly",
+      "description": "Explain what the software does, who it helps, how to use it, and how people can contribute.",
+      "resourceLabel": "View the README",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/README.md"
+    },
+    {
+      "id": "contributing",
+      "category": "Community",
+      "title": "Contributing guide is available",
+      "description": "Add beginner-friendly steps for reporting issues, proposing changes, and submitting pull requests.",
+      "resourceLabel": "View contributing guidance",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/CONTRIBUTING.md"
+    },
+    {
+      "id": "changelog",
+      "category": "Operations",
+      "title": "Changelog tracks important updates",
+      "description": "Document notable changes so users and contributors can follow the project’s release history.",
+      "resourceLabel": "View the changelog",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/CHANGELOG.md"
+    },
+    {
+      "id": "roadmap",
+      "category": "Operations",
+      "title": "Roadmap shows planned improvements",
+      "description": "Publish upcoming priorities so contributors can understand the direction of the project.",
+      "resourceLabel": "View the roadmap",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/roadmap.md"
+    },
+    {
+      "id": "issues",
+      "category": "Community",
+      "title": "Issue tracker is linked and welcoming",
+      "description": "Make it easy for users to report bugs, suggest features, and identify beginner-friendly work.",
+      "resourceLabel": "Browse issues",
+      "resourceUrl": "https://github.com/Jpelotea/openready/issues"
+    },
+    {
+      "id": "security",
+      "category": "Operations",
+      "title": "Security policy explains responsible reporting",
+      "description": "Document supported versions and provide a private way to report sensitive security concerns.",
+      "resourceLabel": "Read the security policy",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/SECURITY.md"
+    },
+    {
+      "id": "governance",
+      "category": "Operations",
+      "title": "Decision-making and maintainer roles are documented",
+      "description": "Explain how decisions are made, who maintains the software, and how responsibilities may grow.",
+      "resourceLabel": "Read the governance guide",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/GOVERNANCE.md"
+    },
+    {
+      "id": "community-docs",
+      "category": "Community",
+      "title": "Project site supports the software community",
+      "description": "Provide documentation, release history, roadmap details, and contributor links directly related to the software.",
+      "resourceLabel": "Open project documentation",
+      "resourceUrl": "https://github.com/Jpelotea/openready"
+    }
+  ]
+}
