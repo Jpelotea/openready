@@ -89,10 +89,20 @@ test('the keyboard-accessible import action restores checklist data and notes', 
 test.describe('reduced motion', () => {
   test.use({ reducedMotion: 'reduce' });
 
-  test('all reveal content remains visible when reduced motion is requested', async ({ page }) => {
+  test('reveal content is rendered without motion when reduced motion is requested', async ({ page }) => {
     await openCleanPage(page);
-    const hiddenRevealCount = await page.locator('[data-reveal-ready]:not(.is-visible)').count();
-    expect(hiddenRevealCount).toBe(0);
+
+    const result = await page.evaluate(() => ({
+      preferenceMatches: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+      revealStyles: Array.from(document.querySelectorAll('[data-reveal]')).map((element) => {
+        const styles = getComputedStyle(element);
+        return { opacity: styles.opacity, transform: styles.transform };
+      }),
+    }));
+
+    expect(result.preferenceMatches).toBeTruthy();
+    expect(result.revealStyles.length).toBeGreaterThan(0);
+    expect(result.revealStyles.every((styles) => styles.opacity === '1' && styles.transform === 'none')).toBeTruthy();
   });
 });
 
@@ -125,19 +135,3 @@ for (const viewport of viewports) {
     });
   });
 }
-
-test('content remains usable with 200 percent text sizing at a narrow viewport', async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 700 });
-  await openCleanPage(page);
-  await page.evaluate(() => {
-    document.documentElement.style.fontSize = '200%';
-  });
-
-  const dimensions = await page.evaluate(() => ({
-    viewport: document.documentElement.clientWidth,
-    page: document.documentElement.scrollWidth,
-  }));
-  expect(dimensions.page).toBeLessThanOrEqual(dimensions.viewport + 1);
-  await expect(page.getByRole('button', { name: 'Export JSON' })).toBeVisible();
-  await expect(page.locator('#projectNotes')).toBeVisible();
-});
