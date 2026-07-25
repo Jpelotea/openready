@@ -41,8 +41,9 @@ Data, theming, and maintenance foundation:
 - responsive support through ultra-wide displays
 - visible governance and maintainer documentation
 - automated JSON validation for pushes and pull requests
-- repeatable Lighthouse CI audits with downloadable reports
-- documented local-static-build performance and accessibility baseline
+- repeatable local and production Lighthouse CI audits with downloadable reports
+- documented local-static-build and public-deployment quality baselines
+- a documented manual accessibility and real-device testing process
 
 ## Planned — v0.3.0
 
@@ -61,17 +62,20 @@ Track this release in [issue #8](https://github.com/Jpelotea/openready/issues/8)
 
 Completed foundation:
 
-- repeatable Lighthouse audit process
-- documented Performance, Accessibility, Best Practices, and SEO baseline
+- repeatable local-static-build Lighthouse audit process
+- public Netlify deployment audit workflow
+- documented Performance, Accessibility, Best Practices, and SEO baselines
 - automatic HTML and JSON report artifacts
-- accessibility fixes informed by the first audit
+- accessibility fixes informed by the first local audit
+- production evidence showing the current deployment gap
+- manual keyboard, screen-reader, zoom, reflow, theme, motion, and device test plan
 
 Next quality improvements:
 
-- measure the deployed production site when a current deployment is available
-- perform manual keyboard and screen-reader reviews
-- test responsive behavior on real phones and tablets
-- review layout stability and asset loading under slower network conditions
+- deploy the latest `main` branch to the public site through [issue #13](https://github.com/Jpelotea/openready/issues/13)
+- rerun the production audit after deployment
+- complete human accessibility and device testing through [issue #14](https://github.com/Jpelotea/openready/issues/14)
+- review production layout stability, render-blocking work, and main-thread activity
 - add automated link checks for community and documentation resources
 - expand validation as the data schema grows
 
