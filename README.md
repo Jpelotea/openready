@@ -13,7 +13,7 @@ It turns repository best practices into a practical browser-based checklist cove
 - changelog and roadmap
 - community participation
 
-OpenReady runs entirely in the browser. It has no backend, account system, analytics, or paid services.
+OpenReady runs entirely in the browser. It has no backend, account system, analytics, advertising, or paid services.
 
 ## Live application
 
@@ -21,7 +21,7 @@ https://capable-chaja-458cb0.netlify.app/
 
 ## Current version
 
-**v0.2.0 — Interface and reporting release**
+**v0.2.1 — Data and theming foundation**
 
 Current capabilities:
 
@@ -29,11 +29,15 @@ Current capabilities:
 - automatic progress score
 - local browser saving with `localStorage`
 - project notes
-- JSON export
-- JSON import
+- JSON export and import
 - print-friendly readiness report
-- responsive mobile layout
-- accessibility-minded controls and focus states
+- responsive layouts for mobile, tablet, desktop, and wide displays
+- system-aware light and dark modes
+- saved manual theme preference
+- configuration-driven color tokens
+- lightweight native browser animations
+- reduced-motion support
+- JSON-driven checklist and site content
 
 ## Who it is for
 
@@ -49,13 +53,46 @@ OpenReady is designed for:
 
 OpenReady does not send checklist information to a server. Progress and notes remain in the current browser unless the user intentionally exports a JSON backup.
 
+## Data-driven architecture
+
+Frequently updated content is separated from the core application code:
+
+- `data/checklist.json` contains checklist categories, titles, descriptions, and resource links.
+- `data/site.json` contains the version, project links, feature cards, documentation cards, roadmap entries, and theme tokens.
+
+This allows maintainers to update most visible content without editing `app.js` or the main HTML structure.
+
+Important headings and project descriptions remain in semantic HTML as a search-friendly fallback.
+
+## Customizing colors
+
+Open `data/site.json`, then edit the values inside:
+
+```json
+"themes": {
+  "light": {
+    "primary": "#2857d6",
+    "background": "#f5f7fb"
+  },
+  "dark": {
+    "primary": "#82a8ff",
+    "background": "#07111f"
+  }
+}
+```
+
+The application maps these values to centralized CSS custom properties. When changing colors, review text contrast and interactive states in both themes.
+
 ## Repository structure
 
 ```text
 openready/
-├── index.html
-├── styles.css
-├── app.js
+├── data/
+│   ├── checklist.json        # Checklist content and resource links
+│   └── site.json             # Site content, links, version, and themes
+├── index.html                # Semantic page structure and SEO fallback content
+├── styles.css                # Responsive design system and theme styles
+├── app.js                    # Rendering, storage, import/export, theme, and animation logic
 ├── getting-started.md
 ├── maintainer-guide.md
 ├── roadmap.md
@@ -75,22 +112,23 @@ openready/
 
 ## Run locally
 
-No build process is required.
+No package installation or build process is required. Because the application loads JSON files with `fetch`, use a local web server rather than opening `index.html` directly as a `file://` page.
 
 1. Download or clone the repository.
-2. Open `index.html` in a modern browser.
-
-For a local development server:
+2. Open a terminal in the repository directory.
+3. Start a local server:
 
 ```bash
 python -m http.server 8080
 ```
 
-Then open:
+4. Open:
 
 ```text
 http://localhost:8080
 ```
+
+Other static servers may also be used.
 
 ## Deploying
 
@@ -105,16 +143,32 @@ Publish directory: .
 
 The included `netlify.toml` contains the publish configuration.
 
+## Performance and accessibility goals
+
+OpenReady aims to maintain:
+
+- Lighthouse Performance score of 90 or higher
+- Lighthouse Accessibility score of 95 or higher
+- Lighthouse Best Practices score of 95 or higher
+- Lighthouse SEO score of 95 or higher
+- minimal layout shifting
+- no required third-party JavaScript
+- keyboard-accessible controls
+- visible focus indicators
+- support for `prefers-reduced-motion`
+
+These are project targets rather than guarantees because results vary by browser, device, network, and hosting conditions.
+
 ## Project roadmap
 
-See [roadmap.md](roadmap.md) and the public [v0.1.0 roadmap tracker](https://github.com/Jpelotea/openready/issues/7).
+See [roadmap.md](roadmap.md) and the current [v0.3.0 roadmap tracker](https://github.com/Jpelotea/openready/issues/8).
 
 Current open work includes:
 
-- improving checklist guidance
+- expanding checklist guidance and examples
 - adding README screenshots
 - refining mobile usability
-- expanding accessibility checks
+- creating a dedicated accessibility review checklist
 - exploring optional project profiles and scoring
 
 ## Contributing
