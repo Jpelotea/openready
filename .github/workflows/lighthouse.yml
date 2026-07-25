@@ -8,6 +8,7 @@ on:
       - "styles.css"
       - "app.js"
       - "data/**"
+      - "docs/performance.md"
       - "lighthouserc.json"
       - ".github/workflows/lighthouse.yml"
   pull_request:
@@ -16,6 +17,7 @@ on:
       - "styles.css"
       - "app.js"
       - "data/**"
+      - "docs/performance.md"
       - "lighthouserc.json"
       - ".github/workflows/lighthouse.yml"
   workflow_dispatch:
