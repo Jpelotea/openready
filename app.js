@@ -35,14 +35,14 @@ const checklistItems = [
     description: "Make it easy for users to report bugs, suggest features, or ask documentation questions."
   },
   {
-    id: "non-commercial",
-    title: "Project is clearly non-commercial",
-    description: "Avoid pricing pages, paid support, commercial hosting, affiliate pages, and sales funnels."
+    id: "security",
+    title: "Security policy explains responsible reporting",
+    description: "Add SECURITY.md with supported versions and a private way to report sensitive security concerns."
   },
   {
-    id: "netlify-attribution",
-    title: "Netlify attribution is visible",
-    description: "If hosted under Netlify's Open Source plan, include the required 'This site is powered by Netlify' link."
+    id: "governance",
+    title: "Decision-making and maintainer roles are documented",
+    description: "Explain how project decisions are made, who maintains the software, and how responsibilities may grow."
   },
   {
     id: "community-docs",
@@ -59,7 +59,11 @@ const progressMessage = document.querySelector("#progressMessage");
 const progressPercent = document.querySelector("#progressPercent");
 const notes = document.querySelector("#projectNotes");
 const exportButton = document.querySelector("#exportButton");
+const importButton = document.querySelector("#importButton");
+const importInput = document.querySelector("#importInput");
+const printButton = document.querySelector("#printButton");
 const resetButton = document.querySelector("#resetButton");
+const toolStatus = document.querySelector("#toolStatus");
 
 function getSavedState() {
   try {
@@ -67,6 +71,11 @@ function getSavedState() {
   } catch (error) {
     return {};
   }
+}
+
+function setStatus(message, isError = false) {
+  toolStatus.textContent = message;
+  toolStatus.dataset.status = isError ? "error" : "success";
 }
 
 function saveState() {
@@ -106,39 +115,53 @@ function renderChecklist() {
   updateProgress();
 }
 
-function updateProgress() {
+function getProgress() {
   const inputs = Array.from(document.querySelectorAll("input[type='checkbox'][data-check]"));
   const completed = inputs.filter((input) => input.checked).length;
   const total = inputs.length;
   const percent = total ? Math.round((completed / total) * 100) : 0;
+  return { completed, total, percent };
+}
+
+function updateProgress() {
+  const { completed, total, percent } = getProgress();
 
   progressText.textContent = `${completed} of ${total} complete`;
   progressPercent.textContent = `${percent}%`;
+  progressPercent.setAttribute("aria-label", `Readiness score: ${percent}%`);
 
   if (percent === 100) {
-    progressMessage.textContent = "Great. Your project has the core public-readiness signals in place.";
+    progressMessage.textContent = "Excellent. Your repository shows strong public project health signals.";
   } else if (percent >= 70) {
-    progressMessage.textContent = "Strong progress. Review the remaining items before publishing or applying.";
+    progressMessage.textContent = "Strong progress. Review the remaining gaps before your next release.";
   } else if (percent >= 40) {
-    progressMessage.textContent = "Good start. Focus next on license, Code of Conduct, and contributing docs.";
+    progressMessage.textContent = "Good foundation. Prioritize security, governance, and contributor guidance.";
   } else {
-    progressMessage.textContent = "Start with the basics: license, README, Code of Conduct, and non-commercial statement.";
+    progressMessage.textContent = "Start with the essentials: license, README, Code of Conduct, and security policy.";
   }
 }
 
-function exportChecklist() {
+function createExportPayload() {
   const state = getSavedState();
-  const payload = {
-    project: "OpenReady checklist export",
+  const { completed, total, percent } = getProgress();
+
+  return {
+    format: "openready-checklist",
+    formatVersion: 1,
+    applicationVersion: "0.2.0",
     exportedAt: new Date().toISOString(),
-    completed: checklistItems.map((item) => ({
+    summary: { completed, total, percent },
+    completedItems: checklistItems.map((item) => ({
       id: item.id,
       title: item.title,
       complete: Boolean(state[item.id])
     })),
     notes: notes.value
   };
+}
 
+function exportChecklist() {
+  const payload = createExportPayload();
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -148,11 +171,59 @@ function exportChecklist() {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
+  setStatus("Checklist exported successfully.");
+}
+
+function normalizeImportedState(payload) {
+  const importedItems = payload.completedItems || payload.completed;
+  if (!Array.isArray(importedItems)) {
+    throw new Error("This file does not contain an OpenReady checklist.");
+  }
+
+  const knownIds = new Set(checklistItems.map((item) => item.id));
+  const state = {};
+
+  importedItems.forEach((item) => {
+    if (item && knownIds.has(item.id)) {
+      state[item.id] = Boolean(item.complete);
+    }
+  });
+
+  return state;
+}
+
+async function importChecklist(file) {
+  try {
+    const text = await file.text();
+    const payload = JSON.parse(text);
+    const state = normalizeImportedState(payload);
+
+    localStorage.setItem(storageKey, JSON.stringify(state));
+    localStorage.setItem(notesKey, typeof payload.notes === "string" ? payload.notes : "");
+
+    document.querySelectorAll("input[type='checkbox'][data-check]").forEach((input) => {
+      input.checked = Boolean(state[input.id]);
+    });
+    notes.value = localStorage.getItem(notesKey) || "";
+    updateProgress();
+    setStatus("Checklist imported successfully.");
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "The checklist could not be imported.";
+    setStatus(message, true);
+  } finally {
+    importInput.value = "";
+  }
+}
+
+function printChecklist() {
+  setStatus("Opening the print dialog. Choose ‘Save as PDF’ to create a report.");
+  window.print();
 }
 
 function resetChecklist() {
   const confirmed = window.confirm("Reset your checklist progress and notes?");
   if (!confirmed) return;
+
   localStorage.removeItem(storageKey);
   localStorage.removeItem(notesKey);
   document.querySelectorAll("input[type='checkbox'][data-check]").forEach((input) => {
@@ -160,9 +231,16 @@ function resetChecklist() {
   });
   notes.value = "";
   updateProgress();
+  setStatus("Checklist progress was reset.");
 }
 
 exportButton.addEventListener("click", exportChecklist);
+importButton.addEventListener("click", () => importInput.click());
+importInput.addEventListener("change", () => {
+  const [file] = importInput.files;
+  if (file) importChecklist(file);
+});
+printButton.addEventListener("click", printChecklist);
 resetButton.addEventListener("click", resetChecklist);
 
 renderChecklist();
