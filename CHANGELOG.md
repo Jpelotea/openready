@@ -4,6 +4,21 @@ All notable changes to OpenReady are documented in this file.
 
 The format follows a simple release-based structure inspired by Keep a Changelog.
 
+## Unreleased
+
+### Added
+
+- Automated JSON content and configuration validation through GitHub Actions.
+- A reusable local validator at `scripts/validate_data.py`.
+- Validation for required fields, duplicate checklist IDs, project links, documentation cards, theme tokens, and roadmap entries.
+- A prominently configured Governance documentation card and governance project link.
+
+### Changed
+
+- Expanded README community-health documentation and repository structure.
+- Added governance and automated validation guidance to the contribution process.
+- Separated the remaining Lighthouse performance audit into a focused tracked task.
+
 ## [0.2.1] - 2026-07-25
 
 ### Added
