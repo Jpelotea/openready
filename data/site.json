@@ -14,6 +14,7 @@
     "codeOfConduct": "https://github.com/Jpelotea/openready/blob/main/CODE_OF_CONDUCT.md",
     "license": "https://github.com/Jpelotea/openready/blob/main/LICENSE",
     "security": "https://github.com/Jpelotea/openready/blob/main/SECURITY.md",
+    "governance": "https://github.com/Jpelotea/openready/blob/main/GOVERNANCE.md",
     "changelog": "https://github.com/Jpelotea/openready/blob/main/CHANGELOG.md",
     "roadmap": "https://github.com/Jpelotea/openready/blob/main/roadmap.md",
     "poweredByNetlify": "https://www.netlify.com/"
@@ -61,6 +62,12 @@
       "title": "Contributing",
       "description": "Report an issue, improve documentation, or propose a software change.",
       "url": "https://github.com/Jpelotea/openready/blob/main/CONTRIBUTING.md"
+    },
+    {
+      "label": "Decision-making",
+      "title": "Governance",
+      "description": "Understand maintainer responsibilities, review criteria, and how project decisions are made.",
+      "url": "https://github.com/Jpelotea/openready/blob/main/GOVERNANCE.md"
     },
     {
       "label": "Stay safe",
