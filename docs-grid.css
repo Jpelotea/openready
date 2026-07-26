@@ -71,6 +71,11 @@ html[data-theme="dark"] .hero::after {
 }
 
 @media (min-width: 1041px) {
+  .hero {
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+  }
+
   .hero h1 {
     max-width: 780px;
     font-size: clamp(3rem, 5.4vw, 5.25rem);
