@@ -6,7 +6,32 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 
 ## Unreleased
 
-No unreleased changes are currently documented.
+### Added
+
+- An accessibility commitment and reporting process in `ACCESSIBILITY.md`.
+- A structured public accessibility issue form for keyboard, screen-reader, zoom, reflow, contrast, motion, form, touch, and cognitive barriers.
+- Maintainer support channels, response targets, scope boundaries, triage outcomes, and sustainable-availability guidance in `SUPPORT.md`.
+- A lightweight architecture and trust-boundary review in `THREAT_MODEL.md`.
+- A documented security incident-response process in `INCIDENT_RESPONSE.md`.
+
+### Changed
+
+- Expanded `SECURITY.md` with supported-version guidance, acknowledgement expectations, scope examples, severity, prioritization, remediation, disclosure, threat-model, and contributor-security sections.
+- Expanded README navigation, privacy guidance, repository structure, accessibility, security, incident-readiness, support, roadmap, and non-commercial documentation.
+- Expanded the contribution process with accessibility and security review expectations and explicit protection against funding or commercial features.
+
+### Accessibility
+
+- Documented the difference between automated evidence and human accessibility verification.
+- Published the current manual-testing gaps and linked the related screen-reader, zoom, high-contrast, and real-device issues.
+- Added a conflict-aware public/private accessibility reporting route that warns against sharing sensitive information.
+
+### Security
+
+- Documented assets, trust boundaries, browser-input risks, JSON import risks, repository and workflow risks, release integrity, deployment integrity, residual risk, and review triggers.
+- Added a best-effort five-business-day acknowledgement target for clear sensitive reports.
+- Defined practical Critical, High, Moderate, and Low security severity guidance.
+- Clarified that OpenReady is not a security certification or managed incident-response service.
 
 ## [0.3.0] - 2026-07-27
 
