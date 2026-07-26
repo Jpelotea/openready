@@ -5,7 +5,7 @@
     "version": "0.2.1",
     "status": "Active open-source project",
     "repository": "https://github.com/Jpelotea/openready",
-    "liveSite": "https://capable-chaja-458cb0.netlify.app/"
+    "liveSite": "https://getopenready.netlify.app/"
   },
   "links": {
     "repository": "https://github.com/Jpelotea/openready",
@@ -133,12 +133,12 @@
       "surfaceSoft": "#101f33",
       "surfaceElevated": "#122238",
       "surfaceDark": "#040a13",
-      "text": "#eaf2ff",
-      "muted": "#9aa9bf",
-      "border": "#26374e",
-      "primary": "#82a8ff",
-      "primaryHover": "#a5c0ff",
-      "primarySoft": "#182b4e",
+      "text": "#e8eef8",
+      "muted": "#a1aec2",
+      "border": "#2b3a52",
+      "primary": "#7f96cc",
+      "primaryHover": "#9aacd4",
+      "primarySoft": "#182641",
       "success": "#5fd6a7",
       "successSoft": "#143d32",
       "danger": "#ff9292"
