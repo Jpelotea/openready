@@ -2,18 +2,18 @@
 
 This document provides a human-readable summary of every shipped OpenReady software release.
 
-For line-by-line changes, see [CHANGELOG.md](CHANGELOG.md). For planned work, see [roadmap.md](roadmap.md).
+For line-by-line changes, see [CHANGELOG.md](CHANGELOG.md). For planned work, see [roadmap.md](roadmap.md). Browse all published versions on the [GitHub Releases page](https://github.com/Jpelotea/openready/releases).
 
 ## Release status
 
 | Version | Date | Status | Focus |
 |---|---|---|---|
-| v0.3.0 | 2026-07-27 | Current | Project profiles, identified reports, release documentation, and production-layout refinement |
-| v0.2.1 | 2026-07-25 | Released | JSON-first content, adaptive themes, automation, and quality baselines |
-| v0.2.0 | 2026-07-25 | Released | Interface redesign, JSON import, and print-ready reporting |
-| v0.1.0 | 2026-06-28 | Released | Initial repository-health checklist and community foundation |
+| [v0.3.0](https://github.com/Jpelotea/openready/releases/tag/v0.3.0) | 2026-07-27 | Current | Project profiles, identified reports, release documentation, and production-layout refinement |
+| [v0.2.1](https://github.com/Jpelotea/openready/releases/tag/v0.2.1) | 2026-07-25 | Released | JSON-first content, adaptive themes, automation, and quality baselines |
+| [v0.2.0](https://github.com/Jpelotea/openready/releases/tag/v0.2.0) | 2026-07-25 | Released | Interface redesign, JSON import, and print-ready reporting |
+| [v0.1.0](https://github.com/Jpelotea/openready/releases/tag/v0.1.0) | 2026-06-28 | Released | Initial repository-health checklist and community foundation |
 
-## v0.3.0 — Project profiles and identified reports
+## [v0.3.0](https://github.com/Jpelotea/openready/releases/tag/v0.3.0) — Project profiles and identified reports
 
 **Released:** July 27, 2026
 
@@ -49,7 +49,7 @@ Make exported and printed readiness reports easier to identify, share, and revis
 - Existing checklist item IDs and local checklist storage keys remain unchanged.
 - OpenReady still runs entirely in the browser and does not transmit profile or checklist data.
 
-## v0.2.1 — Data, theming, and maintenance foundation
+## [v0.2.1](https://github.com/Jpelotea/openready/releases/tag/v0.2.1) — Data, theming, and maintenance foundation
 
 **Released:** July 25, 2026
 
@@ -78,7 +78,7 @@ Separate frequently updated content from application logic and establish a more 
 - Local development requires a static HTTP server because JSON content is loaded with `fetch`.
 - Existing v0.2.0 browser progress and exported checklist data remain compatible.
 
-## v0.2.0 — Interface and reporting
+## [v0.2.0](https://github.com/Jpelotea/openready/releases/tag/v0.2.0) — Interface and reporting
 
 **Released:** July 25, 2026
 
@@ -103,7 +103,7 @@ Turn the initial checklist into a clearer, more usable repository-health applica
 - Continued using the original checklist progress storage key.
 - Exported files remained JSON-based and browser-readable.
 
-## v0.1.0 — Initial foundation
+## [v0.1.0](https://github.com/Jpelotea/openready/releases/tag/v0.1.0) — Initial foundation
 
 **Released:** June 28, 2026
 
@@ -139,5 +139,6 @@ Every shipped OpenReady version must include:
 4. an updated status in [roadmap.md](roadmap.md)
 5. updated user or contributor documentation when behavior changes
 6. automated or documented manual verification appropriate to the change
+7. a published GitHub Release linked from this document
 
 Upcoming work is documented as planned or unreleased and must not be presented as shipped until these records are complete.
