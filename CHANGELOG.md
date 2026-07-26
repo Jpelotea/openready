@@ -16,6 +16,14 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Operational governance role definitions for users, contributors, regular contributors, maintainers, security contacts, and Code of Conduct contacts.
 - Decision classes, significant-change discussion requirements, role progression, permission criteria, conflict handling, inactivity, temporary absence, succession, project transfer, and emergency-authority procedures.
 - A detailed Code of Conduct reporting and enforcement process with conflict-aware handling for reports involving the sole maintainer.
+- Core-readiness and operational-maturity assessment levels.
+- Four item states: `complete`, `in-progress`, `not-started`, and `not-applicable`.
+- Optional evidence URL, item note, last-reviewed date, and responsible-person or team fields.
+- Separate core-readiness, operational-maturity, and overall project-health scores.
+- Assessment schema version 2 with a documented migration and compatibility model.
+- Unsupported-import preservation for unknown top-level fields, item fields, item IDs, and future status values.
+- A 2 MB import-size limit for assessment JSON files.
+- Detailed schema, scoring, storage, migration, export, reset, and print documentation in `docs/assessment-schema-v2.md`.
 
 ### Changed
 
@@ -24,6 +32,12 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Expanded the contribution process with accessibility, security, governance, conduct, significant-decision, conflict-disclosure, and confidential-reporting expectations.
 - Replaced the original high-level governance note with an operational maintainer-led model appropriate to a small project.
 - Expanded the Code of Conduct with project scope, unacceptable behavior examples, private reporting, acknowledgement, privacy, evidence handling, enforcement levels, outcome communication, reconsideration, anti-retaliation, false-report safeguards, and maintainer accountability.
+- Replaced the binary checklist interface with a four-state assessment while retaining the existing browser-storage key for in-place migration.
+- Expanded the checklist from ten foundation items to ten core-readiness and twelve operational-maturity items.
+- Added partial scoring for in-progress items and removed not-applicable items from score denominators.
+- Kept a legacy `completedItems` projection in schema-v2 exports so older OpenReady versions can recover completed known item IDs.
+- Updated project-profile import, export, reset, and status messages for the assessment model.
+- Expanded JSON validation for schema version, levels, statuses, item levels, stable IDs, and out-of-scope commercial assessment concepts.
 
 ### Accessibility
 
@@ -31,6 +45,11 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Published the current manual-testing gaps and linked the related screen-reader, zoom, high-contrast, and real-device issues.
 - Added a conflict-aware public/private accessibility reporting route that warns against sharing sensitive information.
 - Included accessibility needs and communication differences in community conduct and review expectations.
+- Replaced checkbox-only progress controls with labeled native select controls for all four states.
+- Added keyboard-reachable evidence and review-detail fields with visible focus styles.
+- Added accessible core, maturity, and overall score labels.
+- Added responsive single-column assessment layouts for narrow screens.
+- Expanded assessment details automatically during print preparation and restored their previous state afterward.
 
 ### Security
 
@@ -38,6 +57,8 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Added a best-effort five-business-day acknowledgement target for clear sensitive reports.
 - Defined practical Critical, High, Moderate, and Low security severity guidance.
 - Clarified that OpenReady is not a security certification or managed incident-response service.
+- Added bounded import-size handling and safe normalization of unsupported statuses.
+- Preserved unknown imported values rather than silently discarding them.
 
 ### Governance and community
 
@@ -49,6 +70,11 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Documented that no independent Code of Conduct contact will be invented or named without explicit consent.
 - Added proportionate conduct enforcement from informal correction through permanent removal and platform escalation.
 - Added anti-retaliation and one-time reconsideration protections while distinguishing unsubstantiated reports from knowingly false reports.
+- Kept funding, donations, sponsorships, monetization, paid support, pricing, and other commercial concepts outside the assessment model and validator-approved item scope.
+
+### Verification
+
+- Expanded Playwright coverage for four-state persistence, evidence fields, review metadata, legacy migration, schema-v2 imports and exports, unsupported-field preservation, partial scoring, not-applicable handling, project-profile integration, reset, print preparation, reduced motion, responsive layouts, and horizontal overflow.
 
 ## [0.3.0] - 2026-07-27
 

@@ -1,85 +1,219 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "levels": {
+    "core": {
+      "label": "Core readiness",
+      "description": "Essential public project foundations that most open-source repositories should address."
+    },
+    "maturity": {
+      "label": "Operational maturity",
+      "description": "Deeper practices that help a project operate safely, accessibly, transparently, and sustainably."
+    }
+  },
+  "statuses": [
+    "complete",
+    "in-progress",
+    "not-started",
+    "not-applicable"
+  ],
   "items": [
     {
       "id": "license",
+      "level": "core",
       "category": "Foundation",
       "title": "Repository includes a clear open-source license",
-      "description": "Add a LICENSE file in the repository root, such as MIT, Apache-2.0, GPL-3.0, or another OSI-approved license.",
+      "description": "Add a recognized open-source license in the repository root and explain its coverage clearly.",
       "resourceLabel": "Review the license",
       "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/LICENSE"
     },
     {
       "id": "code-of-conduct",
+      "level": "core",
       "category": "Community",
       "title": "Repository includes a Code of Conduct",
-      "description": "Add CODE_OF_CONDUCT.md at the top level and make it easy for contributors to find.",
+      "description": "Publish community behavior expectations and make private reporting and enforcement information easy to find.",
       "resourceLabel": "Read the Code of Conduct",
       "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/CODE_OF_CONDUCT.md"
     },
     {
       "id": "readme",
+      "level": "core",
       "category": "Foundation",
       "title": "README explains the project clearly",
-      "description": "Explain what the software does, who it helps, how to use it, and how people can contribute.",
+      "description": "Explain what the software does, who it helps, how to use it, and how people can participate.",
       "resourceLabel": "View the README",
       "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/README.md"
     },
     {
       "id": "contributing",
+      "level": "core",
       "category": "Community",
       "title": "Contributing guide is available",
-      "description": "Add beginner-friendly steps for reporting issues, proposing changes, and submitting pull requests.",
+      "description": "Add beginner-friendly steps for reporting issues, proposing changes, testing, and submitting pull requests.",
       "resourceLabel": "View contributing guidance",
       "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/CONTRIBUTING.md"
     },
     {
       "id": "changelog",
+      "level": "core",
       "category": "Operations",
       "title": "Changelog tracks important updates",
-      "description": "Document notable changes so users and contributors can follow the project’s release history.",
+      "description": "Document notable changes so users and contributors can follow the project's release history.",
       "resourceLabel": "View the changelog",
       "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/CHANGELOG.md"
     },
     {
       "id": "roadmap",
+      "level": "core",
       "category": "Operations",
       "title": "Roadmap shows planned improvements",
-      "description": "Publish upcoming priorities so contributors can understand the direction of the project.",
+      "description": "Publish current priorities and distinguish shipped work from planned or deferred ideas.",
       "resourceLabel": "View the roadmap",
       "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/roadmap.md"
     },
     {
       "id": "issues",
+      "level": "core",
       "category": "Community",
       "title": "Issue tracker is linked and welcoming",
-      "description": "Make it easy for users to report bugs, suggest features, and identify beginner-friendly work.",
+      "description": "Make it easy to report bugs, suggest focused improvements, and find work suitable for new contributors.",
       "resourceLabel": "Browse issues",
       "resourceUrl": "https://github.com/Jpelotea/openready/issues"
     },
     {
       "id": "security",
-      "category": "Operations",
+      "level": "core",
+      "category": "Safety",
       "title": "Security policy explains responsible reporting",
-      "description": "Document supported versions and provide a private way to report sensitive security concerns.",
+      "description": "Document supported versions, security scope, and a private route for reporting sensitive concerns.",
       "resourceLabel": "Read the security policy",
       "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/SECURITY.md"
     },
     {
       "id": "governance",
+      "level": "core",
       "category": "Operations",
       "title": "Decision-making and maintainer roles are documented",
-      "description": "Explain how decisions are made, who maintains the software, and how responsibilities may grow.",
+      "description": "Explain who maintains the project, how decisions are made, and how roles and responsibilities may change.",
       "resourceLabel": "Read the governance guide",
       "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/GOVERNANCE.md"
     },
     {
       "id": "community-docs",
+      "level": "core",
       "category": "Community",
       "title": "Project site supports the software community",
-      "description": "Provide documentation, release history, roadmap details, and contributor links directly related to the software.",
+      "description": "Provide documentation, releases, roadmap details, contribution routes, and project policies directly related to the software.",
       "resourceLabel": "Open project documentation",
       "resourceUrl": "https://github.com/Jpelotea/openready"
+    },
+    {
+      "id": "accessibility-policy",
+      "level": "maturity",
+      "category": "Accessibility",
+      "title": "Accessibility commitment and reporting process are published",
+      "description": "State the project's accessibility goal, current limitations, supported environments, and how barriers can be reported.",
+      "resourceLabel": "Review accessibility guidance",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/ACCESSIBILITY.md"
+    },
+    {
+      "id": "accessibility-verification",
+      "level": "maturity",
+      "category": "Accessibility",
+      "title": "Automated and human accessibility verification is documented",
+      "description": "Combine automated evidence with keyboard, screen-reader, zoom, reflow, contrast, motion, and device testing appropriate to the project.",
+      "resourceLabel": "Review the manual test plan",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/docs/manual-accessibility-testing.md"
+    },
+    {
+      "id": "conduct-enforcement",
+      "level": "maturity",
+      "category": "Community",
+      "title": "Code of Conduct reporting and enforcement are operational",
+      "description": "Define private reporting, conflict handling, evidence protection, proportionate consequences, anti-retaliation, and review options.",
+      "resourceLabel": "Review conduct enforcement",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/CODE_OF_CONDUCT.md"
+    },
+    {
+      "id": "private-vulnerability-reporting",
+      "level": "maturity",
+      "category": "Safety",
+      "title": "Sensitive vulnerabilities can be reported privately",
+      "description": "Provide a verified private channel, realistic acknowledgement expectations, and coordinated disclosure guidance.",
+      "resourceLabel": "Review private reporting",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/SECURITY.md"
+    },
+    {
+      "id": "threat-model",
+      "level": "maturity",
+      "category": "Safety",
+      "title": "Project assets, trust boundaries, and misuse cases are reviewed",
+      "description": "Maintain a lightweight threat model that reflects the architecture, likely abuse cases, mitigations, residual risks, and review triggers.",
+      "resourceLabel": "Review the threat model",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/THREAT_MODEL.md"
+    },
+    {
+      "id": "incident-response",
+      "level": "maturity",
+      "category": "Safety",
+      "title": "Security incident response is documented",
+      "description": "Define how incidents are received, triaged, contained, remediated, verified, disclosed, and reviewed afterward.",
+      "resourceLabel": "Review incident response",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/INCIDENT_RESPONSE.md"
+    },
+    {
+      "id": "contributor-onboarding",
+      "level": "maturity",
+      "category": "Community",
+      "title": "Contributor pathways support first and repeat participation",
+      "description": "Offer focused entry points, explain review expectations, recognize non-code work, and show how trusted responsibilities may grow.",
+      "resourceLabel": "Review contributor pathways",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/CONTRIBUTING.md"
+    },
+    {
+      "id": "support-boundaries",
+      "level": "maturity",
+      "category": "Sustainability",
+      "title": "Support scope and maintainer availability are documented",
+      "description": "Explain supported request types, realistic response expectations, out-of-scope work, triage outcomes, and maintainer breaks.",
+      "resourceLabel": "Review support boundaries",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/SUPPORT.md"
+    },
+    {
+      "id": "succession",
+      "level": "maturity",
+      "category": "Governance",
+      "title": "Temporary absence, succession, and project transfer are planned",
+      "description": "Document how responsibilities and service access will be protected when maintainers pause, step down, or transfer stewardship.",
+      "resourceLabel": "Review continuity guidance",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/GOVERNANCE.md"
+    },
+    {
+      "id": "project-metrics",
+      "level": "maturity",
+      "category": "Operations",
+      "title": "Project-health metrics are connected to goals and privacy",
+      "description": "Define a small set of useful repository and community measurements without treating popularity as health or adding invasive tracking.",
+      "resourceLabel": "Follow the metrics work",
+      "resourceUrl": "https://github.com/Jpelotea/openready/issues/30"
+    },
+    {
+      "id": "dependency-asset-licensing",
+      "level": "maturity",
+      "category": "Legal clarity",
+      "title": "Dependency, documentation, and asset licensing are reviewed",
+      "description": "Confirm that third-party code, actions, images, documentation, and other assets have compatible terms and required attribution.",
+      "resourceLabel": "Review the project license",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/LICENSE"
+    },
+    {
+      "id": "protected-repository-access",
+      "level": "maturity",
+      "category": "Governance",
+      "title": "Repository and release access follow least privilege",
+      "description": "Protect important branches and services, require appropriate review, use strong account security, and document permission criteria.",
+      "resourceLabel": "Review access governance",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/GOVERNANCE.md"
     }
   ]
 }
