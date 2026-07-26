@@ -47,9 +47,55 @@ html[data-theme="dark"] .preview-progress span {
   background: linear-gradient(90deg, #55d6a5, var(--primary));
 }
 
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: clamp(-18rem, -10vw, -7rem);
+  z-index: 0;
+  width: min(60vw, 760px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  background: url("hero-orbit.svg") center / contain no-repeat;
+  opacity: 0.34;
+  transform: translateY(-50%);
+  animation: hero-orbit-float 10s ease-in-out infinite alternate;
+}
+
+.hero-grid {
+  z-index: 1;
+}
+
+html[data-theme="dark"] .hero::after {
+  opacity: 0.58;
+}
+
+@keyframes hero-orbit-float {
+  from {
+    transform: translateY(calc(-50% - 5px));
+  }
+
+  to {
+    transform: translateY(calc(-50% + 7px));
+  }
+}
+
 @media (max-width: 1180px) {
   .docs-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1040px) {
+  .hero::after {
+    top: 31%;
+    right: -16rem;
+    width: min(88vw, 650px);
+    opacity: 0.23;
+  }
+
+  html[data-theme="dark"] .hero::after {
+    opacity: 0.4;
   }
 }
 
@@ -72,5 +118,29 @@ html[data-theme="dark"] .preview-progress span {
 
   .doc-card h3 {
     margin-top: 0.35rem;
+  }
+
+  .hero::after {
+    top: 22%;
+    right: -18rem;
+    width: 500px;
+    opacity: 0.16;
+  }
+
+  html[data-theme="dark"] .hero::after {
+    opacity: 0.28;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::after {
+    animation: none;
+    transform: translateY(-50%);
   }
 }
