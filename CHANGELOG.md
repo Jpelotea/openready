@@ -13,18 +13,24 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Maintainer support channels, response targets, scope boundaries, triage outcomes, and sustainable-availability guidance in `SUPPORT.md`.
 - A lightweight architecture and trust-boundary review in `THREAT_MODEL.md`.
 - A documented security incident-response process in `INCIDENT_RESPONSE.md`.
+- Operational governance role definitions for users, contributors, regular contributors, maintainers, security contacts, and Code of Conduct contacts.
+- Decision classes, significant-change discussion requirements, role progression, permission criteria, conflict handling, inactivity, temporary absence, succession, project transfer, and emergency-authority procedures.
+- A detailed Code of Conduct reporting and enforcement process with conflict-aware handling for reports involving the sole maintainer.
 
 ### Changed
 
 - Expanded `SECURITY.md` with supported-version guidance, acknowledgement expectations, scope examples, severity, prioritization, remediation, disclosure, threat-model, and contributor-security sections.
 - Expanded README navigation, privacy guidance, repository structure, accessibility, security, incident-readiness, support, roadmap, and non-commercial documentation.
-- Expanded the contribution process with accessibility and security review expectations and explicit protection against funding or commercial features.
+- Expanded the contribution process with accessibility, security, governance, conduct, significant-decision, conflict-disclosure, and confidential-reporting expectations.
+- Replaced the original high-level governance note with an operational maintainer-led model appropriate to a small project.
+- Expanded the Code of Conduct with project scope, unacceptable behavior examples, private reporting, acknowledgement, privacy, evidence handling, enforcement levels, outcome communication, reconsideration, anti-retaliation, false-report safeguards, and maintainer accountability.
 
 ### Accessibility
 
 - Documented the difference between automated evidence and human accessibility verification.
 - Published the current manual-testing gaps and linked the related screen-reader, zoom, high-contrast, and real-device issues.
 - Added a conflict-aware public/private accessibility reporting route that warns against sharing sensitive information.
+- Included accessibility needs and communication differences in community conduct and review expectations.
 
 ### Security
 
@@ -32,6 +38,17 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Added a best-effort five-business-day acknowledgement target for clear sensitive reports.
 - Defined practical Critical, High, Moderate, and Low security severity guidance.
 - Clarified that OpenReady is not a security certification or managed incident-response service.
+
+### Governance and community
+
+- Defined routine, significant public, and confidential decision classes.
+- Required significant changes to document alternatives, accessibility, security, privacy, compatibility, maintenance cost, and verification.
+- Documented reasoned consensus seeking and final maintainer rationale when consensus is not reached.
+- Added least-privilege repository-access criteria and multi-factor-authentication expectations for maintainers.
+- Added conflict disclosure, recusal, permission review, temporary absence, succession, archival, and project-transfer safeguards.
+- Documented that no independent Code of Conduct contact will be invented or named without explicit consent.
+- Added proportionate conduct enforcement from informal correction through permanent removal and platform escalation.
+- Added anti-retaliation and one-time reconsideration protections while distinguishing unsubstantiated reports from knowingly false reports.
 
 ## [0.3.0] - 2026-07-27
 
