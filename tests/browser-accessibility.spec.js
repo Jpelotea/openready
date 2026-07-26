@@ -125,11 +125,41 @@ test('reveal content is rendered without meaningful motion when reduced motion i
   ).toBeTruthy();
 });
 
+test('desktop hero keeps its primary action and preview above the fold on a short laptop viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 860 });
+  await openCleanPage(page);
+
+  const result = await page.evaluate(() => {
+    const heading = document.querySelector('.hero h1');
+    const primaryAction = document.querySelector('.hero-actions .button.primary');
+    const preview = document.querySelector('.hero-panel');
+    const range = document.createRange();
+    range.selectNodeContents(heading);
+    const lineRects = Array.from(range.getClientRects()).filter((rect) => rect.width > 1);
+    const widestLine = Math.max(...lineRects.map((rect) => rect.width));
+    const lastLine = lineRects.at(-1);
+
+    return {
+      viewportHeight: window.innerHeight,
+      primaryActionBottom: primaryAction.getBoundingClientRect().bottom,
+      previewBottom: preview.getBoundingClientRect().bottom,
+      headingLineCount: lineRects.length,
+      lastLineRatio: lastLine.width / widestLine,
+    };
+  });
+
+  expect(result.primaryActionBottom).toBeLessThanOrEqual(result.viewportHeight + 1);
+  expect(result.previewBottom).toBeLessThanOrEqual(result.viewportHeight + 1);
+  expect(result.headingLineCount).toBeLessThanOrEqual(5);
+  expect(result.lastLineRatio).toBeGreaterThan(0.2);
+});
+
 const viewports = [
   { name: 'small-phone', width: 320, height: 640 },
   { name: 'modern-phone', width: 390, height: 844 },
   { name: 'tablet', width: 768, height: 1024 },
   { name: 'desktop', width: 1440, height: 900 },
+  { name: 'short-laptop', width: 1600, height: 860 },
   { name: 'ultra-wide', width: 1920, height: 1080 },
 ];
 
