@@ -6,7 +6,8 @@ This document records quality checks performed against the public OpenReady depl
 
 - URL: https://getopenready.netlify.app/
 - Netlify site ID: `ce11cbd9-5785-475a-9488-5d3122b9e6f2`
-- Last recorded post-deployment audit: July 25, 2026
+- Current documented software release: `v0.3.0`
+- Last recorded post-deployment Lighthouse audit: July 25, 2026
 - Audit environment: GitHub Actions, Lighthouse mobile simulation
 - Production audit runs: 3
 - Evidence retention: GitHub Actions artifact retained for 30 days
@@ -15,7 +16,7 @@ The project was renamed from the original generated Netlify name to `getopenread
 
 ## Reachability and response
 
-The public site returned HTTP `200` and served HTML successfully.
+The public site returned HTTP `200` and served HTML successfully during the last recorded audit.
 
 Observed response protections included:
 
@@ -35,7 +36,7 @@ Observed response protections included:
 
 The repeated runs show normal production variability, especially for Performance. Accessibility, Best Practices, and SEO measured 100 in all three runs.
 
-These results describe the deployed build at the time of the audit. They are not permanent guarantees, and the repository has received visual and responsive changes since this baseline.
+These results describe the deployed build at the time of the audit. They are not permanent guarantees and predate the v0.3.0 project-profile release.
 
 ## Resolved production findings
 
@@ -48,19 +49,26 @@ The first production audit had reported:
 
 The corrected `main` branch was deployed and the three-run post-deployment audit no longer reported those findings. Deployment follow-up issue #13 was closed after verification.
 
-## Current responsive quality work
+## Changes since the recorded baseline
 
-Subsequent interface work added:
+Subsequent interface and product work added:
 
 - a lightweight decorative SVG repository-network sphere
 - refined light- and dark-theme visual treatment
 - consistently aligned documentation cards
 - a height-aware desktop hero composition
 - a short-laptop Playwright regression check at `1600 × 860`
+- optional project-profile fields
+- local project-profile persistence
+- profile-aware JSON import and export
+- project identity in printed and PDF reports
+- complete release documentation in `RELEASES.md`
 
 The regression test verifies that the primary checklist action and complete project-health preview remain within the initial viewport, the headline avoids an isolated final word, and the page does not introduce horizontal overflow.
 
-Because these changes were made after the last recorded production Lighthouse baseline, a new production audit should be generated before publishing new score claims.
+Project-profile tests cover keyboard reachability, persistence, JSON round-tripping, reset behavior, and responsive visibility.
+
+Because v0.3.0 was released after the last recorded production Lighthouse baseline, a new production audit must be generated before publishing updated score claims.
 
 ## Manual testing status
 
@@ -68,13 +76,14 @@ Lighthouse and Playwright cannot establish complete accessibility conformance. H
 
 The human keyboard, screen-reader, zoom, reflow, theme, reduced-motion, and real-device review is tracked in [issue #14](https://github.com/Jpelotea/openready/issues/14) and described in [manual-accessibility-testing.md](manual-accessibility-testing.md).
 
-## Running the next production baseline
+## Running the v0.3.0 production baseline
 
 1. Confirm the latest `main` branch is deployed to `https://getopenready.netlify.app/`.
 2. Run the `Production deployment audit` workflow.
 3. Review all three Lighthouse runs rather than relying on one result.
-4. Record category scores and important performance metrics.
-5. Compare local and production results without presenting them as interchangeable.
-6. Create focused issues for any remaining production-only findings.
+4. Confirm the project profile, release-history link, canonical metadata, and current version are present.
+5. Record category scores and important performance metrics.
+6. Compare local and production results without presenting them as interchangeable.
+7. Create focused issues for any remaining production-only findings.
 
 The local GitHub Actions baseline and production Netlify baseline must remain clearly distinguished in project documentation.
