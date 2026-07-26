@@ -2,12 +2,26 @@
 
 All notable changes to OpenReady are documented in this file.
 
-The format follows a simple release-based structure inspired by Keep a Changelog.
+The format follows a simple release-based structure inspired by Keep a Changelog. Human-readable release summaries are available in [RELEASES.md](RELEASES.md).
 
 ## Unreleased
 
+No unreleased changes are currently documented.
+
+## [0.3.0] - 2026-07-27
+
 ### Added
 
+- An optional project profile for project name, repository URL, maintainer or team, and target release or review date.
+- Local browser persistence for project profile values.
+- Project profile data in JSON exports and imports.
+- Project-based export filenames when a project name is available.
+- Project profile details in printed and PDF readiness reports.
+- A complete human-readable release record in `RELEASES.md`.
+- A lightweight decorative repository-network sphere in `hero-orbit.svg`, implemented without WebGL or a third-party animation library.
+- Height-aware desktop hero rules for short laptop viewports.
+- A Playwright regression check at `1600 × 860` that verifies the primary call to action and complete project-health preview remain above the fold.
+- Automated project-profile coverage for keyboard access, persistence, import, export, reset, and responsive reflow.
 - Automated JSON content and configuration validation through GitHub Actions.
 - A reusable local validator at `scripts/validate_data.py`.
 - Validation for required fields, duplicate checklist IDs, project links, documentation cards, theme tokens, and roadmap entries.
@@ -15,30 +29,29 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Lighthouse CI configuration in `lighthouserc.json`.
 - A GitHub Actions Lighthouse workflow with downloadable HTML and JSON reports.
 - Measured performance and accessibility guidance in `docs/performance.md`.
-- An SVG favicon for the application.
 - A separate Lighthouse configuration and workflow for auditing the public Netlify deployment.
 - Production audit evidence and measured results in `docs/production-audit.md`.
 - A human keyboard, screen-reader, zoom, reflow, theme, reduced-motion, and real-device test plan in `docs/manual-accessibility-testing.md`.
-- A lightweight decorative repository-network sphere in `hero-orbit.svg`, implemented without a WebGL or third-party animation library.
-- Height-aware desktop hero rules for short laptop viewports.
-- A Playwright regression check at `1600 × 860` that verifies the primary call to action and complete project-health preview remain above the fold.
 
 ### Changed
 
+- Renamed the public Netlify project to `getopenready` and updated canonical, structured-data, setup, and audit references to `https://getopenready.netlify.app/`.
+- Aligned documentation-card labels, titles, descriptions, and responsive columns consistently.
+- Softened the dark-theme accent palette to reduce visual glare while preserving readable contrast.
+- Refined the hero composition so the repository sphere supports rather than obscures the project-health preview.
+- Rebalanced desktop hero columns, headline wrapping, spacing, and preview density so the complete first-screen experience works on common laptop heights.
 - Expanded README community-health documentation and repository structure.
 - Added governance and automated validation guidance to the contribution process.
 - Replaced unverified performance claims with documented targets and measured results.
 - Updated the roadmap after establishing the first Lighthouse baseline.
 - Distinguished local-static-build scores from public production-deployment scores.
 - Limited production auditing to a bounded representative run so unreachable or stale deployments still produce useful evidence.
-- Renamed the public Netlify project to `getopenready` and updated canonical, structured-data, setup, and audit references to `https://getopenready.netlify.app/`.
-- Aligned documentation-card labels, titles, descriptions, and responsive columns consistently.
-- Softened the dark-theme accent palette to reduce visual glare while preserving readable contrast.
-- Refined the hero composition so the repository sphere supports rather than obscures the project-health preview.
-- Rebalanced desktop hero columns, headline wrapping, spacing, and preview density so the complete first-screen experience works on common laptop heights.
+- Reset now clears the optional project profile together with checklist progress and notes.
 
 ### Accessibility
 
+- Added accessible labels and instructions for every project-profile field.
+- Kept all project-profile fields keyboard reachable and optional.
 - Added an accessible name to the hidden checklist-import file input.
 - Updated compact brand-link accessible names so they include the visible `OR` text.
 - Fixed the accessibility findings identified by the first Lighthouse audit.
@@ -54,7 +67,7 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - After correcting the identified accessibility labels and missing favicon, all three final local-static-build runs measured 100 in Performance, Accessibility, Best Practices, and SEO.
 - The initial public Netlify audit measured 91 Performance, 91 Accessibility, 96 Best Practices, and 100 SEO.
 - After deploying the corrected `main` branch, three production runs measured Performance at 88, 100, and 100; Accessibility, Best Practices, and SEO measured 100 in all three runs.
-- Browser automation now includes mobile, tablet, desktop, ultra-wide, reduced-motion, keyboard, import, persistence, overflow, and short-laptop hero regression coverage.
+- Browser automation now includes project-profile round-tripping, mobile, tablet, desktop, ultra-wide, reduced-motion, keyboard, persistence, overflow, and short-laptop hero regression coverage.
 
 ## [0.2.1] - 2026-07-25
 
