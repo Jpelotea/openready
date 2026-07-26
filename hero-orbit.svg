@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#9aacd4" stop-opacity="0.22"/>
+      <stop offset="0.58" stop-color="#7f96cc" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#7f96cc" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d6deef" stop-opacity="0.9"/>
+      <stop offset="0.52" stop-color="#9aacd4" stop-opacity="0.82"/>
+      <stop offset="1" stop-color="#7d739f" stop-opacity="0.72"/>
+    </linearGradient>
+    <style>
+      .wireframe {
+        transform-origin: 320px 320px;
+        animation: orbit-turn 42s linear infinite;
+      }
+      .panels {
+        transform-origin: 320px 320px;
+        animation: panel-drift 12s ease-in-out infinite alternate;
+      }
+      .cage {
+        fill: none;
+        stroke: #8ca0cf;
+        stroke-width: 1.35;
+        opacity: 0.58;
+      }
+      .link {
+        fill: none;
+        stroke: #98acd8;
+        stroke-width: 1;
+        opacity: 0.4;
+      }
+      .node {
+        fill: #aebce0;
+        stroke: #24334f;
+        stroke-width: 2;
+      }
+      .tile {
+        fill: url(#tile);
+        stroke: #dbe3f2;
+        stroke-width: 1.1;
+      }
+      .tile.far { opacity: 0.46; }
+      .tile.mid { opacity: 0.7; }
+      .tile.near { opacity: 0.92; }
+      .mark {
+        fill: none;
+        stroke: #344665;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        opacity: 0.55;
+      }
+      @keyframes orbit-turn {
+        from { transform: rotate(-4deg); }
+        to { transform: rotate(356deg); }
+      }
+      @keyframes panel-drift {
+        from { transform: translateY(-5px) rotate(-1.5deg); }
+        to { transform: translateY(7px) rotate(2deg); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .wireframe,
+        .panels { animation: none; }
+      }
+    </style>
+  </defs>
+
+  <circle cx="320" cy="320" r="288" fill="url(#halo)"/>
+
+  <g class="wireframe">
+    <circle class="cage" cx="320" cy="320" r="224"/>
+    <ellipse class="cage" cx="320" cy="320" rx="224" ry="88"/>
+    <ellipse class="cage" cx="320" cy="320" rx="224" ry="146"/>
+    <ellipse class="cage" cx="320" cy="320" rx="88" ry="224"/>
+    <ellipse class="cage" cx="320" cy="320" rx="146" ry="224"/>
+    <ellipse class="cage" cx="320" cy="320" rx="224" ry="112" transform="rotate(52 320 320)"/>
+    <ellipse class="cage" cx="320" cy="320" rx="224" ry="112" transform="rotate(-52 320 320)"/>
+
+    <path class="link" d="M154 214 238 164 330 202 418 156 486 232"/>
+    <path class="link" d="M118 330 212 286 304 326 394 278 520 324"/>
+    <path class="link" d="M160 430 248 386 338 432 430 384 488 446"/>
+    <path class="link" d="M220 130 266 230 232 340 286 470"/>
+    <path class="link" d="M386 126 360 226 412 330 372 478"/>
+
+    <g>
+      <circle class="node" cx="154" cy="214" r="6"/>
+      <circle class="node" cx="238" cy="164" r="5"/>
+      <circle class="node" cx="330" cy="202" r="6"/>
+      <circle class="node" cx="418" cy="156" r="5"/>
+      <circle class="node" cx="486" cy="232" r="6"/>
+      <circle class="node" cx="118" cy="330" r="5"/>
+      <circle class="node" cx="212" cy="286" r="6"/>
+      <circle class="node" cx="304" cy="326" r="6"/>
+      <circle class="node" cx="394" cy="278" r="6"/>
+      <circle class="node" cx="520" cy="324" r="5"/>
+      <circle class="node" cx="160" cy="430" r="6"/>
+      <circle class="node" cx="248" cy="386" r="5"/>
+      <circle class="node" cx="338" cy="432" r="6"/>
+      <circle class="node" cx="430" cy="384" r="5"/>
+      <circle class="node" cx="488" cy="446" r="6"/>
+    </g>
+  </g>
+
+  <g class="panels">
+    <g transform="translate(176 140) rotate(-18)">
+      <rect class="tile far" width="78" height="46" rx="14"/>
+      <path class="mark" d="M18 16h42M18 28h27"/>
+    </g>
+    <g transform="translate(286 110) rotate(3)">
+      <rect class="tile mid" width="88" height="50" rx="15"/>
+      <path class="mark" d="M18 17h48M18 30h32"/>
+    </g>
+    <g transform="translate(404 150) rotate(20)">
+      <rect class="tile far" width="74" height="44" rx="13"/>
+      <path class="mark" d="M17 16h38M17 28h24"/>
+    </g>
+
+    <g transform="translate(126 246) rotate(-26)">
+      <rect class="tile mid" width="84" height="52" rx="15"/>
+      <path class="mark" d="M19 18h44M19 32h29"/>
+    </g>
+    <g transform="translate(228 222) rotate(-8)">
+      <rect class="tile near" width="104" height="62" rx="18"/>
+      <path class="mark" d="M22 20h58M22 38h40"/>
+    </g>
+    <g transform="translate(350 218) rotate(8)">
+      <rect class="tile near" width="104" height="62" rx="18"/>
+      <path class="mark" d="M22 20h58M22 38h40"/>
+    </g>
+    <g transform="translate(458 250) rotate(26)">
+      <rect class="tile mid" width="82" height="50" rx="15"/>
+      <path class="mark" d="M18 17h42M18 31h28"/>
+    </g>
+
+    <g transform="translate(112 346) rotate(-21)">
+      <rect class="tile far" width="74" height="46" rx="14"/>
+      <path class="mark" d="M17 16h37M17 29h23"/>
+    </g>
+    <g transform="translate(198 332) rotate(-7)">
+      <rect class="tile near" width="106" height="64" rx="18"/>
+      <path class="mark" d="M22 21h60M22 40h42"/>
+    </g>
+    <g transform="translate(322 334) rotate(7)">
+      <rect class="tile near" width="106" height="64" rx="18"/>
+      <path class="mark" d="M22 21h60M22 40h42"/>
+    </g>
+    <g transform="translate(454 350) rotate(22)">
+      <rect class="tile far" width="74" height="46" rx="14"/>
+      <path class="mark" d="M17 16h37M17 29h23"/>
+    </g>
+
+    <g transform="translate(164 442) rotate(-16)">
+      <rect class="tile far" width="78" height="46" rx="14"/>
+      <path class="mark" d="M18 16h42M18 28h27"/>
+    </g>
+    <g transform="translate(276 456) rotate(1)">
+      <rect class="tile mid" width="90" height="52" rx="15"/>
+      <path class="mark" d="M19 18h49M19 32h32"/>
+    </g>
+    <g transform="translate(398 440) rotate(17)">
+      <rect class="tile far" width="78" height="46" rx="14"/>
+      <path class="mark" d="M18 16h42M18 28h27"/>
+    </g>
+  </g>
+</svg>
