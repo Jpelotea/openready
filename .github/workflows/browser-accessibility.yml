@@ -29,7 +29,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   browser-accessibility:
@@ -39,6 +39,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -69,7 +71,7 @@ jobs:
       - name: Capture README interface screenshot
         if: always()
         run: |
-          mkdir -p screenshot-artifact
+          mkdir -p screenshot-artifact docs/images
           node <<'NODE'
           const { chromium } = require('@playwright/test');
 
@@ -111,6 +113,20 @@ jobs:
             process.exit(1);
           });
           NODE
+          cp screenshot-artifact/openready-interface-v0.3.0.png docs/images/openready-interface-v0.3.0.png
+
+      - name: Commit verified README screenshot
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/images/openready-interface-v0.3.0.png
+          if git diff --cached --quiet; then
+            echo "Screenshot is already current."
+            exit 0
+          fi
+          git commit -m "docs: add current OpenReady interface screenshot"
+          git push origin HEAD:${{ github.head_ref }}
 
       - name: Upload README screenshot
         if: always()
