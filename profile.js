@@ -1,5 +1,6 @@
 const PROFILE_STORAGE_KEY = "openready-project-profile-v1";
 
+const PROFILE_FORM = document.querySelector("#projectProfileForm");
 const PROFILE_FIELDS = {
   name: document.querySelector("#profileName"),
   repository: document.querySelector("#profileRepository"),
@@ -151,6 +152,8 @@ function resetChecklistWithProfile(event) {
 
 function setupProjectProfile() {
   loadProjectProfile();
+
+  PROFILE_FORM?.addEventListener("submit", (event) => event.preventDefault());
 
   Object.values(PROFILE_FIELDS).forEach((field) => {
     field?.addEventListener("input", saveProjectProfile);
