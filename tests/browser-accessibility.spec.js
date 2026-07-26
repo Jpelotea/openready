@@ -44,18 +44,16 @@ async function exportPayload(page) {
 }
 
 async function revealEntirePage(page) {
-  await page.evaluate(async () => {
-    const step = Math.max(420, Math.floor(window.innerHeight * 0.75));
-    const maximum = document.documentElement.scrollHeight;
-    for (let position = 0; position < maximum; position += step) {
-      window.scrollTo(0, position);
-      await new Promise((resolve) => setTimeout(resolve, 35));
-    }
-    window.scrollTo(0, maximum);
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    window.scrollTo(0, 0);
-    await new Promise((resolve) => setTimeout(resolve, 80));
-  });
+  const revealElements = page.locator('[data-reveal]');
+  const count = await revealElements.count();
+
+  for (let index = 0; index < count; index += 1) {
+    await revealElements.nth(index).scrollIntoViewIfNeeded();
+    await page.waitForTimeout(90);
+  }
+
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(650);
 }
 
 test('keyboard users can reach the main controls and save assessment progress', async ({ page }) => {
