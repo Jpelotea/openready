@@ -8,15 +8,36 @@ The workflow verifies:
 
 - the skip link is the first keyboard focus target
 - main controls are reachable by keyboard
+- project-profile fields are reachable by keyboard
 - checklist items can be changed with the keyboard
 - checklist progress persists after reload
+- project-profile values persist after reload
 - the theme control exposes and preserves its state
 - the Import JSON button opens a file chooser
-- imported checklist data and notes are restored
+- imported checklist data, notes, and project-profile values are restored
+- exported JSON includes project identity, notes, checklist completion, and the current application version
+- project-based export filenames are generated safely
+- reset clears the project profile, checklist progress, and notes
 - reveal content remains visible with reduced motion enabled
-- the page avoids horizontal overflow at 320, 390, 768, 1440, and 1920 pixel viewports
-- key content remains usable with 200% text sizing at a narrow viewport
+- the page avoids horizontal overflow at 320, 390, 768, 1440, 1600, and 1920 pixel viewports
+- the optional project profile remains visible and usable across the tested viewports
 - the desktop hero remains usable at a short-laptop viewport of `1600 × 860`
+
+## Project-profile round-trip test
+
+The v0.3.0 profile test:
+
+1. fills the project name, repository URL, maintainer or team, and review date
+2. reloads the page and confirms local persistence
+3. exports a JSON report
+4. verifies the exported filename and `project` object
+5. verifies notes and checklist completion remain present
+6. resets the workspace
+7. confirms profile values, notes, and checklist state are cleared
+
+A separate import test confirms that project-profile data from an exported report is restored through the keyboard-accessible Import JSON action.
+
+## Short-laptop hero regression
 
 The short-laptop hero regression test checks that:
 
