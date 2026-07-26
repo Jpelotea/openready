@@ -27,6 +27,26 @@
   align-self: start;
 }
 
+html[data-theme="dark"] .button.primary,
+html[data-theme="dark"] .tool-actions button:not(.secondary-button):not(.text-button),
+html[data-theme="dark"] .brand-mark {
+  color: #07111f;
+}
+
+html[data-theme="dark"] .eyebrow.light {
+  color: #a8b7da;
+}
+
+html[data-theme="dark"] .timeline li.current::before {
+  border-color: var(--primary);
+  background: var(--primary);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+html[data-theme="dark"] .preview-progress span {
+  background: linear-gradient(90deg, #55d6a5, var(--primary));
+}
+
 @media (max-width: 1180px) {
   .docs-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
