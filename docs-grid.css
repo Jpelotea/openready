@@ -77,8 +77,28 @@ html[data-theme="dark"] .hero::after {
   }
 
   .hero h1 {
-    max-width: 760px;
-    font-size: clamp(3rem, 4.8vw, 4.65rem);
+    max-width: 820px;
+    font-size: clamp(3rem, 4.4vw, 4.3rem);
+  }
+
+  .hero-panel {
+    padding: 1.25rem;
+  }
+
+  .preview-progress {
+    margin: 0.85rem 0 1.1rem;
+  }
+
+  .preview-list {
+    gap: 0.6rem;
+  }
+
+  .preview-item {
+    padding: 0.8rem;
+  }
+
+  .panel-note {
+    margin-top: 0.8rem;
   }
 }
 
