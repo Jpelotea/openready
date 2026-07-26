@@ -126,12 +126,11 @@ openready/
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
 │   │   └── accessibility.yml
-│   ├── workflows/
-│   │   ├── browser-accessibility.yml
-│   │   ├── lighthouse-production.yml
-│   │   ├── lighthouse.yml
-│   │   └── validate-data.yml
-│   └── PULL_REQUEST_TEMPLATE.md
+│   └── workflows/
+│       ├── browser-accessibility.yml
+│       ├── lighthouse-production.yml
+│       ├── lighthouse.yml
+│       └── validate-data.yml
 ├── data/
 │   ├── checklist.json
 │   └── site.json
@@ -166,6 +165,7 @@ openready/
 ├── CONTRIBUTING.md
 ├── GOVERNANCE.md
 ├── INCIDENT_RESPONSE.md
+├── PULL_REQUEST_TEMPLATE.md
 ├── SECURITY.md
 ├── SUPPORT.md
 ├── THREAT_MODEL.md
