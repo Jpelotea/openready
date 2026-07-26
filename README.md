@@ -7,9 +7,11 @@ It turns repository best practices into a practical browser-based checklist cove
 - licensing
 - project documentation
 - contributor guidance
+- accessibility
 - Code of Conduct
-- security policy
+- security policy and incident readiness
 - governance and maintainer roles
+- support boundaries
 - changelog and release history
 - roadmap and planned improvements
 - community participation
@@ -94,9 +96,13 @@ OpenReady provides public links and documentation directly related to the softwa
 - [Issue tracker](https://github.com/Jpelotea/openready/issues)
 - [GitHub Discussions](https://github.com/Jpelotea/openready/discussions)
 - [Contributing guide](CONTRIBUTING.md)
+- [Accessibility commitment and reporting](ACCESSIBILITY.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Governance and maintainer roles](GOVERNANCE.md)
+- [Support boundaries](SUPPORT.md)
 - [Security policy](SECURITY.md)
+- [Threat model](THREAT_MODEL.md)
+- [Incident response](INCIDENT_RESPONSE.md)
 - [Release summaries](RELEASES.md)
 - [Detailed changelog](CHANGELOG.md)
 - [Project roadmap](roadmap.md)
@@ -111,12 +117,15 @@ Beginner-friendly bug reports, documentation improvements, accessibility feedbac
 
 OpenReady does not send project-profile, checklist, or notes data to a server. All values remain in the current browser unless the user intentionally exports a JSON backup or prints a report.
 
+Avoid entering confidential, medical, account, or other sensitive personal information, especially on a shared device. Exported JSON and printed reports may contain project identity and notes selected by the user.
+
 ## Repository structure
 
 ```text
 openready/
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
+│   │   └── accessibility.yml
 │   ├── workflows/
 │   │   ├── browser-accessibility.yml
 │   │   ├── lighthouse-production.yml
@@ -152,10 +161,14 @@ openready/
 ├── roadmap.md
 ├── RELEASES.md
 ├── netlify-open-source-readiness.md
+├── ACCESSIBILITY.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── GOVERNANCE.md
+├── INCIDENT_RESPONSE.md
 ├── SECURITY.md
+├── SUPPORT.md
+├── THREAT_MODEL.md
 ├── CHANGELOG.md
 ├── LICENSE
 ├── netlify.toml
@@ -268,6 +281,22 @@ Production performance can vary between cold and warm runs. The repository has c
 
 See [docs/performance.md](docs/performance.md) for the local baseline, [docs/production-audit.md](docs/production-audit.md) for deployed-site evidence, and [docs/manual-accessibility-testing.md](docs/manual-accessibility-testing.md) for checks Lighthouse cannot complete.
 
+## Accessibility
+
+OpenReady's accessibility goals, current verification status, known manual-testing gaps, and reporting process are documented in [ACCESSIBILITY.md](ACCESSIBILITY.md).
+
+Automated scores and tests are useful evidence, but they do not establish full conformance or replace testing with people and assistive technologies.
+
+## Security and incident readiness
+
+Review [SECURITY.md](SECURITY.md) before reporting a sensitive issue. OpenReady's current assets, trust boundaries, threats, and mitigations are documented in [THREAT_MODEL.md](THREAT_MODEL.md). The response process for a suspected security incident is documented in [INCIDENT_RESPONSE.md](INCIDENT_RESPONSE.md).
+
+Do not publish exploit details or credentials in a public issue.
+
+## Support
+
+OpenReady is maintained on a best-effort basis. Supported request types, public channels, response targets, out-of-scope requests, maintainer breaks, and non-commercial support boundaries are documented in [SUPPORT.md](SUPPORT.md).
+
 ## Deploying
 
 OpenReady is a static site. Netlify can publish it directly from the repository root.
@@ -287,10 +316,12 @@ The current release is documented in [RELEASES.md](RELEASES.md). Planned v0.4.0 
 
 Current open work includes:
 
+- completing the v0.4.0 project-policy foundation
+- expanding governance and conduct operations
+- developing the backward-compatible checklist schema v2
 - completing desktop and mobile screen-reader review
 - completing browser zoom, reflow, high-contrast, and real-device testing
-- developing beginner-friendly project-material helpers
-- exploring optional accessibility review and scoring workflows
+- developing beginner-friendly guided project materials
 
 ## Decision-making
 
@@ -302,15 +333,13 @@ Beginner-friendly contributions are welcome.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md), browse the [issue tracker](https://github.com/Jpelotea/openready/issues), or join [GitHub Discussions](https://github.com/Jpelotea/openready/discussions).
 
-All participants must follow the [Code of Conduct](CODE_OF_CONDUCT.md).
-
-## Security
-
-Please review [SECURITY.md](SECURITY.md) before reporting a sensitive issue.
+All participants must follow the [Code of Conduct](CODE_OF_CONDUCT.md). Support and maintainer-capacity expectations are documented in [SUPPORT.md](SUPPORT.md).
 
 ## Non-commercial statement
 
-OpenReady is a non-commercial open-source software project. It does not sell hosting, consulting, premium support, advertising, subscriptions, or paid access.
+OpenReady is a non-commercial open-source software project. It does not accept or promote donations, sponsorships, crowdfunding, advertising, affiliate links, paid support, consulting, implementation, hosting services, subscriptions, premium features, or paid access.
+
+All project-controlled website content remains directly connected to the OpenReady software and its open-source community.
 
 ## License
 
