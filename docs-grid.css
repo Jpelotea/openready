@@ -51,13 +51,13 @@ html[data-theme="dark"] .preview-progress span {
   content: "";
   position: absolute;
   top: 43%;
-  right: clamp(-6rem, -3vw, -2rem);
+  right: clamp(-2rem, -0.5vw, 1rem);
   z-index: 0;
   width: min(48vw, 620px);
   aspect-ratio: 1;
   pointer-events: none;
   background: url("hero-orbit.svg") center / contain no-repeat;
-  opacity: 0.27;
+  opacity: 0.42;
   transform: translateY(-50%);
   animation: hero-orbit-float 10s ease-in-out infinite alternate;
 }
