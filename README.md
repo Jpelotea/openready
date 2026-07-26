@@ -20,6 +20,12 @@ OpenReady runs entirely in the browser. It has no backend, account system, analy
 
 https://getopenready.netlify.app/
 
+## Interface preview
+
+![OpenReady v0.3.0 checklist interface showing an optional project profile, a 40% readiness score, and completed repository-health items](docs/images/openready-interface-v0.3.0.png)
+
+*The OpenReady v0.3.0 workspace identifies the project being reviewed, tracks repository-health progress, and keeps checklist data in the current browser.*
+
 ## Current version
 
 **v0.3.0 — Project profiles and identified reports**
@@ -121,6 +127,8 @@ openready/
 │   ├── checklist.json
 │   └── site.json
 ├── docs/
+│   ├── images/
+│   │   └── openready-interface-v0.3.0.png
 │   ├── automated-browser-testing.md
 │   ├── manual-accessibility-testing.md
 │   ├── performance.md
@@ -281,7 +289,6 @@ Current open work includes:
 
 - completing desktop and mobile screen-reader review
 - completing browser zoom, reflow, high-contrast, and real-device testing
-- adding README screenshots
 - developing beginner-friendly project-material helpers
 - exploring optional accessibility review and scoring workflows
 
