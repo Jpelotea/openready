@@ -50,14 +50,14 @@ html[data-theme="dark"] .preview-progress span {
 .hero::after {
   content: "";
   position: absolute;
-  top: 50%;
-  right: clamp(-18rem, -10vw, -7rem);
+  top: 43%;
+  right: clamp(-6rem, -3vw, -2rem);
   z-index: 0;
-  width: min(60vw, 760px);
+  width: min(48vw, 620px);
   aspect-ratio: 1;
   pointer-events: none;
   background: url("hero-orbit.svg") center / contain no-repeat;
-  opacity: 0.34;
+  opacity: 0.27;
   transform: translateY(-50%);
   animation: hero-orbit-float 10s ease-in-out infinite alternate;
 }
@@ -67,7 +67,14 @@ html[data-theme="dark"] .preview-progress span {
 }
 
 html[data-theme="dark"] .hero::after {
-  opacity: 0.58;
+  opacity: 0.44;
+}
+
+@media (min-width: 1041px) {
+  .hero h1 {
+    max-width: 780px;
+    font-size: clamp(3rem, 5.4vw, 5.25rem);
+  }
 }
 
 @keyframes hero-orbit-float {
@@ -88,14 +95,14 @@ html[data-theme="dark"] .hero::after {
 
 @media (max-width: 1040px) {
   .hero::after {
-    top: 31%;
-    right: -16rem;
-    width: min(88vw, 650px);
-    opacity: 0.23;
+    top: 29%;
+    right: -8rem;
+    width: min(76vw, 560px);
+    opacity: 0.2;
   }
 
   html[data-theme="dark"] .hero::after {
-    opacity: 0.4;
+    opacity: 0.34;
   }
 }
 
@@ -121,14 +128,14 @@ html[data-theme="dark"] .hero::after {
   }
 
   .hero::after {
-    top: 22%;
-    right: -18rem;
-    width: 500px;
-    opacity: 0.16;
+    top: 20%;
+    right: -12rem;
+    width: 430px;
+    opacity: 0.13;
   }
 
   html[data-theme="dark"] .hero::after {
-    opacity: 0.28;
+    opacity: 0.22;
   }
 }
 
