@@ -6,6 +6,7 @@ on:
     paths:
       - "index.html"
       - "styles.css"
+      - "docs-grid.css"
       - "app.js"
       - "data/**"
       - "tests/**"
@@ -15,6 +16,7 @@ on:
     paths:
       - "index.html"
       - "styles.css"
+      - "docs-grid.css"
       - "app.js"
       - "data/**"
       - "tests/**"
