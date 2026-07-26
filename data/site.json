@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "application": {
     "name": "OpenReady",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "status": "Active open-source project",
     "repository": "https://github.com/Jpelotea/openready",
     "liveSite": "https://getopenready.netlify.app/"
@@ -16,13 +16,14 @@
     "security": "https://github.com/Jpelotea/openready/blob/main/SECURITY.md",
     "governance": "https://github.com/Jpelotea/openready/blob/main/GOVERNANCE.md",
     "changelog": "https://github.com/Jpelotea/openready/blob/main/CHANGELOG.md",
+    "releases": "https://github.com/Jpelotea/openready/blob/main/RELEASES.md",
     "roadmap": "https://github.com/Jpelotea/openready/blob/main/roadmap.md",
     "poweredByNetlify": "https://www.netlify.com/"
   },
   "principles": [
     {
       "title": "Private by default",
-      "description": "Checklist progress and notes stay in the browser unless the user exports them."
+      "description": "Project profiles, checklist progress, and notes stay in the browser unless the user exports them."
     },
     {
       "title": "Built for beginners",
@@ -41,13 +42,13 @@
     },
     {
       "number": "02",
-      "title": "Keep progress locally",
-      "description": "Checklist progress and notes are stored locally. No account, analytics service, or backend is required."
+      "title": "Identify the project",
+      "description": "Add an optional local project profile so exported and printed reports clearly identify the repository under review."
     },
     {
       "number": "03",
       "title": "Share useful reports",
-      "description": "Export progress as JSON, restore saved work later, or print a clean readiness summary."
+      "description": "Export profile and checklist progress as JSON, restore saved work later, or print a clean readiness summary."
     }
   ],
   "documents": [
@@ -77,9 +78,9 @@
     },
     {
       "label": "Follow progress",
-      "title": "Changelog",
-      "description": "See notable improvements and software release history.",
-      "url": "https://github.com/Jpelotea/openready/blob/main/CHANGELOG.md"
+      "title": "Release history",
+      "description": "See every documented software release and its notable improvements.",
+      "url": "https://github.com/Jpelotea/openready/blob/main/RELEASES.md"
     }
   ],
   "roadmap": [
@@ -96,16 +97,22 @@
       "description": "Improved interface, JSON import, print-ready reporting, and stronger mobile usability."
     },
     {
+      "state": "done",
+      "label": "Released",
+      "version": "v0.2.1",
+      "description": "JSON-first content, adaptive themes, configurable colors, native animations, and automated quality checks."
+    },
+    {
       "state": "current",
       "label": "Current",
-      "version": "v0.2.1",
-      "description": "JSON-first content, adaptive themes, configurable colors, and native browser animations."
+      "version": "v0.3.0",
+      "description": "Optional project profiles, identified reports, and complete release documentation."
     },
     {
       "state": "planned",
       "label": "Planned",
-      "version": "v0.3.0",
-      "description": "Project profiles, template helpers, deeper accessibility guidance, and optional scoring."
+      "version": "v0.4.0",
+      "description": "Project-material helpers, deeper accessibility guidance, and optional scoring."
     }
   ],
   "themes": {
