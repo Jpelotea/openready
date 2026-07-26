@@ -77,8 +77,8 @@ html[data-theme="dark"] .hero::after {
   }
 
   .hero h1 {
-    max-width: 780px;
-    font-size: clamp(3rem, 5.4vw, 5.25rem);
+    max-width: 760px;
+    font-size: clamp(3rem, 4.8vw, 4.65rem);
   }
 }
 
