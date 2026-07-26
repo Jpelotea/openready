@@ -1,4 +1,5 @@
 const PROFILE_STORAGE_KEY = "openready-project-profile-v1";
+const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
 
 const PROFILE_FORM = document.querySelector("#projectProfileForm");
 const PROFILE_FIELDS = {
@@ -74,7 +75,7 @@ function downloadChecklistWithProfile(event) {
   event.stopImmediatePropagation();
 
   if (checklistItems.length === 0) {
-    setStatus("The checklist is still loading.", true);
+    setStatus("The assessment is still loading.", true);
     return;
   }
 
@@ -95,7 +96,26 @@ function downloadChecklistWithProfile(event) {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
-  setStatus("Checklist and project profile exported successfully.");
+  setStatus("Assessment and project profile exported successfully.");
+}
+
+function describeImportResult(report) {
+  const messages = [];
+
+  if (report.legacy) {
+    messages.push("Legacy checklist migrated to assessment schema v2.");
+  } else {
+    messages.push("Assessment imported successfully.");
+  }
+
+  if (report.preservedCount > 0) {
+    messages.push(
+      `${report.preservedCount} unsupported field${report.preservedCount === 1 ? " was" : "s were"} preserved for re-export.`
+    );
+  }
+
+  messages.push("Project profile restored.");
+  return messages.join(" ");
 }
 
 async function importChecklistWithProfile(event) {
@@ -104,24 +124,30 @@ async function importChecklistWithProfile(event) {
   if (!file) return;
 
   try {
+    if (file.size > MAX_IMPORT_BYTES) {
+      throw new Error("This file is larger than the 2 MB OpenReady import limit.");
+    }
+
     const text = await file.text();
+    if (text.length > MAX_IMPORT_BYTES) {
+      throw new Error("This file is larger than the 2 MB OpenReady import limit.");
+    }
+
     const payload = JSON.parse(text);
-    const state = normalizeImportedState(payload);
+    const { state, report } = normalizeImportedAssessment(payload);
     const project = normalizeProjectProfile(payload.project || payload.projectProfile);
 
-    localStorage.setItem(STORAGE_KEYS.checklist, JSON.stringify(state));
+    persistAssessmentState(state);
     localStorage.setItem(STORAGE_KEYS.notes, typeof payload.notes === "string" ? payload.notes : "");
     localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(project));
 
-    document.querySelectorAll("input[data-check]").forEach((input) => {
-      input.checked = Boolean(state[input.dataset.itemId]);
-    });
+    applyAssessmentState(state);
     notes.value = localStorage.getItem(STORAGE_KEYS.notes) || "";
     applyProjectProfile(project);
     updateProgress();
-    setStatus("Checklist and project profile imported successfully.");
+    setStatus(describeImportResult(report));
   } catch (error) {
-    const message = error instanceof Error ? error.message : "The checklist could not be imported.";
+    const message = error instanceof Error ? error.message : "The assessment could not be imported.";
     setStatus(message, true);
   } finally {
     importInput.value = "";
@@ -130,7 +156,9 @@ async function importChecklistWithProfile(event) {
 
 function resetChecklistWithProfile(event) {
   event.stopImmediatePropagation();
-  const confirmed = window.confirm("Reset your project profile, checklist progress, and notes?");
+  const confirmed = window.confirm(
+    "Reset your project profile, assessment statuses, evidence, review details, and notes?"
+  );
   if (!confirmed) return;
 
   try {
@@ -141,13 +169,11 @@ function resetChecklistWithProfile(event) {
     // Continue resetting the visible interface.
   }
 
-  document.querySelectorAll("input[data-check]").forEach((input) => {
-    input.checked = false;
-  });
+  resetAssessmentControls();
   notes.value = "";
   applyProjectProfile(emptyProjectProfile());
   updateProgress();
-  setStatus("Project profile and checklist progress were reset.");
+  setStatus("Project profile and assessment workspace were reset.");
 }
 
 function setupProjectProfile() {
