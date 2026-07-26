@@ -15,7 +15,7 @@ This project is useful for:
 
 ## Use the hosted app
 
-1. Open the [OpenReady website](https://capable-chaja-458cb0.netlify.app/).
+1. Open the [OpenReady website](https://getopenready.netlify.app/).
 2. Review each checklist item.
 3. Mark items that the project already satisfies.
 4. Use the notes field to record missing work or next actions.
@@ -30,6 +30,14 @@ Checklist progress and notes remain in the current browser unless they are inten
 OpenReady follows the browser or operating system theme when there is no saved preference.
 
 Use the theme button in the navigation to switch manually. The chosen theme is saved in local browser storage.
+
+The dark theme uses a muted blue accent system to reduce glare. The decorative repository-network artwork adapts to each theme, stops moving when reduced motion is requested, and is simplified or removed on smaller screens.
+
+## Responsive hero layout
+
+The hero is designed for phones, tablets, desktop monitors, ultra-wide displays, and short laptop viewports. On supported desktop widths, height-aware layout rules keep the primary checklist action and project-health preview usable within the first screen.
+
+This behavior is covered by automated Playwright testing at `1600 × 860` in addition to the standard viewport checks.
 
 ## Run OpenReady locally
 
@@ -84,6 +92,8 @@ This file contains:
 - light and dark theme tokens
 
 When customizing theme colors, verify readable contrast for body text, buttons, links, cards, focus states, success messages, and error messages.
+
+The decorative hero artwork is stored in `hero-orbit.svg`, while its placement, opacity, responsive behavior, and reduced-motion rules are maintained in `docs-grid.css`.
 
 ## What the checklist covers
 
