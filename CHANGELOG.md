@@ -19,6 +19,9 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - A separate Lighthouse configuration and workflow for auditing the public Netlify deployment.
 - Production audit evidence and measured results in `docs/production-audit.md`.
 - A human keyboard, screen-reader, zoom, reflow, theme, reduced-motion, and real-device test plan in `docs/manual-accessibility-testing.md`.
+- A lightweight decorative repository-network sphere in `hero-orbit.svg`, implemented without a WebGL or third-party animation library.
+- Height-aware desktop hero rules for short laptop viewports.
+- A Playwright regression check at `1600 × 860` that verifies the primary call to action and complete project-health preview remain above the fold.
 
 ### Changed
 
@@ -28,6 +31,11 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Updated the roadmap after establishing the first Lighthouse baseline.
 - Distinguished local-static-build scores from public production-deployment scores.
 - Limited production auditing to a bounded representative run so unreachable or stale deployments still produce useful evidence.
+- Renamed the public Netlify project to `getopenready` and updated canonical, structured-data, setup, and audit references to `https://getopenready.netlify.app/`.
+- Aligned documentation-card labels, titles, descriptions, and responsive columns consistently.
+- Softened the dark-theme accent palette to reduce visual glare while preserving readable contrast.
+- Refined the hero composition so the repository sphere supports rather than obscures the project-health preview.
+- Rebalanced desktop hero columns, headline wrapping, spacing, and preview density so the complete first-screen experience works on common laptop heights.
 
 ### Accessibility
 
@@ -35,13 +43,18 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Updated compact brand-link accessible names so they include the visible `OR` text.
 - Fixed the accessibility findings identified by the first Lighthouse audit.
 - Added a manual testing process for checks that automated tools cannot verify.
+- Kept the decorative hero artwork non-interactive with `pointer-events: none` and outside the accessibility tree.
+- Disabled decorative motion when `prefers-reduced-motion: reduce` is active.
+- Simplified or removed the decorative sphere at smaller breakpoints to protect readability and mobile performance.
+- Added automated checks that prevent the hero call to action, preview card, and headline wrapping from regressing on short desktop viewports.
 
 ### Quality baseline
 
 - The first representative local audit measured 100 Performance, 91 Accessibility, 96 Best Practices, and 100 SEO.
 - After correcting the identified accessibility labels and missing favicon, all three final local-static-build runs measured 100 in Performance, Accessibility, Best Practices, and SEO.
 - The initial public Netlify audit measured 91 Performance, 91 Accessibility, 96 Best Practices, and 100 SEO.
-- The production report showed accessibility and favicon findings already fixed on `main`, confirming that the public deployment needs to be updated before a fair current-code comparison.
+- After deploying the corrected `main` branch, three production runs measured Performance at 88, 100, and 100; Accessibility, Best Practices, and SEO measured 100 in all three runs.
+- Browser automation now includes mobile, tablet, desktop, ultra-wide, reduced-motion, keyboard, import, persistence, overflow, and short-laptop hero regression coverage.
 
 ## [0.2.1] - 2026-07-25
 
