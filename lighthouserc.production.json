@@ -2,7 +2,7 @@
   "ci": {
     "collect": {
       "url": [
-        "https://capable-chaja-458cb0.netlify.app/"
+        "https://getopenready.netlify.app/"
       ],
       "numberOfRuns": 3,
       "settings": {
