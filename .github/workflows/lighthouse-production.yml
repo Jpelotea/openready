@@ -3,8 +3,13 @@ name: Production deployment audit
 on:
   pull_request:
     paths:
+      - "index.html"
+      - "styles.css"
+      - "docs-grid.css"
+      - "hero-orbit.svg"
       - "lighthouserc.production.json"
       - ".github/workflows/lighthouse-production.yml"
+      - "docs/production-audit.md"
       - "docs/manual-accessibility-testing.md"
   workflow_dispatch:
 
@@ -32,12 +37,12 @@ jobs:
           mkdir -p lhci-production-results
           {
             echo "Audit time (UTC): $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-            echo "URL: https://capable-chaja-458cb0.netlify.app/"
+            echo "URL: https://getopenready.netlify.app/"
             echo
             curl --location --silent --show-error --fail-with-body \
               --connect-timeout 20 --max-time 60 \
               --dump-header - --output /tmp/openready-production.html \
-              https://capable-chaja-458cb0.netlify.app/
+              https://getopenready.netlify.app/
             echo
             echo "Downloaded bytes: $(wc -c < /tmp/openready-production.html)"
             grep -oE '<title>[^<]+' /tmp/openready-production.html | head -1 || true
