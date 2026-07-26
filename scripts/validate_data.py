@@ -14,6 +14,24 @@ ROOT = Path(__file__).resolve().parents[1]
 CHECKLIST_PATH = ROOT / "data" / "checklist.json"
 SITE_PATH = ROOT / "data" / "site.json"
 ID_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+CHECKLIST_SCHEMA_VERSION = 2
+ASSESSMENT_LEVELS = {"core", "maturity"}
+ASSESSMENT_STATUSES = {
+    "complete",
+    "in-progress",
+    "not-started",
+    "not-applicable",
+}
+PROHIBITED_ASSESSMENT_TERMS = {
+    "funding",
+    "monetization",
+    "monetisation",
+    "donation",
+    "sponsorship",
+    "crowdfunding",
+    "paid-support",
+    "paid-access",
+}
 
 REQUIRED_LINKS = {
     "repository",
@@ -74,17 +92,58 @@ def require_text(container: dict[str, Any], key: str, context: str, errors: list
         errors.append(f"{context} requires a non-empty '{key}' value.")
 
 
-def validate_checklist(data: Any, errors: list[str]) -> int:
+def validate_assessment_configuration(data: dict[str, Any], errors: list[str]) -> None:
+    if data.get("schemaVersion") != CHECKLIST_SCHEMA_VERSION:
+        errors.append(
+            f"data/checklist.json schemaVersion must be {CHECKLIST_SCHEMA_VERSION}."
+        )
+
+    levels = data.get("levels")
+    if not isinstance(levels, dict):
+        errors.append("data/checklist.json requires a 'levels' object.")
+    else:
+        missing_levels = sorted(ASSESSMENT_LEVELS - set(levels))
+        if missing_levels:
+            errors.append(
+                "data/checklist.json is missing assessment levels: "
+                + ", ".join(missing_levels)
+                + "."
+            )
+        for level_name in ASSESSMENT_LEVELS:
+            level = levels.get(level_name)
+            if not isinstance(level, dict):
+                errors.append(f"Assessment level '{level_name}' must be an object.")
+                continue
+            require_text(level, "label", f"Assessment level '{level_name}'", errors)
+            require_text(level, "description", f"Assessment level '{level_name}'", errors)
+
+    statuses = data.get("statuses")
+    if not isinstance(statuses, list):
+        errors.append("data/checklist.json requires a 'statuses' array.")
+    else:
+        status_set = {status for status in statuses if isinstance(status, str)}
+        if status_set != ASSESSMENT_STATUSES or len(statuses) != len(ASSESSMENT_STATUSES):
+            errors.append(
+                "Assessment statuses must be exactly: "
+                + ", ".join(sorted(ASSESSMENT_STATUSES))
+                + "."
+            )
+
+
+def validate_checklist(data: Any, errors: list[str]) -> tuple[int, dict[str, int]]:
     if not isinstance(data, dict):
         errors.append("data/checklist.json must contain a JSON object.")
-        return 0
+        return (0, {"core": 0, "maturity": 0})
+
+    validate_assessment_configuration(data, errors)
 
     items = data.get("items")
     if not isinstance(items, list) or not items:
         errors.append("data/checklist.json must contain a non-empty 'items' array.")
-        return 0
+        return (0, {"core": 0, "maturity": 0})
 
     seen_ids: set[str] = set()
+    level_counts = {"core": 0, "maturity": 0}
 
     for index, item in enumerate(items, start=1):
         context = f"Checklist item {index}"
@@ -92,7 +151,7 @@ def validate_checklist(data: Any, errors: list[str]) -> int:
             errors.append(f"{context} must be a JSON object.")
             continue
 
-        for key in ("id", "title", "description", "category"):
+        for key in ("id", "title", "description", "category", "level"):
             require_text(item, key, context, errors)
 
         item_id = item.get("id")
@@ -105,6 +164,33 @@ def validate_checklist(data: Any, errors: list[str]) -> int:
                 errors.append(f"Duplicate checklist id: '{item_id}'.")
             seen_ids.add(item_id)
 
+            normalized_id = item_id.lower()
+            prohibited = sorted(
+                term for term in PROHIBITED_ASSESSMENT_TERMS if term in normalized_id
+            )
+            if prohibited:
+                errors.append(
+                    f"{context} id '{item_id}' introduces an out-of-scope funding or commercial assessment term."
+                )
+
+        level = item.get("level")
+        if level not in ASSESSMENT_LEVELS:
+            errors.append(f"{context} level must be 'core' or 'maturity'.")
+        else:
+            level_counts[level] += 1
+
+        searchable_text = " ".join(
+            str(item.get(key, "")).lower()
+            for key in ("id", "category", "title")
+        )
+        prohibited_text = sorted(
+            term for term in PROHIBITED_ASSESSMENT_TERMS if term in searchable_text
+        )
+        if prohibited_text:
+            errors.append(
+                f"{context} introduces an out-of-scope funding or commercial assessment concept."
+            )
+
         resource_url = item.get("resourceUrl")
         resource_label = item.get("resourceLabel")
         if resource_url is not None and not is_http_url(resource_url):
@@ -114,7 +200,11 @@ def validate_checklist(data: Any, errors: list[str]) -> int:
         ):
             errors.append(f"{context} needs 'resourceLabel' when 'resourceUrl' is set.")
 
-    return len(items)
+    for level, count in level_counts.items():
+        if count == 0:
+            errors.append(f"Assessment level '{level}' must contain at least one item.")
+
+    return len(items), level_counts
 
 
 def validate_links(links: Any, errors: list[str]) -> None:
@@ -214,7 +304,11 @@ def main() -> int:
     checklist_data = load_json(CHECKLIST_PATH, errors)
     site_data = load_json(SITE_PATH, errors)
 
-    checklist_count = validate_checklist(checklist_data, errors) if checklist_data else 0
+    checklist_count = 0
+    level_counts = {"core": 0, "maturity": 0}
+    if checklist_data:
+        checklist_count, level_counts = validate_checklist(checklist_data, errors)
+
     document_count, roadmap_count = validate_site(site_data, errors) if site_data else (0, 0)
 
     if errors:
@@ -225,6 +319,8 @@ def main() -> int:
 
     print("OpenReady data validation passed.")
     print(f"- Checklist items: {checklist_count}")
+    print(f"- Core readiness items: {level_counts['core']}")
+    print(f"- Operational maturity items: {level_counts['maturity']}")
     print(f"- Documentation cards: {document_count}")
     print(f"- Roadmap entries: {roadmap_count}")
     return 0
