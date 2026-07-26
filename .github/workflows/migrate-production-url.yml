@@ -60,3 +60,5 @@ jobs:
           git add index.html README.md getting-started.md docs/production-audit.md lighthouserc.production.json data/site.json .github/workflows/lighthouse-production.yml .github/workflows/migrate-production-url.yml
           git commit -m "chore: update production URL to getopenready"
           git push
+
+# One-time migration trigger
