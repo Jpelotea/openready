@@ -71,6 +71,15 @@ function projectFileSlug(name) {
     .slice(0, 48);
 }
 
+function ensureAssessmentStyles() {
+  if (document.querySelector("link[data-assessment-styles]")) return;
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "assessment.css";
+  link.dataset.assessmentStyles = "true";
+  document.head.append(link);
+}
+
 function ensureAssessmentChrome() {
   const checklistHeading = document.querySelector("#checklist-title");
   const checklistIntro = checklistHeading?.nextElementSibling;
@@ -244,6 +253,8 @@ function setupProjectProfile() {
 }
 
 function loadAssessmentEngine() {
+  ensureAssessmentStyles();
+
   if (typeof normalizeImportedAssessment === "function") {
     setupProjectProfile();
     return;
