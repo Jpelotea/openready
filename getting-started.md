@@ -16,14 +16,34 @@ This project is useful for:
 ## Use the hosted app
 
 1. Open the [OpenReady website](https://getopenready.netlify.app/).
-2. Review each checklist item.
-3. Mark items that the project already satisfies.
-4. Use the notes field to record missing work or next actions.
-5. Export the checklist as JSON when a backup is needed.
-6. Import a previous JSON export to restore progress.
-7. Use **Print report** to print the summary or save it as a PDF.
+2. Optionally add the project name, repository URL, maintainer or team, and target review date.
+3. Review each checklist item.
+4. Mark items that the project already satisfies.
+5. Use the notes field to record missing work or next actions.
+6. Export the project profile and checklist as JSON when a backup is needed.
+7. Import a previous JSON export to restore project identity, progress, and notes.
+8. Use **Print report** to print the identified summary or save it as a PDF.
 
-Checklist progress and notes remain in the current browser unless they are intentionally exported.
+Project-profile values, checklist progress, and notes remain in the current browser unless they are intentionally exported or printed.
+
+## Optional project profile
+
+The project profile helps identify which repository a report belongs to. Every field is optional:
+
+- **Project name** — used in the report and exported filename
+- **Repository URL** — the public or private source location being reviewed
+- **Maintainer or team** — the person or group responsible for follow-up
+- **Target release or review date** — the date connected to the current readiness review
+
+Profile values are saved locally using the `openready-project-profile-v1` browser-storage key.
+
+When a project name is present, exported files use this pattern:
+
+```text
+openready-<project-name>-checklist.json
+```
+
+Older OpenReady exports without a project profile remain importable.
 
 ## Light and dark themes
 
@@ -94,6 +114,18 @@ This file contains:
 When customizing theme colors, verify readable contrast for body text, buttons, links, cards, focus states, success messages, and error messages.
 
 The decorative hero artwork is stored in `hero-orbit.svg`, while its placement, opacity, responsive behavior, and reduced-motion rules are maintained in `docs-grid.css`.
+
+Project-profile storage, export, import, reset, and filename behavior are maintained in `profile.js`.
+
+## Release history
+
+Every shipped version is documented in:
+
+- [RELEASES.md](RELEASES.md) for readable release summaries and compatibility notes
+- [CHANGELOG.md](CHANGELOG.md) for detailed changes
+- [roadmap.md](roadmap.md) for current and planned work
+
+Upcoming work must remain labeled as planned or unreleased until the version, changelog, release summary, roadmap, and user documentation are all updated.
 
 ## What the checklist covers
 
