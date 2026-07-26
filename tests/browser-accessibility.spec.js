@@ -1,3 +1,4 @@
+const fs = require('node:fs');
 const { test, expect } = require('@playwright/test');
 
 async function openCleanPage(page) {
@@ -31,13 +32,24 @@ test('keyboard users can reach the main controls and save checklist progress', a
   await expect(page.locator('input[data-check]').first()).toBeVisible();
 
   const reachedIds = new Set();
-  for (let index = 0; index < 90; index += 1) {
+  for (let index = 0; index < 110; index += 1) {
     await page.keyboard.press('Tab');
     const id = await page.evaluate(() => document.activeElement?.id || '');
     if (id) reachedIds.add(id);
   }
 
-  for (const requiredId of ['themeToggle', 'exportButton', 'importButton', 'printButton', 'resetButton', 'projectNotes']) {
+  for (const requiredId of [
+    'themeToggle',
+    'profileName',
+    'profileRepository',
+    'profileMaintainer',
+    'profileReviewDate',
+    'exportButton',
+    'importButton',
+    'printButton',
+    'resetButton',
+    'projectNotes',
+  ]) {
     expect(reachedIds.has(requiredId), `${requiredId} should be keyboard reachable`).toBeTruthy();
   }
 
@@ -70,7 +82,7 @@ test('theme control exposes state and preserves the selected theme', async ({ pa
   await expect.poll(() => page.evaluate(() => document.documentElement.dataset.theme)).toBe(selectedTheme);
 });
 
-test('the keyboard-accessible import action restores checklist data and notes', async ({ page }) => {
+test('the keyboard-accessible import action restores checklist data, notes, and project profile', async ({ page }) => {
   await openCleanPage(page);
 
   const firstItemId = await page.locator('input[data-check]').first().getAttribute('data-item-id');
@@ -79,6 +91,12 @@ test('the keyboard-accessible import action restores checklist data and notes', 
     formatVersion: 1,
     completedItems: [{ id: firstItemId, complete: true }],
     notes: 'Imported during automated browser testing.',
+    project: {
+      name: 'Example Community Project',
+      repository: 'https://github.com/example/community-project',
+      maintainer: 'Example Maintainers',
+      reviewDate: '2026-08-15',
+    },
   };
 
   const chooserPromise = page.waitForEvent('filechooser');
@@ -94,7 +112,56 @@ test('the keyboard-accessible import action restores checklist data and notes', 
 
   await expect(page.locator('input[data-check]').first()).toBeChecked();
   await expect(page.locator('#projectNotes')).toHaveValue(payload.notes);
-  await expect(page.locator('#toolStatus')).toHaveText('Checklist imported successfully.');
+  await expect(page.locator('#profileName')).toHaveValue(payload.project.name);
+  await expect(page.locator('#profileRepository')).toHaveValue(payload.project.repository);
+  await expect(page.locator('#profileMaintainer')).toHaveValue(payload.project.maintainer);
+  await expect(page.locator('#profileReviewDate')).toHaveValue(payload.project.reviewDate);
+  await expect(page.locator('#toolStatus')).toHaveText('Checklist and project profile imported successfully.');
+});
+
+test('project profile persists, exports with the report, and resets with the workspace', async ({ page }) => {
+  await openCleanPage(page);
+
+  const profile = {
+    name: 'OpenReady Example',
+    repository: 'https://github.com/example/openready-example',
+    maintainer: 'Community Team',
+    reviewDate: '2026-09-01',
+  };
+
+  await page.locator('#profileName').fill(profile.name);
+  await page.locator('#profileRepository').fill(profile.repository);
+  await page.locator('#profileMaintainer').fill(profile.maintainer);
+  await page.locator('#profileReviewDate').fill(profile.reviewDate);
+  await page.locator('#projectNotes').fill('Profile export test.');
+  await page.locator('input[data-check]').first().check();
+
+  await page.reload();
+  await expect(page.locator('#profileName')).toHaveValue(profile.name);
+  await expect(page.locator('#profileRepository')).toHaveValue(profile.repository);
+  await expect(page.locator('#profileMaintainer')).toHaveValue(profile.maintainer);
+  await expect(page.locator('#profileReviewDate')).toHaveValue(profile.reviewDate);
+
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export JSON' }).click();
+  const download = await downloadPromise;
+  const downloadPath = await download.path();
+  const exported = JSON.parse(fs.readFileSync(downloadPath, 'utf8'));
+
+  expect(download.suggestedFilename()).toBe('openready-openready-example-checklist.json');
+  expect(exported.applicationVersion).toBe('0.3.0');
+  expect(exported.project).toEqual(profile);
+  expect(exported.notes).toBe('Profile export test.');
+  expect(exported.completedItems.some((item) => item.complete)).toBeTruthy();
+
+  page.once('dialog', (dialog) => dialog.accept());
+  await page.getByRole('button', { name: 'Reset progress' }).click();
+  await expect(page.locator('#profileName')).toHaveValue('');
+  await expect(page.locator('#profileRepository')).toHaveValue('');
+  await expect(page.locator('#profileMaintainer')).toHaveValue('');
+  await expect(page.locator('#profileReviewDate')).toHaveValue('');
+  await expect(page.locator('#projectNotes')).toHaveValue('');
+  await expect(page.locator('#toolStatus')).toHaveText('Project profile and checklist progress were reset.');
 });
 
 test('reveal content is rendered without meaningful motion when reduced motion is requested', async ({ page }) => {
@@ -175,6 +242,7 @@ for (const viewport of viewports) {
     expect(dimensions.page).toBeLessThanOrEqual(dimensions.viewport + 1);
 
     await expect(page.locator('#checklist')).toBeVisible();
+    await expect(page.locator('.project-profile')).toBeVisible();
     await expect(page.locator('#docs')).toBeVisible();
     await expect(page.locator('footer')).toBeVisible();
 
