@@ -80,6 +80,7 @@ function downloadChecklistWithProfile(event) {
   const project = readProjectProfile();
   const payload = {
     ...createExportPayload(),
+    applicationVersion: siteConfig?.application?.version || "0.3.0",
     project
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
