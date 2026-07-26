@@ -16,8 +16,25 @@ The workflow verifies:
 - reveal content remains visible with reduced motion enabled
 - the page avoids horizontal overflow at 320, 390, 768, 1440, and 1920 pixel viewports
 - key content remains usable with 200% text sizing at a narrow viewport
+- the desktop hero remains usable at a short-laptop viewport of `1600 × 860`
+
+The short-laptop hero regression test checks that:
+
+- the **Start the checklist** call to action remains above the fold
+- the complete project-health preview remains above the fold
+- the headline uses a controlled number of lines
+- the final headline line is not an isolated word
+- the page does not introduce horizontal overflow
 
 Viewport screenshots, Playwright reports, traces, screenshots, and videos are retained as GitHub Actions artifacts when available.
+
+## Hero-layout rationale
+
+The desktop hero uses height-aware CSS rather than a single fixed desktop composition. This protects the interface on laptop displays where browser chrome and operating-system taskbars reduce the available page height.
+
+The automated check exists because width-only responsive tests would not catch a layout where the headline, primary action, or preview panel falls below the initial viewport.
+
+The decorative SVG repository sphere is not essential content. It does not receive pointer events, is simplified at smaller breakpoints, and stops moving when reduced motion is requested.
 
 ## Run locally
 
