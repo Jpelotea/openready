@@ -66,18 +66,77 @@ Project profiles and identified reports:
 
 The v0.3.0 release scope is tracked in [issue #8](https://github.com/Jpelotea/openready/issues/8) and the focused project-profile work in [issue #22](https://github.com/Jpelotea/openready/issues/22).
 
-## Planned — v0.4.0
+## In development — v0.4.0
 
-Guided project materials and deeper review support:
+**Guided Project Health Framework**
+
+The release will extend OpenReady from a binary file-presence checklist into a backward-compatible assessment of core repository readiness and deeper operational maturity.
+
+### Project policy foundation
+
+Tracked in [issue #26](https://github.com/Jpelotea/openready/issues/26):
+
+- accessibility commitment and reporting
+- support scope and maintainer boundaries
+- expanded security reporting and disclosure
+- lightweight threat model
+- incident-response procedure
+- structured accessibility issue reporting
+
+### Governance and conduct operations
+
+Tracked in [issue #27](https://github.com/Jpelotea/openready/issues/27):
+
+- contributor and maintainer role definitions
+- permission and decision criteria
+- consensus and disagreement handling
+- conflict-of-interest procedures
+- temporary absence, inactivity, succession, and project-transfer guidance
+- conflict-safe Code of Conduct reporting and enforcement
+
+### Checklist schema v2
+
+Tracked in [issue #28](https://github.com/Jpelotea/openready/issues/28):
+
+- core-readiness and operational-maturity levels
+- complete, in-progress, not-started, and not-applicable states
+- optional evidence, notes, review dates, and responsibility fields
+- separate core, maturity, and overall scores
+- backward-compatible import migration for v0.1-v0.3 exports
+- clear non-certification explanations
+
+### Guided project materials
+
+Tracked in [issue #29](https://github.com/Jpelotea/openready/issues/29):
 
 - expanded explanations and examples for every checklist item
-- README section helper
-- dedicated accessibility review checklist
-- optional readiness categories and scoring details
-- improved documentation for custom checklist imports and exports
-- validation guidance for custom themes and JSON content
+- README planning guidance
+- accessibility, security, threat-model, incident-response, governance, support, conduct, metrics, and license-review guidance
+- legal, security, accessibility, and hosting-program disclaimers
 
-Track the next release in [issue #23](https://github.com/Jpelotea/openready/issues/23).
+### Community, quality, and release work
+
+- contributor pathways and privacy-respecting metrics: [issue #30](https://github.com/Jpelotea/openready/issues/30)
+- automated validation and browser coverage: [issue #31](https://github.com/Jpelotea/openready/issues/31)
+- manual accessibility and real-device verification: [issue #32](https://github.com/Jpelotea/openready/issues/32)
+- production audit, documentation, and release: [issue #33](https://github.com/Jpelotea/openready/issues/33)
+- post-release Netlify application-readiness review: [issue #34](https://github.com/Jpelotea/openready/issues/34)
+
+The complete release plan and safeguards are tracked in [issue #23](https://github.com/Jpelotea/openready/issues/23).
+
+### Explicitly outside v0.4.0 scope
+
+OpenReady will not add:
+
+- funding, donation, sponsorship, crowdfunding, or GitHub Sponsors features
+- pricing, subscriptions, premium features, or paid access
+- paid support, consulting, implementation, or hosting services
+- advertising, affiliate links, or commercial promotions
+- funding or monetization checklist items
+- formal legal, accessibility, security, or hosting-program certification
+- accounts, a backend database, or cloud-saved checklist workspaces
+
+OpenReady remains free, non-commercial, MIT licensed, private by default, and focused on its software and open-source community. These safeguards reduce avoidable Netlify eligibility concerns but do not guarantee approval.
 
 ## Performance and quality work
 
@@ -95,19 +154,21 @@ Completed foundation:
 
 Next quality improvements:
 
-- rerun the production audit for v0.3.0
-- complete human accessibility and device testing through [issue #14](https://github.com/Jpelotea/openready/issues/14)
+- complete human accessibility and device testing through [issue #32](https://github.com/Jpelotea/openready/issues/32)
+- complete desktop screen-reader review through [issue #17](https://github.com/Jpelotea/openready/issues/17)
+- complete mobile screen-reader review through [issue #18](https://github.com/Jpelotea/openready/issues/18)
 - complete browser zoom, reflow, and high-contrast review through [issue #19](https://github.com/Jpelotea/openready/issues/19)
 - complete representative real-device testing through [issue #20](https://github.com/Jpelotea/openready/issues/20)
 - add automated link checks for community and documentation resources
-- expand validation as the data schema grows
+- expand validation and browser tests for schema v2
+- run a fresh production audit after the v0.4.0 release candidate is deployed
 
 ## Future exploration
 
 Ideas that require further design and community feedback:
 
 - optional GitHub repository URL assessment
-- reusable community-document templates
+- reusable community-document templates beyond the v0.4.0 guided materials
 - multilingual documentation
 - project examples gallery
 - maintainer learning pathway
@@ -121,7 +182,8 @@ Priorities are shaped by:
 1. usability problems reported through GitHub Issues
 2. accessibility and security needs
 3. beginner-maintainer feedback
-4. community contributions that fit the non-commercial project mission
+4. community contributions that fit the free, non-commercial project mission
 5. measurable improvements to maintainability and performance
+6. backward compatibility and user-data privacy
 
 See the [issue tracker](https://github.com/Jpelotea/openready/issues) for current work.

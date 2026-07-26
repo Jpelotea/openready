@@ -1,0 +1,118 @@
+name: Accessibility barrier
+
+description: Report a keyboard, screen-reader, zoom, reflow, contrast, motion, or other accessibility problem in OpenReady.
+title: "[Accessibility]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve OpenReady. Describe observed behavior without including medical information, credentials, private project data, or other sensitive personal information.
+
+        For private reports, follow the contact guidance in `ACCESSIBILITY.md` instead of submitting this public form.
+
+  - type: input
+    id: affected-area
+    attributes:
+      label: Affected page, section, or task
+      description: Identify where the barrier occurs and the task you were trying to complete.
+      placeholder: Example: Checklist tools — importing a saved JSON file
+    validations:
+      required: true
+
+  - type: dropdown
+    id: barrier-type
+    attributes:
+      label: Type of barrier
+      description: Choose the closest match. Add details later in the form.
+      options:
+        - Keyboard navigation or focus
+        - Screen reader or accessible name
+        - Zoom, text resize, or reflow
+        - Color contrast or forced colors
+        - Motion or animation
+        - Form label, instruction, or error message
+        - Touch target or mobile interaction
+        - Cognitive or plain-language barrier
+        - Other accessibility barrier
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Browser, operating system, and device
+      description: Include versions when known.
+      placeholder: Example: Firefox 128 on Windows 11, laptop
+    validations:
+      required: true
+
+  - type: input
+    id: assistive-technology
+    attributes:
+      label: Assistive technology or accessibility setting
+      description: Optional. Include the product and version, zoom level, forced-colors mode, switch input, or other relevant setting.
+      placeholder: Example: NVDA 2026.1 at 200% browser zoom
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide focused steps that another person can follow.
+      placeholder: |
+        1. Open the checklist.
+        2. Move through the project profile with Tab.
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Explain what should have happened.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Explain the barrier you experienced and its effect on the task.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact on the task
+      options:
+        - Blocks a core task with no known workaround
+        - Blocks a core task but a workaround exists
+        - Makes the task difficult or confusing
+        - Minor barrier or improvement opportunity
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Known workaround
+      description: Optional. Explain any alternative method that worked.
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Optional. Add public screenshots, recordings, or links only when they do not reveal private information.
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I searched existing issues for the same barrier.
+          required: true
+        - label: I removed credentials, private project data, medical information, and other sensitive personal information.
+          required: true
+        - label: I agree to follow the OpenReady Code of Conduct.
+          required: true
