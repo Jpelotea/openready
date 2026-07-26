@@ -22,16 +22,18 @@ https://getopenready.netlify.app/
 
 ## Current version
 
-**v0.2.1 — Data, theming, and maintenance foundation**
+**v0.3.0 — Project profiles and identified reports**
 
 Current capabilities:
 
 - interactive repository-health checklist
 - automatic progress score
+- optional project profile for project name, repository URL, maintainer or team, and review date
 - local browser saving with `localStorage`
 - project notes
-- JSON export and import
-- print-friendly readiness report
+- project profile and checklist JSON export and import
+- project-based export filenames
+- print-friendly readiness report with project identity
 - JSON-driven checklist and site content
 - adaptive light and dark themes
 - configurable semantic color tokens
@@ -41,8 +43,18 @@ Current capabilities:
 - lightweight SVG repository-network hero artwork
 - height-aware hero composition that keeps the main call to action and preview usable on short laptop screens
 - automated JSON validation
-- Playwright browser, keyboard, viewport, reduced-motion, and hero-layout regression checks
+- Playwright browser, keyboard, project-profile, viewport, reduced-motion, and hero-layout regression checks
 - repeatable local and production Lighthouse audits with downloadable reports
+- complete release summaries for every shipped version
+
+## Release documentation
+
+Every shipped version is recorded in both:
+
+- [RELEASES.md](RELEASES.md) — readable release summaries, dates, purpose, highlights, and compatibility notes
+- [CHANGELOG.md](CHANGELOG.md) — detailed added, changed, accessibility, and quality entries
+
+The current and planned release sequence is documented in [roadmap.md](roadmap.md).
 
 ## Interface and visual design
 
@@ -79,7 +91,8 @@ OpenReady provides public links and documentation directly related to the softwa
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Governance and maintainer roles](GOVERNANCE.md)
 - [Security policy](SECURITY.md)
-- [Release history](CHANGELOG.md)
+- [Release summaries](RELEASES.md)
+- [Detailed changelog](CHANGELOG.md)
 - [Project roadmap](roadmap.md)
 - [Automated browser testing](docs/automated-browser-testing.md)
 - [Performance and accessibility audits](docs/performance.md)
@@ -90,7 +103,7 @@ Beginner-friendly bug reports, documentation improvements, accessibility feedbac
 
 ## Privacy
 
-OpenReady does not send checklist information to a server. Progress and notes remain in the current browser unless the user intentionally exports a JSON backup.
+OpenReady does not send project-profile, checklist, or notes data to a server. All values remain in the current browser unless the user intentionally exports a JSON backup or prints a report.
 
 ## Repository structure
 
@@ -120,6 +133,7 @@ openready/
 ├── styles.css
 ├── docs-grid.css
 ├── app.js
+├── profile.js
 ├── hero-orbit.svg
 ├── favicon.svg
 ├── playwright.config.js
@@ -128,6 +142,7 @@ openready/
 ├── getting-started.md
 ├── maintainer-guide.md
 ├── roadmap.md
+├── RELEASES.md
 ├── netlify-open-source-readiness.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
@@ -155,12 +170,26 @@ http://localhost:8080
 
 No package installation or build process is required for normal use.
 
+## Using the project profile
+
+The profile is optional. Enter any useful combination of:
+
+- project name
+- repository URL
+- maintainer or team
+- target release or review date
+
+Profile values are stored locally. They are included in exported JSON and print/PDF reports, restored during import, and cleared when the workspace is reset.
+
+Exports use `openready-<project-name>-checklist.json` when a project name is available.
+
 ## Editing content and themes
 
 Frequently updated content is separated from the core application logic:
 
 - edit `data/checklist.json` to change checklist items, categories, explanations, and resource links
-- edit `data/site.json` to change project links, documentation cards, roadmap entries, and theme colors
+- edit `data/site.json` to change project links, documentation cards, roadmap entries, version information, and theme colors
+- edit `profile.js` when changing project-profile storage or report behavior
 - edit `hero-orbit.svg` and the hero rules in `docs-grid.css` only when changing the decorative hero composition
 
 Keep checklist IDs stable so existing browser progress and imported files remain compatible.
@@ -187,7 +216,16 @@ The workflow is defined in `.github/workflows/validate-data.yml`.
 
 ## Automated browser testing
 
-OpenReady uses Playwright and Chromium to check keyboard interaction, theme persistence, JSON import, reduced motion, viewport overflow, and key responsive layouts.
+OpenReady uses Playwright and Chromium to check:
+
+- keyboard interaction
+- theme persistence
+- project-profile persistence
+- project-profile JSON export and import
+- workspace reset behavior
+- reduced motion
+- viewport overflow
+- key responsive layouts
 
 The suite also includes a short-laptop regression check at `1600 × 860` that verifies:
 
@@ -237,14 +275,15 @@ The included `netlify.toml` contains the publish configuration and static-site h
 
 ## Project roadmap
 
-See [roadmap.md](roadmap.md) and the public [v0.3.0 roadmap tracker](https://github.com/Jpelotea/openready/issues/8).
+The current release is documented in [RELEASES.md](RELEASES.md). Planned v0.4.0 work is tracked in [issue #23](https://github.com/Jpelotea/openready/issues/23) and [roadmap.md](roadmap.md).
 
 Current open work includes:
 
-- completing keyboard, screen-reader, zoom, reflow, and real-device testing
+- completing desktop and mobile screen-reader review
+- completing browser zoom, reflow, high-contrast, and real-device testing
 - adding README screenshots
-- exploring optional project profiles and scoring
 - developing beginner-friendly project-material helpers
+- exploring optional accessibility review and scoring workflows
 
 ## Decision-making
 
