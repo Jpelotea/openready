@@ -18,7 +18,7 @@ OpenReady runs entirely in the browser. It has no backend, account system, analy
 
 ## Live application
 
-https://capable-chaja-458cb0.netlify.app/
+https://getopenready.netlify.app/
 
 ## Current version
 
@@ -35,11 +35,29 @@ Current capabilities:
 - JSON-driven checklist and site content
 - adaptive light and dark themes
 - configurable semantic color tokens
-- responsive mobile, tablet, desktop, and ultra-wide layouts
+- responsive mobile, tablet, desktop, laptop-height, and ultra-wide layouts
 - accessibility-minded controls, focus states, and reduced-motion support
 - native browser reveal animations
+- lightweight SVG repository-network hero artwork
+- height-aware hero composition that keeps the main call to action and preview usable on short laptop screens
 - automated JSON validation
+- Playwright browser, keyboard, viewport, reduced-motion, and hero-layout regression checks
 - repeatable local and production Lighthouse audits with downloadable reports
+
+## Interface and visual design
+
+The hero uses a decorative repository-network sphere implemented as a standalone SVG rather than WebGL or a third-party animation framework.
+
+Design safeguards include:
+
+- `pointer-events: none` so the artwork never blocks controls
+- reduced or removed artwork at smaller breakpoints
+- no decorative motion when `prefers-reduced-motion: reduce` is active
+- separate light- and dark-theme opacity tuning
+- height-aware desktop rules for common laptop displays
+- regression coverage that verifies the primary call to action and full project-health preview stay above the fold at `1600 × 860`
+
+The dark-theme accent palette is intentionally muted to reduce glare while retaining readable interactive states.
 
 ## Who it is for
 
@@ -63,6 +81,7 @@ OpenReady provides public links and documentation directly related to the softwa
 - [Security policy](SECURITY.md)
 - [Release history](CHANGELOG.md)
 - [Project roadmap](roadmap.md)
+- [Automated browser testing](docs/automated-browser-testing.md)
 - [Performance and accessibility audits](docs/performance.md)
 - [Production deployment audit](docs/production-audit.md)
 - [Manual accessibility and device testing](docs/manual-accessibility-testing.md)
@@ -80,6 +99,7 @@ openready/
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
 │   ├── workflows/
+│   │   ├── browser-accessibility.yml
 │   │   ├── lighthouse-production.yml
 │   │   ├── lighthouse.yml
 │   │   └── validate-data.yml
@@ -88,15 +108,21 @@ openready/
 │   ├── checklist.json
 │   └── site.json
 ├── docs/
+│   ├── automated-browser-testing.md
 │   ├── manual-accessibility-testing.md
 │   ├── performance.md
 │   └── production-audit.md
 ├── scripts/
 │   └── validate_data.py
+├── tests/
+│   └── browser-accessibility.spec.js
 ├── index.html
 ├── styles.css
+├── docs-grid.css
 ├── app.js
+├── hero-orbit.svg
 ├── favicon.svg
+├── playwright.config.js
 ├── lighthouserc.json
 ├── lighthouserc.production.json
 ├── getting-started.md
@@ -135,6 +161,7 @@ Frequently updated content is separated from the core application logic:
 
 - edit `data/checklist.json` to change checklist items, categories, explanations, and resource links
 - edit `data/site.json` to change project links, documentation cards, roadmap entries, and theme colors
+- edit `hero-orbit.svg` and the hero rules in `docs-grid.css` only when changing the decorative hero composition
 
 Keep checklist IDs stable so existing browser progress and imported files remain compatible.
 
@@ -158,6 +185,19 @@ The validator checks:
 
 The workflow is defined in `.github/workflows/validate-data.yml`.
 
+## Automated browser testing
+
+OpenReady uses Playwright and Chromium to check keyboard interaction, theme persistence, JSON import, reduced motion, viewport overflow, and key responsive layouts.
+
+The suite also includes a short-laptop regression check at `1600 × 860` that verifies:
+
+- the **Start the checklist** action remains within the initial viewport
+- the complete project-health preview remains within the initial viewport
+- the headline does not create an isolated final word
+- no horizontal overflow is introduced
+
+See [docs/automated-browser-testing.md](docs/automated-browser-testing.md).
+
 ## Lighthouse quality audits
 
 OpenReady uses Lighthouse CI to measure Performance, Accessibility, Best Practices, and SEO in repeatable GitHub Actions environments.
@@ -170,16 +210,17 @@ npx --yes @lhci/cli@0.15.x autorun
 
 The first recorded post-fix local baseline used three runs in GitHub Actions. All three runs scored 100 in all four categories. These scores apply only to that controlled local-static-build environment.
 
-The initial production audit measured the public Netlify deployment at:
+The last recorded post-deployment production baseline used three runs:
 
-- Performance: 91
-- Accessibility: 91
-- Best Practices: 96
-- SEO: 100
+| Run | Performance | Accessibility | Best Practices | SEO |
+|---|---:|---:|---:|---:|
+| 1 | 88 | 100 | 100 | 100 |
+| 2 | 100 | 100 | 100 | 100 |
+| 3 | 100 | 100 | 100 | 100 |
 
-The production report showed that the public site had not yet received accessibility and favicon fixes already present on `main`. Redeployment is tracked in [issue #13](https://github.com/Jpelotea/openready/issues/13).
+Production performance can vary between cold and warm runs. The repository has changed since this baseline, so future claims should use a newly generated audit rather than treating these measurements as permanent.
 
-See [docs/performance.md](docs/performance.md) for the local baseline, [docs/production-audit.md](docs/production-audit.md) for the deployed-site evidence, and [docs/manual-accessibility-testing.md](docs/manual-accessibility-testing.md) for testing that Lighthouse cannot complete.
+See [docs/performance.md](docs/performance.md) for the local baseline, [docs/production-audit.md](docs/production-audit.md) for deployed-site evidence, and [docs/manual-accessibility-testing.md](docs/manual-accessibility-testing.md) for checks Lighthouse cannot complete.
 
 ## Deploying
 
@@ -200,7 +241,6 @@ See [roadmap.md](roadmap.md) and the public [v0.3.0 roadmap tracker](https://git
 
 Current open work includes:
 
-- deploying the latest `main` branch to the public Netlify site
 - completing keyboard, screen-reader, zoom, reflow, and real-device testing
 - adding README screenshots
 - exploring optional project profiles and scoring
