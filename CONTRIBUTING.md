@@ -15,6 +15,7 @@ You can help by:
 - performing documented keyboard, screen-reader, zoom, reflow, forced-colors, or real-device testing
 - reviewing imports, exports, storage, rendering, and workflow security
 - improving project policies and contributor guidance
+- helping with issue triage, decision records, and community support
 - suggesting focused documentation pages
 - reporting confusing sections
 - helping measure Lighthouse and accessibility targets without treating scores as certification
@@ -33,6 +34,14 @@ Please read:
 - [roadmap.md](roadmap.md)
 
 Changes affecting security boundaries should also review [THREAT_MODEL.md](THREAT_MODEL.md) and [INCIDENT_RESPONSE.md](INCIDENT_RESPONSE.md).
+
+## Roles and participation
+
+OpenReady recognizes users, contributors, regular contributors, maintainers, security contacts, and Code of Conduct contacts.
+
+Contribution is broader than code. Useful documentation, accessibility evidence, security review, issue triage, design feedback, support, and community work all count.
+
+A contribution does not automatically grant repository access, a maintainer role, or a guarantee that the work will be merged. Role progression and permission criteria are documented in [GOVERNANCE.md](GOVERNANCE.md).
 
 ## Run the project locally
 
@@ -59,6 +68,31 @@ No package installation or build process is required for normal use.
 5. Explain what changed, why it matters, how it was checked, and which issue it addresses.
 
 Use the accessibility issue form for keyboard, screen-reader, zoom, reflow, contrast, motion, form, touch, or cognitive barriers. Follow [SECURITY.md](SECURITY.md) instead of opening a public issue when a report contains exploit details or another sensitive vulnerability.
+
+Do not open a public issue containing private Code of Conduct allegations, identifying personal information, or confidential evidence. Follow the private process in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+## Significant project decisions
+
+Routine corrections and accepted focused tasks can normally proceed through an issue and pull request.
+
+Propose significant changes publicly before implementation when practical. Examples include:
+
+- breaking import or export changes
+- new scoring or checklist models
+- new storage, privacy, backend, account, or external-service boundaries
+- changes to the license, governance, Code of Conduct, security policy, or non-commercial status
+- removal or alteration of the exact linked Netlify attribution
+- major changes to project purpose or maintainer permissions
+
+A significant proposal should explain alternatives, compatibility, accessibility, security, privacy, maintenance cost, and verification. The maintainer seeks reasoned agreement and records the final rationale when consensus is not reached.
+
+Security incidents, conduct reports, and private personal information may require confidential handling. Confidentiality must not be used to hide ordinary product decisions.
+
+## Conflicts of interest
+
+Disclose a conflict when a personal, professional, financial, organizational, or close-relationship interest could reasonably affect review or decision-making.
+
+A conflicted reviewer should avoid being the sole decision-maker when practical. Do not publish unnecessary private details when disclosing or managing a conflict.
 
 ## Editing JSON content
 
@@ -133,6 +167,9 @@ Before submitting a pull request, please check:
 - Mobile, tablet, desktop, short-laptop, and ultra-wide layouts remain usable when affected.
 - User-entered and imported values are rendered safely.
 - Workflow permissions remain no broader than necessary.
+- Significant decisions have a focused public proposal and recorded rationale when applicable.
+- Relevant conflicts of interest were disclosed and managed.
+- Confidential conduct, security, and personal information was kept out of public issues, pull requests, commits, and workflow logs.
 - The exact linked Netlify attribution remains visible in the footer.
 - Documentation, accessibility, security, support, governance, roadmap, and community links still work.
 - No funding, donation, sponsorship, paid support, consulting, hosting, advertising, affiliate, pricing, subscription, premium-feature, or paid-access capability is introduced.
@@ -140,19 +177,20 @@ Before submitting a pull request, please check:
 
 ## Review and response expectations
 
-The project is maintained on a best-effort basis. Opening a pull request does not guarantee acceptance or a release date.
+The project is maintained on a best-effort basis. Opening a pull request does not guarantee acceptance, repository access, a project role, or a release date.
 
 Review may result in a request to:
 
 - reduce the scope
 - add evidence or tests
 - improve accessibility or security behavior
-- update documentation
+- disclose or manage a conflict
+- update documentation or a decision record
 - defer the work to a later release
 - close the proposal as outside project scope
 
-See [SUPPORT.md](SUPPORT.md) for response targets, maintainer boundaries, and triage outcomes.
+See [SUPPORT.md](SUPPORT.md) for response targets, maintainer boundaries, and triage outcomes. See [GOVERNANCE.md](GOVERNANCE.md) for final-decision, permission, inactivity, temporary-absence, succession, and transfer procedures.
 
 ## Beginner note
 
-You do not need to be an expert developer to contribute. Small, focused improvements are welcome, including documentation corrections, accessibility observations, test evidence, and clearer issue reports.
+You do not need to be an expert developer to contribute. Small, focused improvements are welcome, including documentation corrections, accessibility observations, test evidence, clearer issue reports, and constructive community support.
