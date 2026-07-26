@@ -43,6 +43,21 @@ async function exportPayload(page) {
   };
 }
 
+async function revealEntirePage(page) {
+  await page.evaluate(async () => {
+    const step = Math.max(420, Math.floor(window.innerHeight * 0.75));
+    const maximum = document.documentElement.scrollHeight;
+    for (let position = 0; position < maximum; position += step) {
+      window.scrollTo(0, position);
+      await new Promise((resolve) => setTimeout(resolve, 35));
+    }
+    window.scrollTo(0, maximum);
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    window.scrollTo(0, 0);
+    await new Promise((resolve) => setTimeout(resolve, 80));
+  });
+}
+
 test('keyboard users can reach the main controls and save assessment progress', async ({ page }) => {
   await openCleanPage(page);
 
@@ -383,6 +398,12 @@ for (const viewport of viewports) {
     await expect(page.locator('#assessmentDisclaimer')).toBeVisible();
     await expect(page.locator('#docs')).toBeVisible();
     await expect(page.locator('footer')).toBeVisible();
+
+    await revealEntirePage(page);
+    const hiddenAssessmentCards = await page.locator('.check-item').evaluateAll((cards) =>
+      cards.filter((card) => getComputedStyle(card).opacity !== '1').length
+    );
+    expect(hiddenAssessmentCards).toBe(0);
 
     await page.screenshot({
       path: `test-results/viewports/${viewport.name}.png`,
