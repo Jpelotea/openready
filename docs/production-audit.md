@@ -4,12 +4,14 @@ This document records quality checks performed against the public OpenReady depl
 
 ## Public deployment
 
-- URL: https://capable-chaja-458cb0.netlify.app/
-- Audit date: July 25, 2026
+- URL: https://getopenready.netlify.app/
+- Netlify site ID: `ce11cbd9-5785-475a-9488-5d3122b9e6f2`
+- Last recorded post-deployment audit: July 25, 2026
 - Audit environment: GitHub Actions, Lighthouse mobile simulation
-- Lighthouse version: 12.6.1
-- Production audit runs: 1 bounded run
+- Production audit runs: 3
 - Evidence retention: GitHub Actions artifact retained for 30 days
+
+The project was renamed from the original generated Netlify name to `getopenready`. The site ID remained the same.
 
 ## Reachability and response
 
@@ -23,58 +25,56 @@ Observed response protections included:
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - permissions restrictions for camera, microphone, and geolocation
 
-The downloaded HTML contained the current OpenReady project title and version markers through `v0.3.0`, including the active `v0.2.1` interface content.
+## Last recorded category scores
 
-## Measured category scores
+| Run | Performance | Accessibility | Best Practices | SEO |
+|---|---:|---:|---:|---:|
+| 1 | 88 | 100 | 100 | 100 |
+| 2 | 100 | 100 | 100 | 100 |
+| 3 | 100 | 100 | 100 | 100 |
 
-| Category | Production score | Project target |
-|---|---:|---:|
-| Performance | 91 | 90 or higher |
-| Accessibility | 91 | 95 or higher |
-| Best Practices | 96 | 95 or higher |
-| SEO | 100 | 95 or higher |
+The repeated runs show normal production variability, especially for Performance. Accessibility, Best Practices, and SEO measured 100 in all three runs.
 
-The production deployment met the current Performance, Best Practices, and SEO targets. It did not meet the Accessibility target.
+These results describe the deployed build at the time of the audit. They are not permanent guarantees, and the repository has received visual and responsive changes since this baseline.
 
-## Performance observations
+## Resolved production findings
 
-Representative metrics included:
+The first production audit had reported:
 
-- First Contentful Paint: 2.3 seconds
-- Largest Contentful Paint: 2.3 seconds
-- Speed Index: 2.3 seconds
-- Total Blocking Time: 260 milliseconds
-- Time to Interactive: 2.7 seconds
+- a missing accessible label for the JSON import file input
+- a compact header brand accessible-name mismatch
+- a footer home link without a discernible accessible name
+- a missing favicon request that caused a browser-console error
 
-The audit also identified render-blocking stylesheet work and approximately 3.1 seconds of main-thread activity in the simulated mobile environment. These findings should be reviewed again after the latest repository build has been deployed.
+The corrected `main` branch was deployed and the three-run post-deployment audit no longer reported those findings. Deployment follow-up issue #13 was closed after verification.
 
-## Accessibility and best-practices findings
+## Current responsive quality work
 
-The production audit reported:
+Subsequent interface work added:
 
-- the JSON import file input did not have an accessible label
-- the compact header brand's accessible name did not include its visible text
-- the footer home link did not have a discernible accessible name in the compact layout
-- the browser requested a missing `favicon.ico`, causing a console error
+- a lightweight decorative SVG repository-network sphere
+- refined light- and dark-theme visual treatment
+- consistently aligned documentation cards
+- a height-aware desktop hero composition
+- a short-laptop Playwright regression check at `1600 × 860`
 
-These findings were already corrected in the repository during pull request #11 and passed the final local Lighthouse baseline. Their presence in the production report indicates that the public deployment does not yet contain every fix from the latest `main` branch.
+The regression test verifies that the primary checklist action and complete project-health preview remain within the initial viewport, the headline avoids an isolated final word, and the page does not introduce horizontal overflow.
 
-Deployment follow-up is tracked in [issue #13](https://github.com/Jpelotea/openready/issues/13).
+Because these changes were made after the last recorded production Lighthouse baseline, a new production audit should be generated before publishing new score claims.
 
 ## Manual testing status
 
-Lighthouse includes several audits that require manual verification, including logical focus order, keyboard traps, control affordances, and visual order. Automated scores therefore do not establish complete accessibility conformance.
+Lighthouse and Playwright cannot establish complete accessibility conformance. Human review remains necessary for logical focus order, keyboard traps, screen-reader behavior, browser zoom, forced-colors presentation, and touch usability on physical devices.
 
 The human keyboard, screen-reader, zoom, reflow, theme, reduced-motion, and real-device review is tracked in [issue #14](https://github.com/Jpelotea/openready/issues/14) and described in [manual-accessibility-testing.md](manual-accessibility-testing.md).
 
-## Next production baseline
+## Running the next production baseline
 
-After the latest `main` branch is deployed:
-
-1. rerun the `Production deployment audit` workflow
-2. confirm the four stale-deployment findings are absent
-3. record the new category scores and key performance metrics
-4. compare local and production results without presenting them as interchangeable
-5. create focused issues for any remaining production-only problems
+1. Confirm the latest `main` branch is deployed to `https://getopenready.netlify.app/`.
+2. Run the `Production deployment audit` workflow.
+3. Review all three Lighthouse runs rather than relying on one result.
+4. Record category scores and important performance metrics.
+5. Compare local and production results without presenting them as interchangeable.
+6. Create focused issues for any remaining production-only findings.
 
 The local GitHub Actions baseline and production Netlify baseline must remain clearly distinguished in project documentation.
