@@ -71,6 +71,53 @@ function projectFileSlug(name) {
     .slice(0, 48);
 }
 
+function ensureAssessmentChrome() {
+  const checklistHeading = document.querySelector("#checklist-title");
+  const checklistIntro = checklistHeading?.nextElementSibling;
+  const form = document.querySelector("#checklistForm");
+  const progressCopy = document.querySelector(".progress-copy");
+  const checklistHeader = document.querySelector(".checklist-header");
+  const toolPanel = document.querySelector(".tool-panel");
+  const importField = document.querySelector("#importInput");
+
+  if (checklistHeading) checklistHeading.textContent = "Open-source project health assessment";
+  if (checklistIntro) {
+    checklistIntro.textContent =
+      "Assess core readiness and operational maturity. Statuses, evidence, and review details stay in this browser.";
+  }
+  if (form) form.setAttribute("aria-label", "Open-source project health assessment");
+  if (toolPanel?.querySelector("h3")) toolPanel.querySelector("h3").textContent = "Assessment tools";
+  if (importField) importField.setAttribute("aria-label", "Import OpenReady assessment JSON file");
+
+  if (progressCopy && !document.querySelector(".score-breakdown")) {
+    const breakdown = document.createElement("div");
+    breakdown.className = "score-breakdown";
+    breakdown.setAttribute("aria-label", "Assessment score breakdown");
+
+    const core = document.createElement("span");
+    const coreValue = createTextElement("strong", "0%");
+    coreValue.id = "coreScore";
+    core.append(createTextElement("small", "Core readiness"), coreValue);
+
+    const maturity = document.createElement("span");
+    const maturityValue = createTextElement("strong", "0%");
+    maturityValue.id = "maturityScore";
+    maturity.append(createTextElement("small", "Operational maturity"), maturityValue);
+
+    breakdown.append(core, maturity);
+    progressCopy.append(breakdown);
+  }
+
+  if (checklistHeader && !document.querySelector("#assessmentDisclaimer")) {
+    const disclaimer = document.createElement("p");
+    disclaimer.id = "assessmentDisclaimer";
+    disclaimer.className = "assessment-disclaimer";
+    disclaimer.textContent =
+      "OpenReady scores are planning indicators, not legal, security, accessibility, compliance, certification, or hosting-program decisions.";
+    checklistHeader.insertAdjacentElement("afterend", disclaimer);
+  }
+}
+
 function downloadChecklistWithProfile(event) {
   event.stopImmediatePropagation();
 
@@ -177,8 +224,13 @@ function resetChecklistWithProfile(event) {
 }
 
 function setupProjectProfile() {
-  loadProjectProfile();
+  ensureAssessmentChrome();
 
+  if (checklistItems.length > 0 && !document.querySelector("[data-assessment-status]")) {
+    renderChecklist(checklistItems);
+  }
+
+  loadProjectProfile();
   PROFILE_FORM?.addEventListener("submit", (event) => event.preventDefault());
 
   Object.values(PROFILE_FIELDS).forEach((field) => {
@@ -191,4 +243,20 @@ function setupProjectProfile() {
   resetButton.addEventListener("click", resetChecklistWithProfile, { capture: true });
 }
 
-setupProjectProfile();
+function loadAssessmentEngine() {
+  if (typeof normalizeImportedAssessment === "function") {
+    setupProjectProfile();
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.src = "assessment.js";
+  script.async = true;
+  script.addEventListener("load", setupProjectProfile);
+  script.addEventListener("error", () => {
+    setStatus("The assessment engine could not be loaded. Reload the page and try again.", true);
+  });
+  document.head.append(script);
+}
+
+loadAssessmentEngine();
