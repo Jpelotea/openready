@@ -1,4 +1,5 @@
 const PROFILE_STORAGE_KEY = "openready-project-profile-v1";
+const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
 
 const PROFILE_FORM = document.querySelector("#projectProfileForm");
 const PROFILE_FIELDS = {
@@ -70,11 +71,67 @@ function projectFileSlug(name) {
     .slice(0, 48);
 }
 
+function ensureAssessmentStyles() {
+  if (document.querySelector("link[data-assessment-styles]")) return;
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "assessment.css";
+  link.dataset.assessmentStyles = "true";
+  document.head.append(link);
+}
+
+function ensureAssessmentChrome() {
+  const checklistHeading = document.querySelector("#checklist-title");
+  const checklistIntro = checklistHeading?.nextElementSibling;
+  const form = document.querySelector("#checklistForm");
+  const progressCopy = document.querySelector(".progress-copy");
+  const checklistHeader = document.querySelector(".checklist-header");
+  const toolPanel = document.querySelector(".tool-panel");
+  const importField = document.querySelector("#importInput");
+
+  if (checklistHeading) checklistHeading.textContent = "Open-source project health assessment";
+  if (checklistIntro) {
+    checklistIntro.textContent =
+      "Assess core readiness and operational maturity. Statuses, evidence, and review details stay in this browser.";
+  }
+  if (form) form.setAttribute("aria-label", "Open-source project health assessment");
+  if (toolPanel?.querySelector("h3")) toolPanel.querySelector("h3").textContent = "Assessment tools";
+  if (importField) importField.setAttribute("aria-label", "Import OpenReady assessment JSON file");
+
+  if (progressCopy && !document.querySelector(".score-breakdown")) {
+    const breakdown = document.createElement("div");
+    breakdown.className = "score-breakdown";
+    breakdown.setAttribute("aria-label", "Assessment score breakdown");
+
+    const core = document.createElement("span");
+    const coreValue = createTextElement("strong", "0%");
+    coreValue.id = "coreScore";
+    core.append(createTextElement("small", "Core readiness"), coreValue);
+
+    const maturity = document.createElement("span");
+    const maturityValue = createTextElement("strong", "0%");
+    maturityValue.id = "maturityScore";
+    maturity.append(createTextElement("small", "Operational maturity"), maturityValue);
+
+    breakdown.append(core, maturity);
+    progressCopy.append(breakdown);
+  }
+
+  if (checklistHeader && !document.querySelector("#assessmentDisclaimer")) {
+    const disclaimer = document.createElement("p");
+    disclaimer.id = "assessmentDisclaimer";
+    disclaimer.className = "assessment-disclaimer";
+    disclaimer.textContent =
+      "OpenReady scores are planning indicators, not legal, security, accessibility, compliance, certification, or hosting-program decisions.";
+    checklistHeader.insertAdjacentElement("afterend", disclaimer);
+  }
+}
+
 function downloadChecklistWithProfile(event) {
   event.stopImmediatePropagation();
 
   if (checklistItems.length === 0) {
-    setStatus("The checklist is still loading.", true);
+    setStatus("The assessment is still loading.", true);
     return;
   }
 
@@ -95,7 +152,26 @@ function downloadChecklistWithProfile(event) {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
-  setStatus("Checklist and project profile exported successfully.");
+  setStatus("Assessment and project profile exported successfully.");
+}
+
+function describeImportResult(report) {
+  const messages = [];
+
+  if (report.legacy) {
+    messages.push("Legacy checklist migrated to assessment schema v2.");
+  } else {
+    messages.push("Assessment imported successfully.");
+  }
+
+  if (report.preservedCount > 0) {
+    messages.push(
+      `${report.preservedCount} unsupported field${report.preservedCount === 1 ? " was" : "s were"} preserved for re-export.`
+    );
+  }
+
+  messages.push("Project profile restored.");
+  return messages.join(" ");
 }
 
 async function importChecklistWithProfile(event) {
@@ -104,24 +180,30 @@ async function importChecklistWithProfile(event) {
   if (!file) return;
 
   try {
+    if (file.size > MAX_IMPORT_BYTES) {
+      throw new Error("This file is larger than the 2 MB OpenReady import limit.");
+    }
+
     const text = await file.text();
+    if (text.length > MAX_IMPORT_BYTES) {
+      throw new Error("This file is larger than the 2 MB OpenReady import limit.");
+    }
+
     const payload = JSON.parse(text);
-    const state = normalizeImportedState(payload);
+    const { state, report } = normalizeImportedAssessment(payload);
     const project = normalizeProjectProfile(payload.project || payload.projectProfile);
 
-    localStorage.setItem(STORAGE_KEYS.checklist, JSON.stringify(state));
+    persistAssessmentState(state);
     localStorage.setItem(STORAGE_KEYS.notes, typeof payload.notes === "string" ? payload.notes : "");
     localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(project));
 
-    document.querySelectorAll("input[data-check]").forEach((input) => {
-      input.checked = Boolean(state[input.dataset.itemId]);
-    });
+    applyAssessmentState(state);
     notes.value = localStorage.getItem(STORAGE_KEYS.notes) || "";
     applyProjectProfile(project);
     updateProgress();
-    setStatus("Checklist and project profile imported successfully.");
+    setStatus(describeImportResult(report));
   } catch (error) {
-    const message = error instanceof Error ? error.message : "The checklist could not be imported.";
+    const message = error instanceof Error ? error.message : "The assessment could not be imported.";
     setStatus(message, true);
   } finally {
     importInput.value = "";
@@ -130,7 +212,9 @@ async function importChecklistWithProfile(event) {
 
 function resetChecklistWithProfile(event) {
   event.stopImmediatePropagation();
-  const confirmed = window.confirm("Reset your project profile, checklist progress, and notes?");
+  const confirmed = window.confirm(
+    "Reset your project profile, assessment statuses, evidence, review details, and notes?"
+  );
   if (!confirmed) return;
 
   try {
@@ -141,18 +225,21 @@ function resetChecklistWithProfile(event) {
     // Continue resetting the visible interface.
   }
 
-  document.querySelectorAll("input[data-check]").forEach((input) => {
-    input.checked = false;
-  });
+  resetAssessmentControls();
   notes.value = "";
   applyProjectProfile(emptyProjectProfile());
   updateProgress();
-  setStatus("Project profile and checklist progress were reset.");
+  setStatus("Project profile and assessment workspace were reset.");
 }
 
 function setupProjectProfile() {
-  loadProjectProfile();
+  ensureAssessmentChrome();
 
+  if (checklistItems.length > 0 && !document.querySelector("[data-assessment-status]")) {
+    renderChecklist(checklistItems);
+  }
+
+  loadProjectProfile();
   PROFILE_FORM?.addEventListener("submit", (event) => event.preventDefault());
 
   Object.values(PROFILE_FIELDS).forEach((field) => {
@@ -165,4 +252,22 @@ function setupProjectProfile() {
   resetButton.addEventListener("click", resetChecklistWithProfile, { capture: true });
 }
 
-setupProjectProfile();
+function loadAssessmentEngine() {
+  ensureAssessmentStyles();
+
+  if (typeof normalizeImportedAssessment === "function") {
+    setupProjectProfile();
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.src = "assessment.js";
+  script.async = true;
+  script.addEventListener("load", setupProjectProfile);
+  script.addEventListener("error", () => {
+    setStatus("The assessment engine could not be loaded. Reload the page and try again.", true);
+  });
+  document.head.append(script);
+}
+
+loadAssessmentEngine();
