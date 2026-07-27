@@ -24,11 +24,11 @@ OpenReady uses:
 - repeatable Lighthouse accessibility audits
 - documented manual testing for screen readers, zoom, forced colors, and physical devices
 
-Automated testing is documented in [docs/automated-browser-testing.md](docs/automated-browser-testing.md). Manual testing plans and evidence are documented in [docs/manual-accessibility-testing.md](docs/manual-accessibility-testing.md).
+Automated testing is documented in [docs/automated-browser-testing.md](docs/automated-browser-testing.md). The human protocol is documented in [docs/manual-accessibility-testing.md](docs/manual-accessibility-testing.md), and qualifying session evidence is tracked in [docs/manual-accessibility-results.md](docs/manual-accessibility-results.md).
 
 ## Current verification status
 
-Automated checks cover important keyboard, responsive-layout, reduced-motion, and accessible-name behavior. Human testing is still required for desktop screen readers, mobile screen readers, high zoom, forced colors, and a broader real-device matrix.
+Automated checks cover important keyboard, responsive-layout, reduced-motion, migration, import, and accessible-name behavior. No complete qualifying human v0.4.0 test session has yet been recorded. Desktop and mobile screen readers, high zoom, forced colors, keyboard judgment, and the broader real-device matrix remain pending.
 
 Open work is tracked in:
 
@@ -37,6 +37,8 @@ Open work is tracked in:
 - [Zoom, reflow, and high-contrast review](https://github.com/Jpelotea/openready/issues/19)
 - [Real-device testing matrix](https://github.com/Jpelotea/openready/issues/20)
 - [v0.4.0 manual accessibility verification](https://github.com/Jpelotea/openready/issues/32)
+
+These issues and the results register remain open or pending until genuine human evidence is recorded. Automated scores, emulation, screenshots, and code review are not substitutes.
 
 ## Supported environments
 
