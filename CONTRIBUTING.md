@@ -1,12 +1,13 @@
 # Contributing to OpenReady
 
-Thank you for considering a contribution. OpenReady is designed to be beginner-friendly, so documentation improvements, typo fixes, checklist suggestions, accessibility improvements, testing, issue triage, and focused code changes are all valuable.
+Thank you for considering a contribution. OpenReady is designed to be beginner-friendly, so documentation improvements, typo fixes, checklist suggestions, accessibility improvements, testing, issue triage, design feedback, community support, and focused code changes are all valuable.
 
 ## Ways to contribute
 
 You can help by:
 
 - improving checklist wording in `data/checklist.json`
+- improving guided content in `data/guidance-core.json`, `data/guidance-maturity.json`, or `data/materials.json`
 - adding beginner-friendly explanations and resource links
 - reviewing light and dark theme contrast
 - improving theme tokens in `data/site.json`
@@ -18,22 +19,46 @@ You can help by:
 - helping with issue triage, decision records, and community support
 - suggesting focused documentation pages
 - reporting confusing sections
-- helping measure Lighthouse and accessibility targets without treating scores as certification
+- helping measure project health, Lighthouse results, and accessibility evidence without treating numbers as certification or activity quotas
 
 ## Before contributing
 
 Please read:
 
 - [README.md](README.md)
+- [COMMUNITY.md](COMMUNITY.md)
 - [ACCESSIBILITY.md](ACCESSIBILITY.md)
 - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 - [GOVERNANCE.md](GOVERNANCE.md)
+- [METRICS.md](METRICS.md)
 - [SECURITY.md](SECURITY.md)
 - [SUPPORT.md](SUPPORT.md)
 - [getting-started.md](getting-started.md)
 - [roadmap.md](roadmap.md)
 
 Changes affecting security boundaries should also review [THREAT_MODEL.md](THREAT_MODEL.md) and [INCIDENT_RESPONSE.md](INCIDENT_RESPONSE.md).
+
+## First contribution pathway
+
+A first contribution can be documentation, testing, accessibility evidence, issue reproduction, design feedback, or code.
+
+1. Browse issues labeled [`good first issue`](https://github.com/Jpelotea/openready/labels/good%20first%20issue).
+2. Read the entire issue and its acceptance criteria.
+3. Comment before beginning substantial work so duplicated effort can be avoided.
+4. Keep the change limited to the selected issue.
+5. Run the listed verification steps.
+6. Open a pull request that explains what changed, why it helps, and how it was checked.
+7. Respond to review comments when practical.
+
+The label is reserved for small tasks with clear files, outcomes, and verification. It is not used for sensitive security work, broad redesigns, release administration, governance disputes, or specialist accessibility sessions.
+
+See [COMMUNITY.md](COMMUNITY.md) for the complete participation pathway and recognition process.
+
+## `help wanted` tasks
+
+Issues labeled [`help wanted`](https://github.com/Jpelotea/openready/labels/help%20wanted) are scoped tasks where community assistance would be useful. They may require specific experience, assistive technology, physical hardware, or deeper project knowledge.
+
+The label does not promise immediate maintainer availability, assignment, acceptance, or a release date. Review the issue's evidence requirements before volunteering.
 
 ## Roles and participation
 
@@ -42,6 +67,12 @@ OpenReady recognizes users, contributors, regular contributors, maintainers, sec
 Contribution is broader than code. Useful documentation, accessibility evidence, security review, issue triage, design feedback, support, and community work all count.
 
 A contribution does not automatically grant repository access, a maintainer role, or a guarantee that the work will be merged. Role progression and permission criteria are documented in [GOVERNANCE.md](GOVERNANCE.md).
+
+## Contribution recognition
+
+Release notes may recognize documentation, accessibility, testing, issue-reporting, design, code, and community contributions by GitHub username.
+
+Recognition must be accurate, must not rank people by volume, and must not imply employment, payment, endorsement, or a maintainer role. Contributors may ask not to be named publicly. See [COMMUNITY.md](COMMUNITY.md).
 
 ## Run the project locally
 
@@ -79,7 +110,7 @@ Propose significant changes publicly before implementation when practical. Examp
 
 - breaking import or export changes
 - new scoring or checklist models
-- new storage, privacy, backend, account, or external-service boundaries
+- new storage, privacy, backend, account, analytics, or external-service boundaries
 - changes to the license, governance, Code of Conduct, security policy, or non-commercial status
 - removal or alteration of the exact linked Netlify attribution
 - major changes to project purpose or maintainer permissions
@@ -96,15 +127,17 @@ A conflicted reviewer should avoid being the sole decision-maker when practical.
 
 ## Editing JSON content
 
-When editing `data/checklist.json` or `data/site.json`:
+When editing files under `data/`:
 
 - keep the JSON syntax valid
 - do not add comments inside JSON files
 - keep checklist item IDs stable unless a migration is planned
+- keep guidance IDs aligned with checklist IDs
+- ensure referenced starter IDs exist in `data/materials.json`
 - use complete HTTP or HTTPS URLs for external resources
 - keep text concise and beginner-friendly
 - test both light and dark themes after changing color tokens
-- verify that imported and exported checklist files still work
+- verify that imported and exported assessment files still work when relevant
 - avoid adding funding, donation, sponsorship, commercial-service, advertising, affiliate, pricing, or paid-access links
 
 ## Accessibility review
@@ -138,7 +171,7 @@ For changes affecting imports, exports, storage, rendering, workflows, external 
 - update [THREAT_MODEL.md](THREAT_MODEL.md) when a trust boundary changes
 - add regression coverage for a corrected vulnerability when feasible
 
-Do not claim that validation, tests, audit scores, or a checklist result guarantees security, accessibility, legal compliance, or hosting-program eligibility.
+Do not claim that validation, tests, audit scores, metrics, or an assessment result guarantees security, accessibility, legal compliance, or hosting-program eligibility.
 
 ## Validate changes
 
@@ -148,9 +181,15 @@ Run the project data validator before committing:
 python scripts/validate_data.py
 ```
 
-The validator checks required fields, duplicate checklist IDs, project links, documentation cards, theme tokens, and roadmap entries.
+When guidance or starter materials change, also run:
 
-GitHub Actions runs the same validation automatically when relevant files change in a push or pull request. A failed validation check should be corrected before merging.
+```bash
+python scripts/validate_guidance.py
+```
+
+The validators check required fields, duplicate checklist IDs, project links, documentation cards, theme tokens, roadmap entries, guidance coverage, starter references, notices, and prohibited commercial assessment content.
+
+GitHub Actions runs the relevant validation automatically when matching files change in a push or pull request. A failed validation check should be corrected before merging.
 
 ## Pull request checklist
 
@@ -158,8 +197,8 @@ Before submitting a pull request, please check:
 
 - The change supports the free, non-commercial open-source purpose of the project.
 - The site works through a local static server in a modern browser.
-- The checklist loads from `data/checklist.json`.
-- `python scripts/validate_data.py` completes successfully when relevant.
+- The assessment and guided content load from the intended JSON files.
+- Relevant validation scripts complete successfully.
 - Light and dark modes both remain readable.
 - Keyboard navigation and visible focus states still work.
 - Form labels, instructions, errors, and status messages remain understandable.
@@ -169,15 +208,15 @@ Before submitting a pull request, please check:
 - Workflow permissions remain no broader than necessary.
 - Significant decisions have a focused public proposal and recorded rationale when applicable.
 - Relevant conflicts of interest were disclosed and managed.
-- Confidential conduct, security, and personal information was kept out of public issues, pull requests, commits, and workflow logs.
+- Confidential conduct, security, accessibility, and personal information was kept out of public issues, pull requests, commits, metrics snapshots, and workflow logs.
 - The exact linked Netlify attribution remains visible in the footer.
-- Documentation, accessibility, security, support, governance, roadmap, and community links still work.
-- No funding, donation, sponsorship, paid support, consulting, hosting, advertising, affiliate, pricing, subscription, premium-feature, or paid-access capability is introduced.
+- Documentation, accessibility, security, support, governance, metrics, roadmap, and community links still work.
+- No analytics, tracking, funding, donation, sponsorship, paid support, consulting, hosting, advertising, affiliate, pricing, subscription, premium-feature, or paid-access capability is introduced.
 - The change follows the Code of Conduct.
 
 ## Review and response expectations
 
-The project is maintained on a best-effort basis. Opening a pull request does not guarantee acceptance, repository access, a project role, or a release date.
+The project is maintained on a best-effort basis. Opening a pull request does not guarantee acceptance, repository access, a project role, recognition in a particular release, or a release date.
 
 Review may result in a request to:
 
@@ -193,4 +232,4 @@ See [SUPPORT.md](SUPPORT.md) for response targets, maintainer boundaries, and tr
 
 ## Beginner note
 
-You do not need to be an expert developer to contribute. Small, focused improvements are welcome, including documentation corrections, accessibility observations, test evidence, clearer issue reports, and constructive community support.
+You do not need to be an expert developer to contribute. Small, focused improvements are welcome, including documentation corrections, accessibility observations, test evidence, clearer issue reports, starter-material reviews, and constructive community support.
