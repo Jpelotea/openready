@@ -5,11 +5,13 @@ on:
     paths:
       - "data/**"
       - "scripts/validate_data.py"
+      - "scripts/validate_guidance.py"
       - ".github/workflows/validate-data.yml"
   pull_request:
     paths:
       - "data/**"
       - "scripts/validate_data.py"
+      - "scripts/validate_guidance.py"
       - ".github/workflows/validate-data.yml"
   workflow_dispatch:
 
@@ -31,4 +33,6 @@ jobs:
           python-version: "3.x"
 
       - name: Validate OpenReady data
-        run: python scripts/validate_data.py
+        run: |
+          python scripts/validate_data.py
+          python scripts/validate_guidance.py

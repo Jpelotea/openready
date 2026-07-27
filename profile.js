@@ -232,6 +232,18 @@ function resetChecklistWithProfile(event) {
   setStatus("Project profile and assessment workspace were reset.");
 }
 
+function loadGuidanceLayer() {
+  if (document.querySelector("script[data-guidance-engine]")) return;
+  const script = document.createElement("script");
+  script.src = "guidance.js";
+  script.async = true;
+  script.dataset.guidanceEngine = "true";
+  script.addEventListener("error", () => {
+    setStatus("The guided project materials could not be loaded. Reload the page and try again.", true);
+  });
+  document.head.append(script);
+}
+
 function setupProjectProfile() {
   ensureAssessmentChrome();
 
@@ -240,6 +252,7 @@ function setupProjectProfile() {
   }
 
   loadProjectProfile();
+  loadGuidanceLayer();
   PROFILE_FORM?.addEventListener("submit", (event) => event.preventDefault());
 
   Object.values(PROFILE_FIELDS).forEach((field) => {

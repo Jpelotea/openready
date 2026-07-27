@@ -24,6 +24,12 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Unsupported-import preservation for unknown top-level fields, item fields, item IDs, and future status values.
 - A 2 MB import-size limit for assessment JSON files.
 - Detailed schema, scoring, storage, migration, export, reset, and print documentation in `docs/assessment-schema-v2.md`.
+- Plain-language improvement guidance for every core-readiness and operational-maturity assessment item.
+- Minimum and stronger implementations, common mistakes, example evidence, and further resources for all 22 assessment items.
+- Ten editable Markdown starters covering README planning, accessibility, security, threat modeling, incident response, governance, support, conduct enforcement, privacy-respecting metrics, and license review.
+- Visible legal, security, and accessibility limitation notices above the assessment workspace.
+- Dedicated guidance-content validation through `scripts/validate_guidance.py`.
+- Guided-material operation, privacy, validation, verification, and maintenance documentation in `docs/guided-project-materials.md`.
 
 ### Changed
 
@@ -38,6 +44,9 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Kept a legacy `completedItems` projection in schema-v2 exports so older OpenReady versions can recover completed known item IDs.
 - Updated project-profile import, export, reset, and status messages for the assessment model.
 - Expanded JSON validation for schema version, levels, statuses, item levels, stable IDs, and out-of-scope commercial assessment concepts.
+- Added an expandable **How to improve this item** section to each assessment card without changing scoring, storage, or import compatibility.
+- Added copy, Markdown download, and restore actions for editable starter materials.
+- Expanded data, browser-accessibility, and Lighthouse workflow triggers to cover guided-content files and interface behavior.
 
 ### Accessibility
 
@@ -50,6 +59,9 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Added accessible core, maturity, and overall score labels.
 - Added responsive single-column assessment layouts for narrow screens.
 - Expanded assessment details automatically during print preparation and restored their previous state afterward.
+- Implemented guided content with native `details` and `summary` controls, labeled editable textareas, and keyboard-reachable material actions.
+- Kept repeated starter materials associated with unique control IDs and labels.
+- Added narrow-screen guidance reflow, stacked mobile actions, and print expansion with state restoration.
 
 ### Security
 
@@ -59,6 +71,8 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Clarified that OpenReady is not a security certification or managed incident-response service.
 - Added bounded import-size handling and safe normalization of unsupported statuses.
 - Preserved unknown imported values rather than silently discarding them.
+- Kept editable starter drafts outside assessment storage, scoring, and JSON exports.
+- Warned users not to place passwords, tokens, confidential vulnerability reports, private conduct reports, or unnecessary personal information in starter text.
 
 ### Governance and community
 
@@ -71,10 +85,14 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Added proportionate conduct enforcement from informal correction through permanent removal and platform escalation.
 - Added anti-retaliation and one-time reconsideration protections while distinguishing unsubstantiated reports from knowingly false reports.
 - Kept funding, donations, sponsorships, monetization, paid support, pricing, and other commercial concepts outside the assessment model and validator-approved item scope.
+- Kept funding, donations, sponsorships, pricing, paid support, consulting, hosting services, advertising, affiliates, and monetization outside guided materials.
+- Required starter text to name only real roles and contacts that have agreed to serve.
 
 ### Verification
 
 - Expanded Playwright coverage for four-state persistence, evidence fields, review metadata, legacy migration, schema-v2 imports and exports, unsupported-field preservation, partial scoring, not-applicable handling, project-profile integration, reset, print preparation, reduced motion, responsive layouts, and horizontal overflow.
+- Added guidance validation for complete checklist coverage, required notices, explanation structure, valid resource links, starter references, starter filenames, and prohibited commercial material IDs.
+- Added browser checks for all 22 guidance sections, starter editing and Markdown download, restoration, unique control IDs, keyboard access, print preparation, and 320-pixel reflow.
 
 ## [0.3.0] - 2026-07-27
 
