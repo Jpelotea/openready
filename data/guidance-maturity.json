@@ -1,0 +1,364 @@
+{
+  "schemaVersion": 1,
+  "items": {
+    "accessibility-policy": {
+      "whyItMatters": "An accessibility statement tells users what the project is trying to support, what remains limited, and how to report barriers.",
+      "minimum": [
+        "State an accessibility goal.",
+        "Describe known limitations honestly.",
+        "Provide an accessible reporting route."
+      ],
+      "stronger": [
+        "List tested browsers, devices, and assistive technologies.",
+        "Publish automated and manual test status.",
+        "Explain prioritization, response expectations, and available workarounds."
+      ],
+      "commonMistakes": [
+        "Claiming full WCAG conformance without evidence.",
+        "Listing only automated test results.",
+        "Making the reporting process itself inaccessible."
+      ],
+      "exampleEvidence": [
+        "ACCESSIBILITY.md linked from the README.",
+        "Known limitations and manual-testing status.",
+        "An accessibility issue form that avoids sensitive information."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Accessibility Best Practices",
+          "url": "https://opensource.guide/accessibility-best-practices-for-your-project/"
+        }
+      ],
+      "starterId": "accessibility-statement"
+    },
+    "accessibility-verification": {
+      "whyItMatters": "Automated checks catch repeatable problems, but human testing is needed to evaluate real keyboard, screen-reader, zoom, contrast, motion, and device use.",
+      "minimum": [
+        "Run automated accessibility checks for relevant interface changes.",
+        "Test keyboard navigation and visible focus.",
+        "Record known manual-testing gaps."
+      ],
+      "stronger": [
+        "Test desktop and mobile screen readers.",
+        "Verify zoom, reflow, forced colors, reduced motion, touch, and physical devices.",
+        "Publish findings and create follow-up issues."
+      ],
+      "commonMistakes": [
+        "Treating a perfect automated score as proof of accessibility.",
+        "Testing only one browser or viewport.",
+        "Closing accessibility work without documenting failures."
+      ],
+      "exampleEvidence": [
+        "Automated browser accessibility workflow results.",
+        "A completed manual accessibility matrix.",
+        "Issues linked to screen-reader, reflow, or device findings."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Accessibility Best Practices",
+          "url": "https://opensource.guide/accessibility-best-practices-for-your-project/"
+        }
+      ]
+    },
+    "conduct-enforcement": {
+      "whyItMatters": "A Code of Conduct is credible only when reports can be handled privately, consistently, and without conflicts of interest.",
+      "minimum": [
+        "Define who receives reports and who may access them.",
+        "Describe proportionate enforcement options.",
+        "Protect reporters and participants from retaliation."
+      ],
+      "stronger": [
+        "Provide conflict-safe handling for reports involving a maintainer.",
+        "Set acknowledgement, evidence, outcome, and reconsideration expectations.",
+        "Document confidentiality limits and platform escalation."
+      ],
+      "commonMistakes": [
+        "Publishing rules without deciding who enforces them.",
+        "Sharing private report details more widely than necessary.",
+        "Treating an unproven report as knowingly false."
+      ],
+      "exampleEvidence": [
+        "A conduct enforcement section with an escalation ladder.",
+        "Conflict and recusal procedures.",
+        "A documented private reporting route and anti-retaliation statement."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Code of Conduct",
+          "url": "https://opensource.guide/code-of-conduct/"
+        }
+      ],
+      "starterId": "conduct-enforcement"
+    },
+    "private-vulnerability-reporting": {
+      "whyItMatters": "Private vulnerability reporting reduces the chance that exploitable details are exposed before maintainers can assess and address them.",
+      "minimum": [
+        "Provide a verified private route.",
+        "Explain what information helps triage.",
+        "Ask reporters not to publish exploit details prematurely."
+      ],
+      "stronger": [
+        "Enable platform-native private vulnerability reporting.",
+        "Document acknowledgement and coordinated-disclosure expectations.",
+        "Separate security reports from ordinary support requests."
+      ],
+      "commonMistakes": [
+        "Publishing a contact address that is not monitored.",
+        "Requesting passwords, tokens, or unnecessary personal information.",
+        "Guaranteeing rewards or response times the project cannot provide."
+      ],
+      "exampleEvidence": [
+        "A monitored security email or private advisory form.",
+        "Acknowledgement and disclosure guidance.",
+        "A tested path from report intake to incident response."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Security Best Practices",
+          "url": "https://opensource.guide/security-best-practices-for-your-project/"
+        }
+      ]
+    },
+    "threat-model": {
+      "whyItMatters": "A lightweight threat model helps maintainers identify important assets, trust boundaries, misuse cases, and residual risks before incidents occur.",
+      "minimum": [
+        "List important assets and trust boundaries.",
+        "Identify realistic misuse cases.",
+        "Record current mitigations and remaining risk."
+      ],
+      "stronger": [
+        "Assign owners and review triggers.",
+        "Cover repository, dependency, workflow, release, and deployment risks.",
+        "Revisit the model after architecture or permission changes."
+      ],
+      "commonMistakes": [
+        "Writing a generic list unrelated to the actual architecture.",
+        "Treating the model as proof that risk is eliminated.",
+        "Ignoring non-server risks such as imports, browser storage, or CI permissions."
+      ],
+      "exampleEvidence": [
+        "THREAT_MODEL.md with assets, threats, mitigations, and residual risk.",
+        "A diagram or table of trust boundaries.",
+        "Issues created for high-priority mitigations."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Security Best Practices",
+          "url": "https://opensource.guide/security-best-practices-for-your-project/"
+        }
+      ],
+      "starterId": "threat-model-outline"
+    },
+    "incident-response": {
+      "whyItMatters": "An incident-response plan reduces confusion when maintainers need to assess, contain, fix, verify, and communicate a security problem.",
+      "minimum": [
+        "Define report intake and triage.",
+        "Identify containment, remediation, and verification steps.",
+        "Explain how users will be informed when necessary."
+      ],
+      "stronger": [
+        "Assign decision authority and backups.",
+        "Keep a private incident log and public disclosure criteria.",
+        "Record lessons learned and update tests or the threat model."
+      ],
+      "commonMistakes": [
+        "Improvising roles during an active incident.",
+        "Publishing uncertain details too early.",
+        "Closing an incident without follow-up actions."
+      ],
+      "exampleEvidence": [
+        "INCIDENT_RESPONSE.md with ordered steps.",
+        "A private incident checklist.",
+        "A post-incident review linked to remediation issues."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Security Best Practices",
+          "url": "https://opensource.guide/security-best-practices-for-your-project/"
+        }
+      ],
+      "starterId": "incident-response-checklist"
+    },
+    "contributor-onboarding": {
+      "whyItMatters": "Clear contributor pathways help people move from reporting a small issue to making repeat contributions and taking trusted responsibility.",
+      "minimum": [
+        "Explain first-contribution steps.",
+        "Offer small, well-scoped tasks.",
+        "Describe review and communication expectations."
+      ],
+      "stronger": [
+        "Recognize documentation, testing, accessibility, design, triage, and community work.",
+        "Use contributor labels and release recognition.",
+        "Explain how regular contributors may gain permissions."
+      ],
+      "commonMistakes": [
+        "Equating contribution only with code.",
+        "Leaving beginner issues too broad.",
+        "Promoting contributors without discussing responsibilities and security."
+      ],
+      "exampleEvidence": [
+        "A first-contribution section.",
+        "Good-first-issue and help-wanted labels.",
+        "Release notes recognizing different contribution types."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Building Community",
+          "url": "https://opensource.guide/building-community/"
+        }
+      ]
+    },
+    "support-boundaries": {
+      "whyItMatters": "Support boundaries protect users from unclear expectations and help maintainers avoid unsustainable commitments.",
+      "minimum": [
+        "List supported request types and channels.",
+        "State that work is best effort and issues are not promises.",
+        "Explain out-of-scope requests."
+      ],
+      "stronger": [
+        "Set realistic acknowledgement targets.",
+        "Distinguish normal support from security, accessibility, and conduct reports.",
+        "Document pauses, stale triage, and maintainer availability."
+      ],
+      "commonMistakes": [
+        "Promising immediate help from a volunteer project.",
+        "Mixing confidential reports with public support.",
+        "Leaving users uncertain whether a request is accepted, deferred, or declined."
+      ],
+      "exampleEvidence": [
+        "SUPPORT.md linked from the README.",
+        "Issue triage outcomes and response targets.",
+        "A temporary-maintainer-unavailability notice process."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Maintaining Balance",
+          "url": "https://opensource.guide/maintaining-balance-for-open-source-maintainers/"
+        }
+      ],
+      "starterId": "support-boundaries"
+    },
+    "succession": {
+      "whyItMatters": "Continuity planning protects users, releases, and community spaces when a maintainer pauses, becomes unavailable, or steps down.",
+      "minimum": [
+        "Document temporary absence and archival options.",
+        "Identify which services and permissions must remain recoverable.",
+        "Explain how stewardship may transfer."
+      ],
+      "stronger": [
+        "Maintain least-privilege backup access.",
+        "Define successor selection and consent.",
+        "Review continuity after service, account, or maintainer changes."
+      ],
+      "commonMistakes": [
+        "Sharing credentials instead of granting named access.",
+        "Assuming a successor without their agreement.",
+        "Leaving release and deployment ownership undocumented."
+      ],
+      "exampleEvidence": [
+        "Governance sections for absence, succession, and transfer.",
+        "Documented service ownership.",
+        "A tested recovery route for repository and deployment access."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Leadership and Governance",
+          "url": "https://opensource.guide/leadership-and-governance/"
+        }
+      ]
+    },
+    "project-metrics": {
+      "whyItMatters": "A small set of goal-linked metrics can reveal project load, responsiveness, participation, and release progress without turning popularity into a health score.",
+      "minimum": [
+        "Choose a few metrics connected to project goals.",
+        "Record how often they are reviewed.",
+        "Avoid collecting private user assessment data."
+      ],
+      "stronger": [
+        "Track first-time and returning contributors, response times, backlog, releases, accessibility work, and roadmap outcomes.",
+        "Explain limitations and context.",
+        "Use aggregate repository data instead of invasive website tracking."
+      ],
+      "commonMistakes": [
+        "Treating stars or page views as proof of health.",
+        "Measuring activity without a decision it supports.",
+        "Pressuring maintainers to maximize output."
+      ],
+      "exampleEvidence": [
+        "METRICS.md with definitions and review cadence.",
+        "A monthly or per-release snapshot.",
+        "Documented privacy limits and interpretation notes."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Metrics",
+          "url": "https://opensource.guide/metrics/"
+        }
+      ],
+      "starterId": "metrics-plan"
+    },
+    "dependency-asset-licensing": {
+      "whyItMatters": "A project may use code, actions, documentation, images, fonts, or other assets whose licenses and attribution requirements differ from the project license.",
+      "minimum": [
+        "Inventory third-party dependencies and assets.",
+        "Check license compatibility and attribution requirements.",
+        "Remove or replace material with unclear permission."
+      ],
+      "stronger": [
+        "Automate dependency-license checks where appropriate.",
+        "Maintain third-party notices.",
+        "Review licensing during pull requests and releases."
+      ],
+      "commonMistakes": [
+        "Assuming the project license covers third-party material.",
+        "Copying screenshots, logos, or snippets without permission.",
+        "Adding a contributor agreement without a real need."
+      ],
+      "exampleEvidence": [
+        "A dependency and asset inventory.",
+        "THIRD_PARTY_NOTICES.md when required.",
+        "Pull-request checks for new third-party material."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Legal",
+          "url": "https://opensource.guide/legal/"
+        }
+      ],
+      "starterId": "license-review"
+    },
+    "protected-repository-access": {
+      "whyItMatters": "Least-privilege access and protected release paths reduce accidental or malicious changes to source code, workflows, tags, and deployments.",
+      "minimum": [
+        "Use multi-factor authentication for privileged accounts.",
+        "Limit write access to people who need it.",
+        "Review default-branch and release settings."
+      ],
+      "stronger": [
+        "Require appropriate checks or review for important changes.",
+        "Pin or review trusted automation actions.",
+        "Document permission grants, reviews, and removal."
+      ],
+      "commonMistakes": [
+        "Sharing account credentials.",
+        "Granting administrator access for routine contributions.",
+        "Assuming a public repository does not need access controls."
+      ],
+      "exampleEvidence": [
+        "Protected default-branch settings.",
+        "A documented permission matrix.",
+        "Regular review of repository, CI, and deployment access."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Security Best Practices",
+          "url": "https://opensource.guide/security-best-practices-for-your-project/"
+        },
+        {
+          "label": "Open Source Guides: Leadership and Governance",
+          "url": "https://opensource.guide/leadership-and-governance/"
+        }
+      ]
+    }
+  }
+}
