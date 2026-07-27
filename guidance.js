@@ -89,18 +89,21 @@
     reportStatus(`${material.title} downloaded as ${material.filename}.`);
   }
 
-  function createMaterialStarter(material, itemId) {
+  function createMaterialStarter(material, itemId, itemTitle) {
     const section = document.createElement("section");
     section.className = "material-starter";
     section.dataset.materialId = material.id;
 
     const heading = textElement("h5", material.title);
+    heading.id = `material-heading-${material.id}-${itemId}`;
+    section.setAttribute("aria-labelledby", heading.id);
+
     const description = textElement("p", material.description, "material-description");
     const disclaimer = textElement("p", material.disclaimer, "material-disclaimer");
     const label = document.createElement("label");
     const textareaId = `material-${material.id}-${itemId}`;
     label.htmlFor = textareaId;
-    label.append(textElement("span", `Editable ${material.title}`));
+    label.append(textElement("span", `Editable ${material.title} for ${itemTitle}`));
 
     const textarea = document.createElement("textarea");
     textarea.id = textareaId;
@@ -120,14 +123,17 @@
 
     const copyButton = textElement("button", "Copy starter");
     copyButton.type = "button";
+    copyButton.setAttribute("aria-label", `Copy ${material.title} for ${itemTitle}`);
     copyButton.addEventListener("click", () => copyStarter(textarea, material));
 
     const downloadButton = textElement("button", "Download Markdown", "secondary-button");
     downloadButton.type = "button";
+    downloadButton.setAttribute("aria-label", `Download ${material.title} for ${itemTitle} as Markdown`);
     downloadButton.addEventListener("click", () => downloadStarter(textarea, material));
 
     const resetButton = textElement("button", "Restore starter", "text-button");
     resetButton.type = "button";
+    resetButton.setAttribute("aria-label", `Restore ${material.title} for ${itemTitle}`);
     resetButton.addEventListener("click", () => {
       textarea.value = material.content;
       reportStatus(`${material.title} restored to its original starting text.`);
@@ -156,15 +162,41 @@
     return section;
   }
 
+  function enhanceAssessmentAccessibleNames(card) {
+    const itemTitle = card?.querySelector(".check-title")?.textContent?.trim() || "this assessment item";
+    const status = card?.querySelector("[data-assessment-status]");
+    const evidenceDetails = card?.querySelector(".assessment-evidence");
+    const evidenceSummary = evidenceDetails?.querySelector("summary");
+    const fieldLabels = {
+      evidenceUrl: "Evidence URL",
+      note: "Item note",
+      reviewedAt: "Last reviewed",
+      responsible: "Responsible person or team"
+    };
+
+    status?.setAttribute("aria-label", `Assessment status for ${itemTitle}`);
+    evidenceSummary?.setAttribute("aria-label", `Evidence and review details for ${itemTitle}`);
+
+    Object.entries(fieldLabels).forEach(([field, label]) => {
+      card?.querySelector(`[data-assessment-field="${field}"]`)
+        ?.setAttribute("aria-label", `${label} for ${itemTitle}`);
+    });
+
+    return itemTitle;
+  }
+
   function attachItemGuidance(card, itemGuidance, materialsById) {
     if (!card || card.dataset.guidanceReady === "true") return;
     const itemId = card.dataset.itemId;
+    const itemTitle = enhanceAssessmentAccessibleNames(card);
     if (!itemGuidance) return;
 
     const details = document.createElement("details");
     details.className = "item-guidance";
     details.dataset.guidanceItem = itemId;
-    details.append(textElement("summary", "How to improve this item"));
+    const summary = textElement("summary", "How to improve this item");
+    summary.setAttribute("aria-label", `How to improve ${itemTitle}`);
+    details.append(summary);
 
     const body = document.createElement("div");
     body.className = "guidance-body";
@@ -181,7 +213,7 @@
     body.append(grid, createResourceBlock(itemGuidance.resources));
 
     const starter = materialsById.get(itemGuidance.starterId);
-    if (starter) body.append(createMaterialStarter(starter, itemId));
+    if (starter) body.append(createMaterialStarter(starter, itemId, itemTitle));
 
     details.append(body);
     card.append(details);

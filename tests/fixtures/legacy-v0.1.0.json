@@ -1,0 +1,22 @@
+{
+  "project": "OpenReady checklist export",
+  "exportedAt": "2026-06-28T12:00:00.000Z",
+  "completed": [
+    {
+      "id": "license",
+      "title": "Repository includes a clear open-source license",
+      "complete": true
+    },
+    {
+      "id": "readme",
+      "title": "README explains the project clearly",
+      "complete": false
+    },
+    {
+      "id": "non-commercial",
+      "title": "Project is clearly non-commercial",
+      "complete": true
+    }
+  ],
+  "notes": "Representative export created by OpenReady v0.1.0."
+}

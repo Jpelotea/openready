@@ -1,0 +1,35 @@
+{
+  "format": "openready-checklist",
+  "formatVersion": 1,
+  "applicationVersion": "0.3.0",
+  "exportedAt": "2026-07-27T00:00:00.000Z",
+  "summary": {
+    "completed": 2,
+    "total": 10,
+    "percent": 20
+  },
+  "completedItems": [
+    {
+      "id": "license",
+      "title": "Repository includes a clear open-source license",
+      "complete": true
+    },
+    {
+      "id": "community-docs",
+      "title": "Project site supports the software community",
+      "complete": true
+    },
+    {
+      "id": "roadmap",
+      "title": "Roadmap shows planned improvements",
+      "complete": false
+    }
+  ],
+  "notes": "Representative export created by OpenReady v0.3.0.",
+  "project": {
+    "name": "OpenReady Historical Fixture",
+    "repository": "https://github.com/example/openready-historical-fixture",
+    "maintainer": "Example Maintainers",
+    "reviewDate": "2026-07-27"
+  }
+}

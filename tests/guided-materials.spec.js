@@ -54,13 +54,17 @@ test('README starter is editable, downloadable, restorable, and uses unique cont
   await textarea.fill(customText);
 
   const downloadPromise = page.waitForEvent('download');
-  await starter.getByRole('button', { name: 'Download Markdown' }).click();
+  await starter.getByRole('button', {
+    name: 'Download README planning worksheet for README explains the project clearly as Markdown',
+  }).click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toBe('README-plan.md');
   const downloadPath = await download.path();
   expect(fs.readFileSync(downloadPath, 'utf8')).toBe(customText);
 
-  await starter.getByRole('button', { name: 'Restore starter' }).click();
+  await starter.getByRole('button', {
+    name: 'Restore README planning worksheet for README explains the project clearly',
+  }).click();
   await expect(textarea).toHaveValue(/# \[Project name\]/);
   await expect(page.locator('#toolStatus')).toContainText('restored to its original starting text');
 
