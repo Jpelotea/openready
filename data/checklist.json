@@ -168,7 +168,7 @@
       "title": "Contributor pathways support first and repeat participation",
       "description": "Offer focused entry points, explain review expectations, recognize non-code work, and show how trusted responsibilities may grow.",
       "resourceLabel": "Review contributor pathways",
-      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/CONTRIBUTING.md"
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/COMMUNITY.md"
     },
     {
       "id": "support-boundaries",
@@ -194,8 +194,8 @@
       "category": "Operations",
       "title": "Project-health metrics are connected to goals and privacy",
       "description": "Define a small set of useful repository and community measurements without treating popularity as health or adding invasive tracking.",
-      "resourceLabel": "Follow the metrics work",
-      "resourceUrl": "https://github.com/Jpelotea/openready/issues/30"
+      "resourceLabel": "Review project metrics",
+      "resourceUrl": "https://github.com/Jpelotea/openready/blob/main/METRICS.md"
     },
     {
       "id": "dependency-asset-licensing",
