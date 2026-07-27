@@ -1,0 +1,320 @@
+{
+  "schemaVersion": 1,
+  "notices": [
+    {
+      "id": "legal",
+      "title": "General information, not legal advice",
+      "text": "OpenReady offers educational project guidance. License selection, compatibility, ownership, and third-party material may require qualified legal advice."
+    },
+    {
+      "id": "security",
+      "title": "Planning guidance, not a security assessment",
+      "text": "A policy, threat model, test, or high score does not prove that software is secure. Verify risks against the project's real architecture and operating environment."
+    },
+    {
+      "id": "accessibility",
+      "title": "Guidance, not accessibility certification",
+      "text": "Automated checks and templates do not establish WCAG conformance. Record actual human testing, known barriers, and supported environments honestly."
+    }
+  ],
+  "items": {
+    "license": {
+      "whyItMatters": "A clear license tells people what they may use, copy, modify, and distribute. A public repository without a license does not automatically grant those permissions.",
+      "minimum": [
+        "Place a recognized open-source license in the repository root.",
+        "Name the license in the README.",
+        "Confirm the copyright holder and year are accurate."
+      ],
+      "stronger": [
+        "Review whether code, documentation, screenshots, and other assets are covered.",
+        "Record required third-party notices and incompatible material.",
+        "Review contribution licensing before accepting substantial outside work."
+      ],
+      "commonMistakes": [
+        "Assuming a public repository is automatically open source.",
+        "Using custom restrictions that conflict with open-source use.",
+        "Copying images or code without checking their terms."
+      ],
+      "exampleEvidence": [
+        "A root-level LICENSE file.",
+        "A README license section linking to the license.",
+        "A third-party notices file when attribution is required."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Legal",
+          "url": "https://opensource.guide/legal/"
+        },
+        {
+          "label": "Open Source Initiative licenses",
+          "url": "https://opensource.org/licenses"
+        }
+      ],
+      "starterId": "license-review"
+    },
+    "code-of-conduct": {
+      "whyItMatters": "A Code of Conduct makes participation expectations visible and gives the community a shared standard for responding to harmful behavior.",
+      "minimum": [
+        "Publish behavior expectations in a top-level file.",
+        "Explain where the policy applies.",
+        "Provide a private reporting route and describe possible consequences."
+      ],
+      "stronger": [
+        "Add conflict-safe handling when the normal recipient is involved.",
+        "Set acknowledgement and confidentiality expectations.",
+        "Document anti-retaliation and reconsideration safeguards."
+      ],
+      "commonMistakes": [
+        "Publishing a policy without an enforcement process.",
+        "Using only a public issue for sensitive reports.",
+        "Naming an independent contact who has not agreed to serve."
+      ],
+      "exampleEvidence": [
+        "CODE_OF_CONDUCT.md linked from the README.",
+        "A private reporting address or platform form.",
+        "Documented enforcement levels and conflict handling."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Code of Conduct",
+          "url": "https://opensource.guide/code-of-conduct/"
+        }
+      ]
+    },
+    "readme": {
+      "whyItMatters": "The README is usually the first place a user or contributor decides whether the project is understandable, useful, and active.",
+      "minimum": [
+        "Explain what the software does and who it helps.",
+        "Provide basic use or installation instructions.",
+        "Link the license, contribution guide, security policy, and community channels."
+      ],
+      "stronger": [
+        "Add screenshots or examples that match the current release.",
+        "State project scope and non-goals.",
+        "Include release status, support expectations, and accessibility information."
+      ],
+      "commonMistakes": [
+        "Leading with internal history instead of the user problem.",
+        "Leaving setup steps incomplete or outdated.",
+        "Claiming features, scores, or compliance that have not been verified."
+      ],
+      "exampleEvidence": [
+        "A README with purpose, use, contribution, support, and license sections.",
+        "A current interface screenshot with useful alternative text.",
+        "Links to releases, roadmap, issues, and discussions."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Building Community",
+          "url": "https://opensource.guide/building-community/"
+        }
+      ],
+      "starterId": "readme-plan"
+    },
+    "contributing": {
+      "whyItMatters": "Clear contribution instructions reduce uncertainty and help people participate through code, documentation, testing, accessibility, design, and issue reporting.",
+      "minimum": [
+        "Explain how to report an issue and propose a change.",
+        "Provide local setup and verification steps.",
+        "Describe the expected pull-request scope and review process."
+      ],
+      "stronger": [
+        "Offer first-contribution pathways and suitable labels.",
+        "Recognize non-code work explicitly.",
+        "Explain role progression, conflicts of interest, and sensitive-report routes."
+      ],
+      "commonMistakes": [
+        "Assuming contributors already know the toolchain.",
+        "Requiring large changes for a first contribution.",
+        "Leaving response and review expectations undefined."
+      ],
+      "exampleEvidence": [
+        "CONTRIBUTING.md with setup and testing steps.",
+        "Good-first-issue and help-wanted examples.",
+        "A pull-request template with accessibility and security checks."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Building Community",
+          "url": "https://opensource.guide/building-community/"
+        }
+      ]
+    },
+    "changelog": {
+      "whyItMatters": "A changelog helps users and contributors understand notable behavior changes, compatibility risks, and release history.",
+      "minimum": [
+        "Keep an Unreleased section.",
+        "Record meaningful additions, changes, fixes, accessibility work, and security work.",
+        "Date released versions consistently."
+      ],
+      "stronger": [
+        "Link release entries to GitHub Releases or tags.",
+        "Separate current evidence from historical audit results.",
+        "Document migrations and compatibility expectations."
+      ],
+      "commonMistakes": [
+        "Listing every commit without explaining user impact.",
+        "Editing old release facts to match the current version.",
+        "Presenting planned work as already released."
+      ],
+      "exampleEvidence": [
+        "CHANGELOG.md with dated release sections.",
+        "Links to release notes and migration guidance.",
+        "Clear Unreleased entries for merged but unpublished work."
+      ],
+      "resources": [
+        {
+          "label": "OpenReady release history",
+          "url": "https://github.com/Jpelotea/openready/blob/main/RELEASES.md"
+        }
+      ]
+    },
+    "roadmap": {
+      "whyItMatters": "A public roadmap explains project direction while helping maintainers distinguish priorities from promises.",
+      "minimum": [
+        "List current and planned work.",
+        "Link planned work to issues where possible.",
+        "Mark shipped, deferred, and cancelled work honestly."
+      ],
+      "stronger": [
+        "Define release gates and acceptance criteria.",
+        "Invite focused community feedback on significant changes.",
+        "Keep the roadmap aligned with the current public application."
+      ],
+      "commonMistakes": [
+        "Using dates as guarantees without capacity.",
+        "Keeping completed work marked as planned.",
+        "Adding broad ideas without owners, scope, or verification."
+      ],
+      "exampleEvidence": [
+        "roadmap.md with current release goals.",
+        "A parent roadmap issue with child implementation issues.",
+        "Release gates covering tests, documentation, and deployment."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Leadership and Governance",
+          "url": "https://opensource.guide/leadership-and-governance/"
+        }
+      ]
+    },
+    "issues": {
+      "whyItMatters": "A welcoming issue tracker gives users a clear route to report problems, suggest focused improvements, and find contribution opportunities.",
+      "minimum": [
+        "Provide issue templates or clear reporting prompts.",
+        "Use descriptive labels and respectful triage.",
+        "Explain where sensitive security or conduct reports belong."
+      ],
+      "stronger": [
+        "Maintain good-first-issue and help-wanted work.",
+        "Acknowledge valid reports within a realistic window.",
+        "Explain closures, deferrals, duplicates, and out-of-scope decisions."
+      ],
+      "commonMistakes": [
+        "Sending sensitive reports to public issues.",
+        "Leaving stale issues without status context.",
+        "Treating every request as an implementation promise."
+      ],
+      "exampleEvidence": [
+        "Bug, accessibility, and feature issue forms.",
+        "Labels for documentation, accessibility, security, and beginner work.",
+        "Maintainer comments explaining triage decisions."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Building Community",
+          "url": "https://opensource.guide/building-community/"
+        }
+      ]
+    },
+    "security": {
+      "whyItMatters": "A security policy tells reporters how to share sensitive concerns without creating avoidable public harm.",
+      "minimum": [
+        "Identify supported versions.",
+        "Provide a private reporting channel.",
+        "Request reproduction, impact, and environment details without asking for secrets."
+      ],
+      "stronger": [
+        "Define acknowledgement, severity, remediation, and coordinated-disclosure expectations.",
+        "Link a threat model and incident-response process.",
+        "Explain project-specific in-scope and out-of-scope examples."
+      ],
+      "commonMistakes": [
+        "Using a public issue for exploit details.",
+        "Promising fixed response times that maintainers cannot meet.",
+        "Treating the presence of SECURITY.md as proof the software is secure."
+      ],
+      "exampleEvidence": [
+        "SECURITY.md with private reporting instructions.",
+        "GitHub private vulnerability reporting when enabled.",
+        "A documented severity and disclosure process."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Security Best Practices",
+          "url": "https://opensource.guide/security-best-practices-for-your-project/"
+        }
+      ],
+      "starterId": "security-policy-review"
+    },
+    "governance": {
+      "whyItMatters": "Governance makes authority, decisions, permissions, and continuity understandable to contributors and users.",
+      "minimum": [
+        "Name the current maintainers.",
+        "Explain how routine and significant decisions are made.",
+        "Describe maintainer responsibilities."
+      ],
+      "stronger": [
+        "Define contributor and maintainer role progression.",
+        "Document conflict handling, inactivity, temporary absence, and succession.",
+        "Explain project transfer, archival, and emergency authority."
+      ],
+      "commonMistakes": [
+        "Claiming community governance when one person makes every decision.",
+        "Granting repository access without criteria.",
+        "Ignoring what happens when the sole maintainer is unavailable."
+      ],
+      "exampleEvidence": [
+        "GOVERNANCE.md with roles and decision classes.",
+        "Public discussion for significant changes.",
+        "Least-privilege permission and succession criteria."
+      ],
+      "resources": [
+        {
+          "label": "Open Source Guides: Leadership and Governance",
+          "url": "https://opensource.guide/leadership-and-governance/"
+        }
+      ],
+      "starterId": "governance-roles"
+    },
+    "community-docs": {
+      "whyItMatters": "A project site should help people understand and participate in the software rather than function as unrelated promotional content.",
+      "minimum": [
+        "Link source code, license, releases, issues, and contribution guidance.",
+        "Keep site content directly related to the software and community.",
+        "Keep project status and version information accurate."
+      ],
+      "stronger": [
+        "Publish accessibility, security, governance, and support documentation.",
+        "Show current development activity and roadmap evidence.",
+        "Keep hosting attribution and project purpose visible."
+      ],
+      "commonMistakes": [
+        "Adding unrelated commercial or promotional sections.",
+        "Leaving the website behind the repository release.",
+        "Using community language without participation routes."
+      ],
+      "exampleEvidence": [
+        "A software-focused public site with repository links.",
+        "Release history and roadmap pages.",
+        "Visible community policies and contribution routes."
+      ],
+      "resources": [
+        {
+          "label": "OpenReady repository",
+          "url": "https://github.com/Jpelotea/openready"
+        }
+      ]
+    }
+  }
+}
