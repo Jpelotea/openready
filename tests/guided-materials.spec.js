@@ -46,7 +46,7 @@ test('README starter is editable, downloadable, restorable, and uses unique cont
 
   const starter = guidance.locator('[data-material-id="readme-plan"]');
   const textarea = starter.locator('[data-material-starter="readme-plan"]');
-  await expect(textarea).toContainText('# [Project name]');
+  await expect(textarea).toHaveValue(/# \[Project name\]/);
   await expect(starter.locator('.material-disclaimer')).toContainText('editable starting point');
   await expect(starter.locator('.material-privacy')).toContainText('not included in the assessment score');
 
@@ -61,7 +61,7 @@ test('README starter is editable, downloadable, restorable, and uses unique cont
   expect(fs.readFileSync(downloadPath, 'utf8')).toBe(customText);
 
   await starter.getByRole('button', { name: 'Restore starter' }).click();
-  await expect(textarea).toContainText('# [Project name]');
+  await expect(textarea).toHaveValue(/# \[Project name\]/);
   await expect(page.locator('#toolStatus')).toContainText('restored to its original starting text');
 
   const ids = await page.locator('[data-material-starter]').evaluateAll((controls) =>
