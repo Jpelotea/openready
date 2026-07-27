@@ -11,6 +11,8 @@
     "repository": "https://github.com/Jpelotea/openready",
     "issues": "https://github.com/Jpelotea/openready/issues",
     "discussions": "https://github.com/Jpelotea/openready/discussions",
+    "community": "https://github.com/Jpelotea/openready/blob/main/COMMUNITY.md",
+    "metrics": "https://github.com/Jpelotea/openready/blob/main/METRICS.md",
     "codeOfConduct": "https://github.com/Jpelotea/openready/blob/main/CODE_OF_CONDUCT.md",
     "license": "https://github.com/Jpelotea/openready/blob/main/LICENSE",
     "security": "https://github.com/Jpelotea/openready/blob/main/SECURITY.md",
@@ -23,22 +25,22 @@
   "principles": [
     {
       "title": "Private by default",
-      "description": "Project profiles, checklist progress, and notes stay in the browser unless the user exports them."
+      "description": "Project profiles, assessment progress, notes, and guided-material drafts stay in the browser unless the user intentionally exports, copies, downloads, or prints them."
     },
     {
       "title": "Built for beginners",
-      "description": "Plain-language guidance makes repository health easier to understand."
+      "description": "Plain-language guidance and focused contribution pathways make repository health easier to understand and improve."
     },
     {
       "title": "Community-first",
-      "description": "The project is designed for open collaboration, reuse, and improvement."
+      "description": "The project welcomes documentation, accessibility, testing, design, issue-reporting, code, and community contributions."
     }
   ],
   "features": [
     {
       "number": "01",
       "title": "Assess project health",
-      "description": "Review licensing, governance, security, documentation, and community readiness in one place."
+      "description": "Review licensing, governance, security, documentation, accessibility, and community readiness in one place."
     },
     {
       "number": "02",
@@ -47,8 +49,8 @@
     },
     {
       "number": "03",
-      "title": "Share useful reports",
-      "description": "Export profile and checklist progress as JSON, restore saved work later, or print a clean readiness summary."
+      "title": "Turn findings into action",
+      "description": "Use structured guidance and editable starters without transmitting project data or treating results as certification."
     }
   ],
   "documents": [
@@ -61,13 +63,25 @@
     {
       "label": "Participate",
       "title": "Contributing",
-      "description": "Report an issue, improve documentation, or propose a software change.",
+      "description": "Report an issue, improve documentation, add evidence, or propose a software change.",
       "url": "https://github.com/Jpelotea/openready/blob/main/CONTRIBUTING.md"
+    },
+    {
+      "label": "Join the community",
+      "title": "Community pathways",
+      "description": "Understand first contributions, project labels, contribution types, and recognition.",
+      "url": "https://github.com/Jpelotea/openready/blob/main/COMMUNITY.md"
+    },
+    {
+      "label": "Measure responsibly",
+      "title": "Project metrics",
+      "description": "Use reproducible aggregate measurements without website tracking or activity quotas.",
+      "url": "https://github.com/Jpelotea/openready/blob/main/METRICS.md"
     },
     {
       "label": "Decision-making",
       "title": "Governance",
-      "description": "Understand maintainer responsibilities, review criteria, and how project decisions are made.",
+      "description": "Understand maintainer responsibilities, review criteria, roles, and project decisions.",
       "url": "https://github.com/Jpelotea/openready/blob/main/GOVERNANCE.md"
     },
     {
@@ -112,7 +126,7 @@
       "state": "planned",
       "label": "Planned",
       "version": "v0.4.0",
-      "description": "Project-material helpers, deeper accessibility guidance, and optional scoring."
+      "description": "Guided project-health assessment, editable project materials, community pathways, and privacy-respecting metrics."
     }
   ],
   "themes": {
