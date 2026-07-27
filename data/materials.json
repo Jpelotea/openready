@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "materials": [
+    {
+      "id": "readme-plan",
+      "title": "README planning worksheet",
+      "filename": "README-plan.md",
+      "description": "Plan the minimum sections needed to help users understand, use, and contribute to the project.",
+      "disclaimer": "This worksheet is an editable starting point. Replace every bracketed prompt and remove sections that do not apply. Do not claim features, support, or compliance that has not been verified.",
+      "content": "# [Project name]\n\n## What this project does\n[Describe the user problem and the software's purpose in plain language.]\n\n## Who it helps\n[Describe the intended users or contributors.]\n\n## Current status\n[State the current release, stability, and important limitations.]\n\n## Use the software\n[Provide the shortest safe path to use or run the project.]\n\n## Local development\n[Add setup, test, and validation commands.]\n\n## Contributing\n[Link CONTRIBUTING.md and beginner-friendly issues.]\n\n## Accessibility\n[Link the accessibility statement and reporting process.]\n\n## Security\n[Link SECURITY.md. Do not place sensitive vulnerability details in public issues.]\n\n## Support\n[Link SUPPORT.md and state realistic response expectations.]\n\n## License\n[Name and link the open-source license.]\n"
+    },
+    {
+      "id": "accessibility-statement",
+      "title": "Accessibility statement starter",
+      "filename": "ACCESSIBILITY-draft.md",
+      "description": "Draft an honest accessibility commitment, testing summary, limitation list, and reporting process.",
+      "disclaimer": "This starter does not establish WCAG conformance or accessibility certification. Report only testing that was actually completed and keep known limitations visible.",
+      "content": "# Accessibility\n\n## Commitment\n[State the project's accessibility goal in plain language.]\n\n## Current support\n[List the browsers, devices, keyboard use, and assistive technologies actually tested.]\n\n## Automated checks\n[List automated tools and what they can and cannot verify.]\n\n## Manual testing\n[List completed keyboard, screen-reader, zoom, reflow, contrast, motion, touch, and device checks.]\n\n## Known limitations\n- [Limitation, affected task, and available workaround]\n\n## Report an accessibility barrier\n[Provide an accessible public or private reporting route.]\n\nInclude the affected task, browser, operating system, assistive technology when relevant, expected behavior, actual behavior, and whether the barrier blocks a core task.\n\nDo not include passwords, access tokens, confidential reports, or unnecessary personal information.\n\n## Response and prioritization\n[Explain realistic acknowledgement expectations and how blocking barriers are prioritized.]\n"
+    },
+    {
+      "id": "security-policy-review",
+      "title": "Security policy review worksheet",
+      "filename": "SECURITY-review.md",
+      "description": "Review whether the security policy gives reporters a safe, realistic, project-specific process.",
+      "disclaimer": "This worksheet is general project guidance, not a security assessment or guarantee that the software is secure.",
+      "content": "# Security policy review\n\n- [ ] Supported versions are stated.\n- [ ] A monitored private reporting route is provided.\n- [ ] Public exploit disclosure is discouraged until coordination is complete.\n- [ ] Reporters are asked for reproduction, impact, and environment details.\n- [ ] The policy does not request passwords, tokens, or unnecessary personal data.\n- [ ] Project-specific in-scope and out-of-scope examples are included.\n- [ ] A realistic acknowledgement target is stated.\n- [ ] Severity and prioritization are explained.\n- [ ] Remediation, verification, and coordinated disclosure are described.\n- [ ] Threat-model and incident-response documents are linked.\n- [ ] The policy avoids claiming that a file or score proves security.\n\n## Next actions\n- Owner: [name or team]\n- Target review date: [YYYY-MM-DD]\n- Highest-priority gap: [describe]\n"
+    },
+    {
+      "id": "threat-model-outline",
+      "title": "Threat model outline",
+      "filename": "THREAT_MODEL-draft.md",
+      "description": "Create a lightweight review of assets, trust boundaries, misuse cases, mitigations, and remaining risk.",
+      "disclaimer": "A threat model helps prioritize risk; it does not prove that threats are eliminated or that the project is secure.",
+      "content": "# Threat model\n\n## Scope and architecture\n[Describe the software, data flow, deployment, and important exclusions.]\n\n## Assets\n- [Asset and why it matters]\n\n## Trust boundaries\n- [Boundary, data or permission crossing it, and who controls each side]\n\n## Misuse cases\n| Misuse case | Likely impact | Existing mitigation | Residual risk | Owner |\n|---|---|---|---|---|\n| [Example] | [Impact] | [Mitigation] | [Remaining risk] | [Owner] |\n\n## Repository and supply-chain risks\n[Review dependencies, automation actions, permissions, releases, and deployment integrity.]\n\n## Review triggers\n- Architecture change\n- New data type or import path\n- New dependency or automation permission\n- Security incident\n- Maintainer or service-access change\n\n## Follow-up issues\n- [Issue link and priority]\n"
+    },
+    {
+      "id": "incident-response-checklist",
+      "title": "Incident-response checklist",
+      "filename": "INCIDENT_RESPONSE-checklist.md",
+      "description": "Prepare an ordered, adaptable process for receiving, containing, fixing, verifying, and communicating an incident.",
+      "disclaimer": "This checklist is a planning aid, not a managed incident-response service. Adapt roles and steps to the project's real architecture and capacity.",
+      "content": "# Security incident-response checklist\n\n## 1. Receive and protect the report\n- [ ] Confirm the private channel.\n- [ ] Limit access to people needed for response.\n- [ ] Record time, reporter contact, affected versions, and evidence.\n\n## 2. Triage\n- [ ] Confirm the issue or document uncertainty.\n- [ ] Assess impact, exploitability, exposure, and affected users.\n- [ ] Assign decision authority and an incident owner.\n\n## 3. Contain\n- [ ] Reduce ongoing exposure.\n- [ ] Protect logs and evidence.\n- [ ] Avoid unverified public statements.\n\n## 4. Remediate and verify\n- [ ] Prepare the smallest safe fix.\n- [ ] Add regression tests.\n- [ ] Review accessibility and compatibility impact.\n- [ ] Verify the release and deployment artifact.\n\n## 5. Communicate\n- [ ] Coordinate disclosure with the reporter when possible.\n- [ ] Publish user actions and affected versions when necessary.\n- [ ] Avoid exposing secrets or unnecessary personal data.\n\n## 6. Learn\n- [ ] Record lessons learned.\n- [ ] Update the threat model, policy, tests, and follow-up issues.\n"
+    },
+    {
+      "id": "governance-roles",
+      "title": "Governance roles worksheet",
+      "filename": "GOVERNANCE-roles.md",
+      "description": "Define current roles, decision authority, repository permissions, conflicts, and continuity.",
+      "disclaimer": "Use only roles and contacts that exist or have explicitly agreed to serve. Do not invent an independent reviewer or successor.",
+      "content": "# Governance roles\n\n## Current model\n[Example: maintainer-led project with public discussion for significant changes.]\n\n## Roles\n### User\n[How users participate.]\n\n### Contributor\n[What useful contributions include.]\n\n### Regular contributor\n[How repeated trusted participation is recognized.]\n\n### Maintainer\n[Review, merge, release, moderation, and stewardship responsibilities.]\n\n### Security contact\n[Name only a person or team that has agreed to serve.]\n\n### Code of Conduct contact\n[Name only a person or team that has agreed to serve.]\n\n## Decision classes\n- Routine decisions: [examples and authority]\n- Significant public decisions: [discussion and rationale process]\n- Confidential decisions: [security and conduct handling]\n\n## Permissions\n[Criteria for granting, reviewing, and removing access.]\n\n## Conflicts\n[Disclosure and recusal process.]\n\n## Continuity\n[Temporary absence, succession, archival, and transfer process.]\n"
+    },
+    {
+      "id": "support-boundaries",
+      "title": "Support boundaries starter",
+      "filename": "SUPPORT-draft.md",
+      "description": "Set realistic channels, response expectations, scope boundaries, and maintainer-availability rules.",
+      "disclaimer": "Do not promise response times or services the project cannot reliably provide. This starter does not create paid or guaranteed support.",
+      "content": "# Support\n\n## Supported requests\n- Reproducible software defects\n- Documentation questions\n- Focused feature proposals\n- Accessibility barriers through the documented route\n\n## Separate confidential routes\n- Security concerns: [link SECURITY.md]\n- Code of Conduct reports: [link CODE_OF_CONDUCT.md]\n\n## Response expectations\n[State a realistic best-effort acknowledgement target.]\n\nOpening an issue does not guarantee implementation, a specific timeline, or individual troubleshooting.\n\n## Out of scope\n- [List project-specific exclusions]\n- Requests requiring private credentials or confidential data\n- Unrelated commercial, consulting, implementation, or hosting services\n\n## Triage outcomes\nAccepted, needs information, duplicate, deferred, out of scope, or closed after inactivity.\n\n## Maintainer availability\n[Explain pauses, reduced availability, and how urgent confidential reports are handled.]\n"
+    },
+    {
+      "id": "conduct-enforcement",
+      "title": "Conduct enforcement worksheet",
+      "filename": "CONDUCT-enforcement-review.md",
+      "description": "Review report intake, conflicts, privacy, proportional consequences, anti-retaliation, and reconsideration.",
+      "disclaimer": "This worksheet is a process starter. Do not name a secondary contact, reviewer, or enforcement team without explicit consent.",
+      "content": "# Code of Conduct enforcement review\n\n- [ ] Scope covers repository and community spaces.\n- [ ] Unacceptable behavior has practical examples.\n- [ ] A private reporting route is monitored.\n- [ ] Reports involving the normal recipient have a conflict-safe process.\n- [ ] Access to reports is limited.\n- [ ] Evidence, confidentiality, and record handling are described.\n- [ ] A realistic acknowledgement expectation is stated.\n- [ ] Enforcement options are proportionate.\n- [ ] Anti-retaliation protection is included.\n- [ ] Unsubstantiated reports are distinguished from knowingly false reports.\n- [ ] Outcome communication and one-time reconsideration are described.\n- [ ] Platform escalation is available for urgent safety risks.\n\n## Current gaps\n- [Gap, owner, and next action]\n"
+    },
+    {
+      "id": "metrics-plan",
+      "title": "Privacy-respecting metrics plan",
+      "filename": "METRICS-plan.md",
+      "description": "Choose a small set of measurements connected to decisions, community health, and maintainer capacity.",
+      "disclaimer": "Metrics are context, not certification. Popularity measures such as stars or views should not be presented as proof of project health.",
+      "content": "# Project-health metrics plan\n\n## Goals\n- [Goal the project is trying to support]\n\n## Measures\n| Metric | Why it matters | Source | Review cadence | Decision supported |\n|---|---|---|---|---|\n| Issue acknowledgement time | [Reason] | GitHub issues | Monthly | [Decision] |\n| Open issue and pull-request load | [Reason] | GitHub | Monthly | [Decision] |\n| First-time and returning contributors | [Reason] | GitHub | Per release | [Decision] |\n| Accessibility issues opened and resolved | [Reason] | GitHub | Per release | [Decision] |\n| Roadmap goals completed, deferred, or cancelled | [Reason] | Roadmap | Per release | [Decision] |\n\n## Privacy boundaries\n- Do not collect checklist or project-profile data from user browsers.\n- Prefer aggregate repository information.\n- Do not use metrics to pressure maintainers into unhealthy activity.\n\n## Interpretation notes\n[Record important limitations and context.]\n"
+    },
+    {
+      "id": "license-review",
+      "title": "License and third-party material review",
+      "filename": "LICENSE-review.md",
+      "description": "Review the project license, contribution terms, dependencies, automation actions, documentation, and assets.",
+      "disclaimer": "This worksheet provides general information and is not legal advice. Seek qualified advice for unresolved licensing questions or custom terms.",
+      "content": "# License and third-party material review\n\n## Project license\n- [ ] A recognized open-source license is in the repository root.\n- [ ] The README names and links the license.\n- [ ] Copyright holder and year are accurate.\n- [ ] License coverage for code, documentation, and project assets is understood.\n\n## Contributions\n- [ ] Contribution guidance explains that submissions follow the project license.\n- [ ] No additional contributor agreement is required without a documented need.\n\n## Third-party review\n| Material | Source | License or permission | Compatibility | Attribution required | Action |\n|---|---|---|---|---|---|\n| [Dependency, action, image, font, documentation, or snippet] | [Source] | [Terms] | [Review] | [Yes/No] | [Keep/replace/remove] |\n\n## Follow-up\n- [ ] Add THIRD_PARTY_NOTICES.md when attribution is required.\n- [ ] Remove or replace material with unclear permission.\n- [ ] Review new third-party material during pull requests and releases.\n"
+    }
+  ]
+}
