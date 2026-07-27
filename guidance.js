@@ -89,7 +89,7 @@
     reportStatus(`${material.title} downloaded as ${material.filename}.`);
   }
 
-  function createMaterialStarter(material) {
+  function createMaterialStarter(material, itemId) {
     const section = document.createElement("section");
     section.className = "material-starter";
     section.dataset.materialId = material.id;
@@ -98,7 +98,7 @@
     const description = textElement("p", material.description, "material-description");
     const disclaimer = textElement("p", material.disclaimer, "material-disclaimer");
     const label = document.createElement("label");
-    const textareaId = `material-${material.id}`;
+    const textareaId = `material-${material.id}-${itemId}`;
     label.htmlFor = textareaId;
     label.append(textElement("span", `Editable ${material.title}`));
 
@@ -181,7 +181,7 @@
     body.append(grid, createResourceBlock(itemGuidance.resources));
 
     const starter = materialsById.get(itemGuidance.starterId);
-    if (starter) body.append(createMaterialStarter(starter));
+    if (starter) body.append(createMaterialStarter(starter, itemId));
 
     details.append(body);
     card.append(details);
@@ -247,6 +247,22 @@
       reportStatus("The guided project materials could not be loaded. Reload the page and try again.", true);
     }
   }
+
+  let guidancePrintStates = [];
+  window.addEventListener("beforeprint", () => {
+    guidancePrintStates = Array.from(document.querySelectorAll(".item-guidance"))
+      .map((details) => ({ details, open: details.open }));
+    guidancePrintStates.forEach(({ details }) => {
+      details.open = true;
+    });
+  });
+
+  window.addEventListener("afterprint", () => {
+    guidancePrintStates.forEach(({ details, open }) => {
+      details.open = open;
+    });
+    guidancePrintStates = [];
+  });
 
   initializeGuidance();
 })();
