@@ -1,0 +1,29 @@
+{
+  "format": "openready-checklist",
+  "formatVersion": 1,
+  "applicationVersion": "0.2.0",
+  "exportedAt": "2026-07-25T13:39:39.000Z",
+  "summary": {
+    "completed": 2,
+    "total": 10,
+    "percent": 20
+  },
+  "completedItems": [
+    {
+      "id": "license",
+      "title": "Repository includes a clear open-source license",
+      "complete": true
+    },
+    {
+      "id": "security",
+      "title": "Security policy explains responsible reporting",
+      "complete": true
+    },
+    {
+      "id": "governance",
+      "title": "Decision-making and maintainer roles are documented",
+      "complete": false
+    }
+  ],
+  "notes": "Representative export created by OpenReady v0.2.0."
+}
