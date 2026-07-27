@@ -6,12 +6,16 @@ on:
       - "data/**"
       - "scripts/validate_data.py"
       - "scripts/validate_guidance.py"
+      - "scripts/validate_project_scope.py"
+      - "tests/test_validators.py"
       - ".github/workflows/validate-data.yml"
   pull_request:
     paths:
       - "data/**"
       - "scripts/validate_data.py"
       - "scripts/validate_guidance.py"
+      - "scripts/validate_project_scope.py"
+      - "tests/test_validators.py"
       - ".github/workflows/validate-data.yml"
   workflow_dispatch:
 
@@ -36,3 +40,7 @@ jobs:
         run: |
           python scripts/validate_data.py
           python scripts/validate_guidance.py
+          python scripts/validate_project_scope.py
+
+      - name: Run validator regression tests
+        run: python tests/test_validators.py
