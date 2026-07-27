@@ -14,7 +14,7 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - A lightweight architecture and trust-boundary review in `THREAT_MODEL.md`.
 - A documented security incident-response process in `INCIDENT_RESPONSE.md`.
 - Operational governance role definitions for users, contributors, regular contributors, maintainers, security contacts, and Code of Conduct contacts.
-- Decision classes, significant-change discussion requirements, role progression, permission criteria, conflict handling, inactivity, temporary absence, succession, project transfer, and emergency-authority procedures.
+- Decision classes, significant-change discussion requirements, role progression, permission criteria, conflict handling, inactivity, succession, project transfer, and emergency-authority procedures.
 - A detailed Code of Conduct reporting and enforcement process with conflict-aware handling for reports involving the sole maintainer.
 - Core-readiness and operational-maturity assessment levels.
 - Four item states: `complete`, `in-progress`, `not-started`, and `not-applicable`.
@@ -30,12 +30,17 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Visible legal, security, and accessibility limitation notices above the assessment workspace.
 - Dedicated guidance-content validation through `scripts/validate_guidance.py`.
 - Guided-material operation, privacy, validation, verification, and maintenance documentation in `docs/guided-project-materials.md`.
+- A public community participation pathway in `COMMUNITY.md` for first contributions, repeat participation, project labels, contribution types, recognition, privacy, and conduct.
+- Privacy-respecting project measurement definitions in `METRICS.md`.
+- A reproducible monthly, release, or project-health snapshot format in `docs/metrics-snapshot-template.md`.
+- A genuinely scoped `good first issue` for reviewing one guided starter and `help wanted` labels for human accessibility tasks requiring community equipment or experience.
 
 ### Changed
 
 - Expanded `SECURITY.md` with supported-version guidance, acknowledgement expectations, scope examples, severity, prioritization, remediation, disclosure, threat-model, and contributor-security sections.
-- Expanded README navigation, privacy guidance, repository structure, accessibility, security, incident-readiness, support, roadmap, and non-commercial documentation.
-- Expanded the contribution process with accessibility, security, governance, conduct, significant-decision, conflict-disclosure, and confidential-reporting expectations.
+- Expanded README navigation, privacy guidance, repository structure, accessibility, security, incident-readiness, support, roadmap, metrics, and community documentation.
+- Expanded the contribution process with accessibility, security, governance, conduct, first-contribution, label, recognition, metrics, conflict-disclosure, and confidential-reporting expectations.
+- Expanded the maintainer guide with label criteria, contributor recognition, sustainable metrics review, and release attribution checks.
 - Replaced the original high-level governance note with an operational maintainer-led model appropriate to a small project.
 - Expanded the Code of Conduct with project scope, unacceptable behavior examples, private reporting, acknowledgement, privacy, evidence handling, enforcement levels, outcome communication, reconsideration, anti-retaliation, false-report safeguards, and maintainer accountability.
 - Replaced the binary checklist interface with a four-state assessment while retaining the existing browser-storage key for in-place migration.
@@ -47,6 +52,8 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Added an expandable **How to improve this item** section to each assessment card without changing scoring, storage, or import compatibility.
 - Added copy, Markdown download, and restore actions for editable starter materials.
 - Expanded data, browser-accessibility, and Lighthouse workflow triggers to cover guided-content files and interface behavior.
+- Replaced the temporary project-metrics issue link with the permanent `METRICS.md` policy and linked contributor onboarding to `COMMUNITY.md`.
+- Added Community pathways and Project metrics to the data-driven documentation cards without changing the official v0.3.0 release status.
 
 ### Accessibility
 
@@ -62,6 +69,7 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Implemented guided content with native `details` and `summary` controls, labeled editable textareas, and keyboard-reachable material actions.
 - Kept repeated starter materials associated with unique control IDs and labels.
 - Added narrow-screen guidance reflow, stacked mobile actions, and print expansion with state restoration.
+- Distinguished specialist human accessibility tasks from beginner tasks and labeled the desktop, mobile, zoom, contrast, and device reviews as `help wanted` rather than `good first issue`.
 
 ### Security
 
@@ -73,6 +81,7 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Preserved unknown imported values rather than silently discarding them.
 - Kept editable starter drafts outside assessment storage, scoring, and JSON exports.
 - Warned users not to place passwords, tokens, confidential vulnerability reports, private conduct reports, or unnecessary personal information in starter text.
+- Kept metrics snapshots limited to aggregate repository activity and project-controlled records without copying private security, conduct, accessibility, or personal data.
 
 ### Governance and community
 
@@ -85,14 +94,21 @@ The format follows a simple release-based structure inspired by Keep a Changelog
 - Added proportionate conduct enforcement from informal correction through permanent removal and platform escalation.
 - Added anti-retaliation and one-time reconsideration protections while distinguishing unsubstantiated reports from knowingly false reports.
 - Kept funding, donations, sponsorships, monetization, paid support, pricing, and other commercial concepts outside the assessment model and validator-approved item scope.
-- Kept funding, donations, sponsorships, pricing, paid support, consulting, hosting services, advertising, affiliates, and monetization outside guided materials.
+- Kept funding, donations, sponsorships, pricing, paid support, consulting, hosting services, advertising, affiliates, and monetization outside guided materials and project metrics.
 - Required starter text to name only real roles and contacts that have agreed to serve.
+- Defined `good first issue` as small, non-sensitive, permission-free, documented work and `help wanted` as scoped work that may require experience or equipment.
+- Recognized documentation, accessibility, testing, issue reporting, triage, design, code, and community support without ranking contribution value by code volume.
+- Added release-note recognition rules that respect contributor consent and avoid implying employment, payment, endorsement, or maintainer status.
+- Documented that response measurements are not service-level agreements and metrics must not create contributor quotas or maintainer productivity targets.
+- Classified stars, forks, views, visitors, clones, and referrals as optional awareness indicators rather than project-health or eligibility evidence.
 
 ### Verification
 
 - Expanded Playwright coverage for four-state persistence, evidence fields, review metadata, legacy migration, schema-v2 imports and exports, unsupported-field preservation, partial scoring, not-applicable handling, project-profile integration, reset, print preparation, reduced motion, responsive layouts, and horizontal overflow.
 - Added guidance validation for complete checklist coverage, required notices, explanation structure, valid resource links, starter references, starter filenames, and prohibited commercial material IDs.
 - Added browser checks for all 22 guidance sections, starter editing and Markdown download, restoration, unique control IDs, keyboard access, print preparation, and 320-pixel reflow.
+- Documented exact GitHub search queries, classification rules, evidence requirements, limitations, review cadence, and interpretation rules for reproducible project-health snapshots.
+- Confirmed the community-and-metrics implementation introduces no website analytics, tracking service, user-data transmission, funding metric, or commercial measurement.
 
 ## [0.3.0] - 2026-07-27
 
