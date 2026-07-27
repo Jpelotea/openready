@@ -1,129 +1,187 @@
 # Manual Accessibility and Device Testing
 
-Automated Lighthouse and Playwright checks are useful, but they do not prove that every person can use OpenReady successfully. This checklist covers the human testing that must accompany automated results.
+Automated Lighthouse and Playwright checks provide useful regression evidence, but they do not prove that every person can use OpenReady successfully. This guide defines the human testing required for the v0.4.0 release candidate.
 
-## Testing status
+The evidence register is maintained in [manual-accessibility-results.md](manual-accessibility-results.md).
 
-- Automated local Lighthouse baseline: completed
-- Production Lighthouse audit: completed; see [production-audit.md](production-audit.md)
-- Automated keyboard, theme, import, reduced-motion, and responsive checks: completed; see [automated-browser-testing.md](automated-browser-testing.md)
+## Current status
+
+- Automated local Lighthouse checks: completed for the current implementation
+- Automated keyboard, naming, migration, theme, reduced-motion, import, and responsive checks: completed
 - Human keyboard-only review: pending
 - Desktop screen-reader review: pending
 - Mobile screen-reader review: pending
-- Browser zoom, reflow, and high-contrast review: pending
-- Representative real-device review: pending
-- Parent manual testing tracker: [issue #14](https://github.com/Jpelotea/openready/issues/14)
+- Browser zoom at 200%, 300%, and 400%: pending
+- Reflow, text resize, and forced-colors review: pending
+- Representative physical-device review: pending
 
-A test should only be marked complete after a person has performed it and recorded the date, browser, operating system, environment, and result.
+A test is complete only after a person performs it and records the date, tester, exact environment, tested URL or commit, completed scope, result, observations, and related defect issues.
 
-## Human testing work queue
+## Work queue
 
-The remaining work is separated so contributors can complete one focused test without needing every device or assistive technology.
-
+- [Parent manual testing tracker — issue #14](https://github.com/Jpelotea/openready/issues/14)
 - [Desktop screen reader and keyboard review — issue #17](https://github.com/Jpelotea/openready/issues/17)
 - [Mobile screen reader review — issue #18](https://github.com/Jpelotea/openready/issues/18)
 - [Browser zoom, reflow, and high contrast — issue #19](https://github.com/Jpelotea/openready/issues/19)
 - [Representative real-device usability matrix — issue #20](https://github.com/Jpelotea/openready/issues/20)
+- [v0.4.0 manual verification coordinator — issue #32](https://github.com/Jpelotea/openready/issues/32)
 
-Use the repository's **Accessibility test session** issue template to record a session. Create a separate, focused bug issue for every defect found rather than hiding several unrelated problems inside one test report.
+Use the repository’s **Accessibility test session** issue template for each session. Create one focused accessibility-barrier issue for each defect rather than combining unrelated failures into a general report.
 
-## Keyboard-only test
+## Release-candidate rule
+
+Always record the exact production URL and commit tested. A result from an older build cannot be treated as evidence for a newer release candidate without a retest of the affected workflow.
+
+A single session may cover several matrix areas when the same person actually performs them in the recorded environment. Do not infer untested results from automated screenshots, emulation, code inspection, or a different operating system.
+
+## Core end-to-end workflow
+
+Across the complete evidence set, people must exercise these tasks:
+
+1. Open the production site and identify its title, purpose, and main regions.
+2. Use the skip link, navigation, theme control, and primary action.
+3. Enter and edit the optional project profile.
+4. Change assessment items among Complete, In progress, Not started, and Not applicable.
+5. Open evidence and review details and use the evidence URL, note, last-reviewed date, and responsible-person fields.
+6. Open improvement guidance and review headings, resource links, safety notices, and reading order.
+7. Edit a guided Markdown starter and use copy, download, and restore actions where supported.
+8. Confirm core, maturity, and overall score changes are understandable.
+9. Add project notes and confirm browser-local persistence after reload.
+10. Export JSON and import both a valid file and invalid JSON.
+11. Review the print preview or platform print explanation.
+12. Reset the workspace and confirm the project profile, assessment state, evidence details, and notes are cleared after confirmation.
+13. Review documentation, roadmap, community, policy, and footer links.
+
+## Keyboard-only protocol
 
 Use the site without a mouse or touch input.
 
-1. Reload the page and press `Tab`.
-2. Confirm the skip link appears and moves focus to the main content.
-3. Move through the navigation, theme control, primary actions, checklist controls, notes field, import, export, print, reset, documentation cards, roadmap link, community links, and footer links.
-4. Confirm every interactive element has a visible focus indicator.
-5. Confirm focus order follows the visual and reading order.
-6. Activate buttons and links with `Enter` or `Space` as appropriate.
-7. Confirm checklist items can be selected and deselected from the keyboard.
-8. Confirm the theme switch communicates its current state.
-9. Open and cancel the file picker without trapping focus.
-10. Confirm no keyboard trap occurs anywhere on the page.
+1. Reload and press `Tab`; confirm the skip link appears first and moves focus to main content.
+2. Move through navigation, theme, primary actions, project profile, every assessment status, evidence details, guidance, starter controls, notes, import, export, print, reset, documentation cards, community links, and footer links.
+3. Confirm focus order follows the visual and reading order.
+4. Confirm every focused control has a visible indicator at normal and increased zoom.
+5. Activate controls with `Enter`, `Space`, arrow keys, or native select commands as appropriate.
+6. Open and cancel the native file picker; confirm focus returns to a sensible control.
+7. Confirm no keyboard trap or unexpected focus loss occurs.
+8. Confirm native details and summary controls can be opened and closed.
+9. Confirm reset remains cancelable and does not clear data until accepted.
 
-## Screen-reader test
+## Desktop screen-reader protocol
 
-Recommended combinations:
+Preferred combinations:
 
 - NVDA with Firefox or Chrome on Windows
 - VoiceOver with Safari on macOS
+
+Review:
+
+1. Page title, purpose, landmarks, and heading outline.
+2. Skip-link announcement and destination.
+3. Theme-control name and state.
+4. Project-profile labels and optional-field instructions.
+5. Assessment-status names; each repeated status must include the assessment-item title.
+6. Evidence fields and details; each repeated field must include the assessment-item title.
+7. Improvement-guidance sections; each must be distinguishable by assessment item.
+8. Starter editors and copy, download, and restore actions; names must include material and item context.
+9. Score labels, progress changes, and tool-status announcements.
+10. Import, export, invalid-file errors, print, and reset flow.
+11. Link purpose outside surrounding paragraphs.
+12. Decorative visuals remaining outside the useful reading order.
+
+## Mobile screen-reader protocol
+
+Preferred combinations:
+
 - VoiceOver with Safari on iPhone
 - TalkBack with Chrome on Android
 
-Review the following:
+Review in portrait and landscape when supported:
 
-1. The page title and main purpose are announced clearly.
-2. Landmarks for navigation, main content, sections, forms, and footer are understandable.
-3. Heading levels provide a logical outline.
-4. The theme button has a meaningful name and state.
-5. Checklist labels, descriptions, categories, and resource links are announced in a useful order.
-6. Progress changes are announced without excessive interruption.
-7. Tool status messages are announced after import, export, print, and reset actions.
-8. The notes field has a clear label and supporting instructions.
-9. Links make sense outside their surrounding paragraph.
-10. Decorative visual elements are not announced unnecessarily.
+1. Swipe navigation through headings, landmarks, links, buttons, form controls, details, and assessment items.
+2. Touch exploration and activation of compact controls.
+3. Theme name and state.
+4. Project-profile and assessment-field labels.
+5. Status, evidence, guidance, and starter-action names.
+6. Score, progress, and status-message announcements.
+7. Orientation changes without focus loss or unexpected navigation.
+8. Notes, import/export explanation, print explanation, and reset.
+9. Touch-target comfort and spacing.
+10. No hidden, overlapped, unreachable, or unexpectedly repeated content.
 
-## Zoom and reflow test
+## Zoom, text resize, and reflow protocol
 
-1. Test browser zoom at 200% and 400%.
-2. Confirm content reflows without horizontal scrolling at a viewport equivalent to 320 CSS pixels, except where a specific component genuinely requires two-dimensional scrolling.
-3. Confirm text is not clipped or overlapped.
-4. Confirm buttons and form controls remain visible and usable.
-5. Confirm the checklist, roadmap, documentation cards, and footer remain understandable in a single-column layout.
+Test browser zoom at **200%, 300%, and 400%**.
 
-## Theme and contrast review
+1. Confirm ordinary page content reflows without two-dimensional scrolling.
+2. Confirm no text, labels, controls, cards, details, or status messages are clipped or overlapped.
+3. Confirm project-profile, assessment, evidence, guidance, starter, notes, and tool controls remain operable.
+4. Confirm visible focus remains perceivable.
+5. Confirm documentation cards, roadmap, community links, and footer remain understandable.
+6. Test an approximately 320 CSS-pixel viewport or equivalent reflow condition.
+7. Test browser or operating-system text-size controls where supported.
+8. Retest the documentation-card area previously corrected in issue #21.
 
-1. Test both light and dark modes.
-2. Confirm text, borders, controls, status messages, focus indicators, and links remain readable.
-3. Confirm meaning is not communicated by color alone.
-4. Confirm the system theme is used when no manual preference has been saved.
-5. Confirm the saved theme is restored without a visible flash of the wrong theme.
-6. Test with increased-contrast or forced-colors settings when available.
+## Theme, contrast, and forced-colors protocol
 
-## Reduced-motion review
+1. Test both light and dark themes.
+2. Confirm text, borders, form controls, status messages, links, badges, and focus indicators remain understandable.
+3. Confirm state and meaning are not conveyed by color alone.
+4. Confirm system theme is used when no manual preference is stored.
+5. Confirm the saved theme returns without a distracting wrong-theme flash.
+6. Test Windows forced colors, platform high contrast, or an equivalent supported mode.
+7. Record any browser or operating-system limitations that prevented a contrast mode from being tested.
 
-1. Enable the operating system's reduced-motion preference.
-2. Reload the page.
-3. Confirm reveal animations and transitions no longer create noticeable movement.
-4. Confirm no content remains hidden because animation was disabled.
+## Reduced-motion protocol
+
+1. Enable the operating system’s reduced-motion preference.
+2. Reload the production site.
+3. Confirm reveal effects and transitions no longer create noticeable movement.
+4. Confirm no content remains hidden or delayed because motion was disabled.
+5. Confirm theme changes, details controls, progress updates, and status messages remain understandable.
 
 ## Real-device matrix
 
-Record at least one human result in each category:
+Record at least one qualifying human result in each category.
 
-| Category | Suggested environment | Result | Evidence |
+| Category | Suggested environment | Current result | Evidence |
 |---|---|---|---|
-| Small phone | iPhone SE-size device or compact Android phone | Pending | Issue #20 |
-| Modern phone | Current iPhone or Android device | Pending | Issue #20 |
-| Tablet | iPad or Android tablet in portrait and landscape | Pending | Issue #20 |
-| Desktop | Windows, macOS, or Linux at 100% and 200% zoom | Pending | Issues #17 and #19 |
-| Ultra-wide | Desktop viewport wider than 1600 pixels | Pending | Issue #20 |
+| Small phone | Compact physical iPhone or Android phone | Pending | Issue #20 |
+| Modern phone | Current physical iPhone or Android phone | Pending | Issue #20 |
+| Tablet | Physical iPad or Android tablet in portrait and landscape | Pending | Issue #20 |
+| Desktop or laptop | Physical Windows, macOS, or Linux computer | Pending | Issues #17 and #20 |
+| Ultra-wide desktop | Physical or representative viewport wider than 1600 CSS pixels | Pending | Issue #20 |
 
-## Functional checks during accessibility testing
+For every environment, review navigation, profile entry, assessment controls, guidance, starter materials, notes, tools, links, themes, orientation, spacing, and practical target sizes.
 
-Confirm that:
+## Result values
 
-- checklist progress persists after reload
-- JSON export downloads a valid file
-- JSON import restores progress and notes
-- invalid JSON produces a clear error message
-- print preview contains the readiness report rather than the full marketing page
-- reset asks for confirmation and clears only checklist progress and notes
-- external project and community links open the expected resources
+- **Pass** — the completed scope was usable and no defect was found.
+- **Pass with observations** — usable, with non-blocking findings recorded.
+- **Needs work** — a barrier made a task difficult or impossible; create focused defect issues.
+- **Incomplete** — the declared scope was not finished and does not satisfy a matrix requirement.
 
-## Recording a completed test
+## Evidence required
 
-For each testing session, record:
+Record:
 
-- date and time
-- tester name or GitHub username
-- device and operating system
+- date and approximate time
+- tester or GitHub username
+- exact device or representative environment
+- operating system and version
 - browser and version
 - assistive technology and version, when applicable
-- OpenReady URL or commit tested
-- test sections completed
-- problems found and their related GitHub issue numbers
-- overall result: pass, pass with observations, or needs work
+- zoom, theme, contrast, motion, and orientation settings
+- exact production URL or commit
+- coverage and tasks completed
+- result value
+- observations
+- focused defect issue numbers
+- safe screenshots or recordings when useful
 
-Automated scores must not be used as a substitute for these human results.
+Do not include credentials, private project data, medical information, confidential security details, or unnecessary personal information.
+
+## Closing rules
+
+Issues #14, #17, #18, #19, #20, and #32 must remain open until their stated human evidence is complete. A Lighthouse score, Playwright run, browser emulation, screenshot, code review, or undocumented visual inspection cannot substitute for a recorded human session.
+
+Results must not be described as universal accessibility or WCAG certification. They are environment-specific evidence used to identify and reduce barriers.
